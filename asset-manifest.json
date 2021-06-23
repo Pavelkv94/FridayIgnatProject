@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/fridayy/static/css/main.8c8b27cf.chunk.css",
-    "main.js": "/fridayy/static/js/main.ee7c8137.chunk.js",
-    "main.js.map": "/fridayy/static/js/main.ee7c8137.chunk.js.map",
+    "main.js": "/fridayy/static/js/main.42cb52a2.chunk.js",
+    "main.js.map": "/fridayy/static/js/main.42cb52a2.chunk.js.map",
     "runtime-main.js": "/fridayy/static/js/runtime-main.c669ed65.js",
     "runtime-main.js.map": "/fridayy/static/js/runtime-main.c669ed65.js.map",
     "static/js/2.fab7f2e8.chunk.js": "/fridayy/static/js/2.fab7f2e8.chunk.js",
@@ -18,6 +18,6 @@
     "static/js/runtime-main.c669ed65.js",
     "static/js/2.fab7f2e8.chunk.js",
     "static/css/main.8c8b27cf.chunk.css",
-    "static/js/main.ee7c8137.chunk.js"
+    "static/js/main.42cb52a2.chunk.js"
   ]
 }
