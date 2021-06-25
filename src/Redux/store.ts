@@ -1,15 +1,17 @@
 import {applyMiddleware, combineReducers, createStore} from "redux";
-import passwordReducer from "./password-reducer";
+import newPasswordReducer from "./new-password-reducer";
 import thunkMiddleware from "redux-thunk";
 import loginReducer from "./login-reducer";
 import profileReducer from "./profile-reducer";
 import registrationReducer from "./reg-reducer";
+import PasswordRecoveryReducer from "./password-recovery-reducer";
 
 
 export const rootReducer = combineReducers({
     loginPage: loginReducer,
     profile: profileReducer,
-    passPage: passwordReducer,
+    newPassPage: newPasswordReducer,
+    recovPass: PasswordRecoveryReducer,
     reg: registrationReducer,
 })
 
