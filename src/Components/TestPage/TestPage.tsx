@@ -9,7 +9,7 @@ export function TestPage() {
         <div>
             <h1>TestPage</h1>
             <SuperInputText/>
-            <SuperButton>hello</SuperButton>
+            <SuperButton>hello!!!!</SuperButton>
             <SuperCheckbox/>
         </div>
     );
