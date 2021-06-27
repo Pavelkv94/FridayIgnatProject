@@ -1,6 +1,9 @@
 import React from 'react'
 
-const loginReducer = (state: any, action: any) => {
+
+const initialState = {}
+
+const loginReducer = (state= initialState , action: any) => {
 
     return state;
 }
