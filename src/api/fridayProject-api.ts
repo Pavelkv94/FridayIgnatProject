@@ -1,17 +1,21 @@
 import axios from "axios";
 
+const instance = axios.create({
+    withCredentials: true,
+    baseURL: "http://localhost:7542/2.0"
+})
 //api
 
 export const authApi = {
     me() {
-        return axios.post<ResponseLoginType>("http://localhost:7542/2.0/auth/me", {})
+        return instance.post<ResponseLoginType>("/auth/me", {})
     },
     login(email: string, password: string, rememberMe: boolean) {
-        return axios.post<ResponseLoginType>("http://localhost:7542/2.0/auth/login", { email, password, rememberMe })
+        return instance.post<ResponseLoginType>("/auth/login", { email, password, rememberMe })
     },
 
     logout() {
-        return axios.delete("http://localhost:7542/2.0/auth/me")
+        return instance.delete("/auth/me")
     }
 
 }
