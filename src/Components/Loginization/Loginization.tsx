@@ -32,7 +32,9 @@ export function Loginization() {
 
         <div>
             <h1>Loginization</h1>
-
+            <span style={{color: 'green'}}>nya-admin@nya.nya <br />
+            1qazxcvBG</span> <hr />
+           
             <div>Email:</div>
             <SuperInputText value={email} onChangeText={setEmail} />
             <div>Password:</div>
