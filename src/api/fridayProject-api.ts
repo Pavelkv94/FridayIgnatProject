@@ -11,11 +11,6 @@ export const authApi = {
 
 //types
 
-export type ParamsRegisterType = {
-    email: string,
-    password: string
-}
-
 export type ResponseRegisterType = {
     addedUser: any,
     error?: string
