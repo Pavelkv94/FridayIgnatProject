@@ -20,10 +20,11 @@ type PayloadType = {
     verified: boolean; // подтвердил ли почту
     rememberMe: boolean;
     error?: string;
+    info?: string
 }
 
 export type InitialAuthType = typeof initialState;
-export type LoginActionType = SetUserDataACType | SetErrorACType | IsLoggedInACType 
+export type LoginActionType = SetUserDataACType | SetErrorACType | IsLoggedInACType
 
 const loginReducer = (state: InitialAuthType = initialState, action: LoginActionType) => {
     switch (action.type) {
@@ -42,7 +43,7 @@ const loginReducer = (state: InitialAuthType = initialState, action: LoginAction
                 ...state,
                 isLoggedIn: action.isLoggedIn
             }
-                default:
+        default:
             return state;
     }
 
@@ -67,28 +68,26 @@ export const isLoggedInAC = (isLoggedIn: boolean) => ({
     isLoggedIn
 } as const)
 
-
 export const loginTC = (email: string, password: string, rememberMe: boolean) => (dispatch: Dispatch) => {
     authApi.login(email, password, rememberMe)
         .then(
             res => {
-               
+
                 dispatch(setUserDataAC(res.data))
                 dispatch(isLoggedInAC(true))
             }
         )
         .catch(err => {
-            dispatch(setErrorAC(err.response.data.error))
+            dispatch(setErrorAC(err))
 
         })
 }
 
-export const logout = () => (dispatch: Dispatch) => {
+export const logoutTC = () => (dispatch: Dispatch) => {
     authApi.logout()
-        .then()
-    // if (response.resultCode === ResultCodeENum.Success) {
-    //     dispatch(setAuthUserData(null, null, null, false));
-    // }
+        .then(res => {
+            isLoggedInAC(false)
+        })
 
 }
 
