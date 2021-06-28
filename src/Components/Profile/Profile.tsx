@@ -16,6 +16,7 @@ export function Profile() {
     }
     if (isAuth === false) { return <Redirect to={"/login"} />; }
 
+    //при успешной логинизации отрисовываем данные пользователя
     return (
 
         <div>

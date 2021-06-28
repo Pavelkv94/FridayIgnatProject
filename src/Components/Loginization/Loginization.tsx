@@ -15,7 +15,6 @@ export function Loginization() {
     const [email, setEmail] = useState<string>("")
     const [password, setPassword] = useState<string>("")
     const [rememberMe, setRememberMe] = useState<boolean>(false)
-
     const isAuth = useSelector<AppStateType, boolean>(state => state.loginPage.isAuth)
 
     const onCLickHandler = () => {
@@ -32,9 +31,9 @@ export function Loginization() {
 
         <div>
             <h1>Loginization</h1>
-            <span style={{color: 'green'}}>nya-admin@nya.nya <br />
-            1qazxcvBG</span> <hr />
-           
+            <span style={{ color: 'green', margin: "10px" }}>nya-admin@nya.nya <br />
+                1qazxcvBG</span> <hr />
+
             <div>Email:</div>
             <SuperInputText value={email} onChangeText={setEmail} />
             <div>Password:</div>

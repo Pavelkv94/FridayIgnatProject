@@ -47,6 +47,7 @@ const loginReducer = (state: InitialAuthType = initialState, action: LoginAction
 
 }
 
+//Action creators
 type SetUserDataACType = ReturnType<typeof getUserDataAC>
 type SetErrorACType = ReturnType<typeof setErrorAC>
 type IsLoggedInACType = ReturnType<typeof isLoggedInAC>
@@ -66,6 +67,7 @@ export const isLoggedInAC = (isAuth: boolean) => ({
     isAuth
 } as const)
 
+//Thunk creators
 export const loginTC = (email: string, password: string, rememberMe: boolean) => (dispatch: Dispatch) => {
     authApi.login(email, password, rememberMe)
         .then(
@@ -80,6 +82,7 @@ export const loginTC = (email: string, password: string, rememberMe: boolean) =>
             alert("Введены неверные данные")
         })
 }
+
 
 export const logoutTC = () => (dispatch: Dispatch) => {
     authApi.logout()
