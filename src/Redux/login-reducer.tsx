@@ -87,6 +87,8 @@ export const logoutTC = () => (dispatch: Dispatch) => {
     authApi.logout()
         .then(res => {
             isLoggedInAC(false)
+        }).catch(err => {
+            alert("error logout")
         })
 
 }

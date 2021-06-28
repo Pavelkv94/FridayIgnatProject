@@ -10,12 +10,9 @@ export function Profile() {
     const isLoggedIn = useSelector<AppStateType, boolean>(state => state.loginPage.isLoggedIn)
     const data = useSelector<AppStateType, ResponseLoginType>(state => state.loginPage.userData)
 
-    if (isLoggedIn) {
-        return <Redirect to='/login' />
-    }
 
     const logout = () => {
-        dispatch(logoutTC())
+      dispatch(logoutTC());
     }
 
     return (
@@ -31,7 +28,7 @@ export function Profile() {
             <p>updated - {data.updated}</p>
             <p>count of cards - {data.publicCardPacksCount}</p>
             <br />
-            <button onClick={logout}>X</button>
+            <button onClick={logout}>Log Out</button>
         </div>
     );
 }
