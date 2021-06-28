@@ -4,8 +4,9 @@ import { isLoggedInAC, loginTC } from '../../Redux/login-reducer';
 import { AppStateType } from '../../Redux/store';
 import SuperInputText from "../../SuperComponents/c1-SuperInputText/SuperInputText";
 import SuperButton from "../../SuperComponents/c2-SuperButton/SuperButton";
-import {Redirect} from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import s from './Loginization.module.css'
+import SuperCheckbox from '../../SuperComponents/c3-SuperCheckbox/SuperCheckbox';
 
 
 
@@ -24,6 +25,9 @@ export function Loginization() {
     if (isLoggedIn) {
         return <Redirect to='/profile' />
     }
+    const checkboxChange = () => {
+        setRememberMe(!rememberMe)
+    }
     return (
 
         <div>
@@ -33,6 +37,8 @@ export function Loginization() {
             <SuperInputText value={email} onChangeText={setEmail} />
             <div>Password:</div>
             <SuperInputText value={password} onChangeText={setPassword} />
+            <br />
+            <span><SuperCheckbox checked={rememberMe} onChange={checkboxChange} /> Remember Me</span>
             <div>
                 <SuperButton onClick={buttonCallback}>Sign Up</SuperButton>
             </div>

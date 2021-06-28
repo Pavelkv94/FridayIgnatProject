@@ -23,9 +23,9 @@ type PayloadType = {
 }
 
 export type InitialAuthType = typeof initialState;
-type ActionType = SetUserDataACType | SetErrorACType | IsLoggedInACType
+export type LoginActionType = SetUserDataACType | SetErrorACType | IsLoggedInACType 
 
-const loginReducer = (state: InitialAuthType = initialState, action: ActionType) => {
+const loginReducer = (state: InitialAuthType = initialState, action: LoginActionType) => {
     switch (action.type) {
         case 'LOGIN/SET-USER-DATA':
             return {
@@ -42,7 +42,7 @@ const loginReducer = (state: InitialAuthType = initialState, action: ActionType)
                 ...state,
                 isLoggedIn: action.isLoggedIn
             }
-        default:
+                default:
             return state;
     }
 
@@ -56,7 +56,6 @@ export const setUserDataAC = (profileData: PayloadType) => ({
     type: 'LOGIN/SET-USER-DATA',
     profileData,
 } as const)
-
 
 export const setErrorAC = (error: string | null) => ({
     type: 'LOGIN/SET-ERROR',
@@ -73,7 +72,7 @@ export const loginTC = (email: string, password: string, rememberMe: boolean) =>
     authApi.login(email, password, rememberMe)
         .then(
             res => {
-                debugger
+               
                 dispatch(setUserDataAC(res.data))
                 dispatch(isLoggedInAC(true))
             }
@@ -82,6 +81,15 @@ export const loginTC = (email: string, password: string, rememberMe: boolean) =>
             dispatch(setErrorAC(err.response.data.error))
 
         })
+}
+
+export const logout = () => (dispatch: Dispatch) => {
+    authApi.logout()
+        .then()
+    // if (response.resultCode === ResultCodeENum.Success) {
+    //     dispatch(setAuthUserData(null, null, null, false));
+    // }
+
 }
 
 export default loginReducer;

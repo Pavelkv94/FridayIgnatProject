@@ -7,6 +7,11 @@ export const authApi = {
     login(email: string, password: string, rememberMe: boolean) {
         const promise = axios.post<ResponseLoginType>("http://localhost:7542/2.0/auth/login", { email, password, rememberMe })
         return promise
+    },
+
+    logout() {
+        const promise = axios.delete<{}>("http://localhost:7542/2.0/auth/me")
+        return promise
     }
 
 }
