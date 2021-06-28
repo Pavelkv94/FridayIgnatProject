@@ -3,15 +3,15 @@ import axios from "axios";
 //api
 
 export const authApi = {
-
+    me() {
+        return axios.post<ResponseLoginType>("http://localhost:7542/2.0/auth/me", {})
+    },
     login(email: string, password: string, rememberMe: boolean) {
-        const promise = axios.post<ResponseLoginType>("http://localhost:7542/2.0/auth/login", { email, password, rememberMe })
-        return promise
+        return axios.post<ResponseLoginType>("http://localhost:7542/2.0/auth/login", { email, password, rememberMe })
     },
 
     logout() {
-        const promise = axios.delete<{}>("http://localhost:7542/2.0/auth/me")
-        return promise
+        return axios.delete("http://localhost:7542/2.0/auth/me")
     }
 
 }
@@ -31,17 +31,4 @@ export type ResponseLoginType = {
     rememberMe: boolean;
     error?: string;
 }
-
-
-
-
-// export type ParamsRegisterType = {
-//     email: string,
-//     password: string
-// }
-
-// export type ResponseRegisterType = {
-//     addedUser: any,
-//     error?: string
-// }
 

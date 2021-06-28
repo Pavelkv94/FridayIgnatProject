@@ -4,9 +4,7 @@ import { authApi, ResponseLoginType } from '../api/fridayProject-api';
 
 let initialState = {
     userData: {} as ResponseLoginType,
-    email: null as string | null,
-    error: null as string | null,
-    isLoggedIn: false as boolean
+    isAuth: false as boolean
 }
 type PayloadType = {
     _id: string;
@@ -41,7 +39,7 @@ const loginReducer = (state: InitialAuthType = initialState, action: LoginAction
         case 'LOGIN/IS-LOGGED-IN':
             return {
                 ...state,
-                isLoggedIn: action.isLoggedIn
+                isAuth: action.isAuth
             }
         default:
             return state;
@@ -49,11 +47,11 @@ const loginReducer = (state: InitialAuthType = initialState, action: LoginAction
 
 }
 
-type SetUserDataACType = ReturnType<typeof setUserDataAC>
+type SetUserDataACType = ReturnType<typeof getUserDataAC>
 type SetErrorACType = ReturnType<typeof setErrorAC>
 type IsLoggedInACType = ReturnType<typeof isLoggedInAC>
 
-export const setUserDataAC = (profileData: PayloadType) => ({
+export const getUserDataAC = (profileData: PayloadType) => ({
     type: 'LOGIN/SET-USER-DATA',
     profileData,
 } as const)
@@ -63,9 +61,9 @@ export const setErrorAC = (error: string | null) => ({
     error
 } as const)
 
-export const isLoggedInAC = (isLoggedIn: boolean) => ({
+export const isLoggedInAC = (isAuth: boolean) => ({
     type: 'LOGIN/IS-LOGGED-IN',
-    isLoggedIn
+    isAuth
 } as const)
 
 export const loginTC = (email: string, password: string, rememberMe: boolean) => (dispatch: Dispatch) => {
@@ -73,22 +71,23 @@ export const loginTC = (email: string, password: string, rememberMe: boolean) =>
         .then(
             res => {
 
-                dispatch(setUserDataAC(res.data))
+                dispatch(getUserDataAC(res.data))
                 dispatch(isLoggedInAC(true))
             }
         )
         .catch(err => {
             dispatch(setErrorAC(err))
-
+            alert("Введены неверные данные")
         })
 }
 
 export const logoutTC = () => (dispatch: Dispatch) => {
     authApi.logout()
         .then(res => {
-            isLoggedInAC(false)
+            dispatch(isLoggedInAC(false))
         }).catch(err => {
-            alert("error logout")
+            alert(err)
+            //dispatch(isLoggedInAC(false))
         })
 
 }

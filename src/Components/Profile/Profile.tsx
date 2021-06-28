@@ -7,13 +7,14 @@ import { Redirect } from 'react-router-dom';
 
 export function Profile() {
     const dispatch = useDispatch();
-    const isLoggedIn = useSelector<AppStateType, boolean>(state => state.loginPage.isLoggedIn)
+    const isAuth = useSelector<AppStateType, boolean>(state => state.loginPage.isAuth)
     const data = useSelector<AppStateType, ResponseLoginType>(state => state.loginPage.userData)
 
 
     const logout = () => {
-      dispatch(logoutTC());
+        dispatch(logoutTC());
     }
+    if (isAuth === false) { return <Redirect to={"/login"} />; }
 
     return (
 

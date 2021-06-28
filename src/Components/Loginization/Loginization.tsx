@@ -16,13 +16,13 @@ export function Loginization() {
     const [password, setPassword] = useState<string>("")
     const [rememberMe, setRememberMe] = useState<boolean>(false)
 
-    const isLoggedIn = useSelector<AppStateType, boolean>(state => state.loginPage.isLoggedIn)
+    const isAuth = useSelector<AppStateType, boolean>(state => state.loginPage.isAuth)
 
-    const buttonCallback = () => {
+    const onCLickHandler = () => {
         dispatch(loginTC(email, password, rememberMe))
     }
 
-    if (isLoggedIn) {
+    if (isAuth) {
         return <Redirect to='/profile' />
     }
     const checkboxChange = () => {
@@ -40,7 +40,7 @@ export function Loginization() {
             <br />
             <span><SuperCheckbox checked={rememberMe} onChange={checkboxChange} /> Remember Me</span>
             <div>
-                <SuperButton onClick={buttonCallback}>Sign Up</SuperButton>
+                <SuperButton onClick={onCLickHandler}>Sign Up</SuperButton>
             </div>
         </div>
     );
