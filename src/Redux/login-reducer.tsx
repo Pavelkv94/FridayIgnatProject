@@ -4,7 +4,7 @@ import { authApi, ResponseLoginType } from '../api/fridayProject-api';
 
 let initialState = {
     userData: {} as ResponseLoginType,
-    isAuth: false as boolean
+    isAuth: "" as string
 }
 type PayloadType = {
     _id: string;
@@ -39,7 +39,7 @@ const loginReducer = (state: InitialAuthType = initialState, action: LoginAction
         case 'LOGIN/IS-LOGGED-IN':
             return {
                 ...state,
-                isAuth: action.isAuth
+                isAuth: action._id
             }
         default:
             return state;
@@ -62,9 +62,9 @@ export const setErrorAC = (error: string | null) => ({
     error
 } as const)
 
-export const isLoggedInAC = (isAuth: boolean) => ({
+export const isLoggedInAC = (_id: string) => ({
     type: 'LOGIN/IS-LOGGED-IN',
-    isAuth
+    _id
 } as const)
 
 //Thunk creators
@@ -74,7 +74,7 @@ export const loginTC = (email: string, password: string, rememberMe: boolean) =>
             res => {
 
                 dispatch(getUserDataAC(res.data))
-                dispatch(isLoggedInAC(true))
+                dispatch(isLoggedInAC(res.data._id))
             }
         )
         .catch(err => {
@@ -87,10 +87,9 @@ export const loginTC = (email: string, password: string, rememberMe: boolean) =>
 export const logoutTC = () => (dispatch: Dispatch) => {
     authApi.logout()
         .then(res => {
-            dispatch(isLoggedInAC(false))
+            dispatch(isLoggedInAC(""))
         }).catch(err => {
             alert(err)
-            //dispatch(isLoggedInAC(false))
         })
 
 }

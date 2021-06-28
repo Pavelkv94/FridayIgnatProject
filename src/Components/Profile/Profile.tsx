@@ -6,15 +6,16 @@ import { AppStateType } from '../../Redux/store';
 import { Redirect } from 'react-router-dom';
 
 export function Profile() {
+    
     const dispatch = useDispatch();
-    const isAuth = useSelector<AppStateType, boolean>(state => state.loginPage.isAuth)
+    const isAuth = useSelector<AppStateType, string>(state => state.loginPage.isAuth)
     const data = useSelector<AppStateType, ResponseLoginType>(state => state.loginPage.userData)
 
 
     const logout = () => {
         dispatch(logoutTC());
     }
-    if (isAuth === false) { return <Redirect to={"/login"} />; }
+    if (isAuth === "") { return <Redirect to={"/login"} />; }
 
     //при успешной логинизации отрисовываем данные пользователя
     return (

@@ -15,7 +15,7 @@ export function Loginization() {
     const [email, setEmail] = useState<string>("")
     const [password, setPassword] = useState<string>("")
     const [rememberMe, setRememberMe] = useState<boolean>(false)
-    const isAuth = useSelector<AppStateType, boolean>(state => state.loginPage.isAuth)
+    const isAuth = useSelector<AppStateType, string>(state => state.loginPage.isAuth)
 
     const onCLickHandler = () => {
         dispatch(loginTC(email, password, rememberMe))
