@@ -9,10 +9,10 @@ import PasswordRecoveryReducer from "./password-recovery-reducer";
 
 export const rootReducer = combineReducers({
     loginPage: loginReducer,
-    profile: profileReducer,
-    newPassPage: newPasswordReducer,
-    recovPass: PasswordRecoveryReducer,
-    reg: registrationReducer,
+    // profile: profileReducer,
+    // newPassPage: newPasswordReducer,
+    // recovPass: PasswordRecoveryReducer,
+    // reg: registrationReducer,
 })
 
 
@@ -21,3 +21,5 @@ export type AppStateType = ReturnType<typeof rootReducer>
 
 export const store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
 
+//@ts-ignore
+window.store = store;
