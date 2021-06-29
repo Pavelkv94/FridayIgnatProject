@@ -6,6 +6,7 @@ import {registerTC, setAppErrorAC, setIsInitializedAC} from "../../Redux/reg-red
 import {Redirect} from 'react-router-dom';
 import {AppStateType} from "../../Redux/store";
 import style from "./Registration.module.css"
+import Preloader from "../../Common/Preloader/Preloader";
 
 export function Registration() {
 //useState
@@ -16,6 +17,7 @@ export function Registration() {
     const isInitialized = useSelector<AppStateType, boolean>((state) => state.reg.isInitialized)
     const status = useSelector<AppStateType, string>((state) => state.reg.status)
     const error = useSelector<AppStateType, string | null>((state) => state.reg.error)
+    const isAuth = useSelector<AppStateType, string>(state => state.loginPage.isAuth)
 
     const dispatch = useDispatch()
 
@@ -30,15 +32,19 @@ export function Registration() {
     useEffect(() => {
         dispatch(setIsInitializedAC(false))
         dispatch(setAppErrorAC(null))
-    }, [isInitialized])
+    },[isInitialized])
 
     if (isInitialized) {
         return <Redirect to='/login'/>
     }
+    if (isAuth) {
+        return <Redirect to='/profile' />
+    }
+
     return (
 
         <div>
-
+            {status !== 'idle'? <Preloader/> : null}
             <h1>Registration</h1>
             {error && <div className={style.formSummaryError}>
                 {error}

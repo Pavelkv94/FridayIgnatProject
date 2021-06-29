@@ -8,20 +8,19 @@ const instance = axios.create({
 //api
 
 export const authApi = {
-    
+
     me() {
         return instance.post<ResponseLoginType>("/auth/me", {})
     },
     login(email: string, password: string, rememberMe: boolean) {
-        return instance.post<ResponseLoginType>("/auth/login", { email, password, rememberMe })
+        return instance.post<ResponseLoginType>("/auth/login", {email, password, rememberMe})
     },
 
     logout() {
         return instance.delete("/auth/me")
     },
-  register(email:string, password: string) {
-        const promise = instance.post<ResponseRegisterType>("/auth/register", {email, password})
-        return promise
+    register(email: string, password: string) {
+        return instance.post<ResponseRegisterType>("/auth/register", {email, password})
     }
 }
 
