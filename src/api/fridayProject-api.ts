@@ -1,5 +1,6 @@
 import axios from "axios";
 
+
 const instance = axios.create({
     withCredentials: true,
     baseURL: "http://localhost:7542/2.0"
@@ -17,11 +18,15 @@ export const authApi = {
 
     logout() {
         return instance.delete("/auth/me")
+    },
+  register(email:string, password: string) {
+        const promise = instance.post<ResponseRegisterType>("/auth/register", {email, password})
+        return promise
     }
-
 }
 
 //types
+
 
 export type ResponseLoginType = {
     _id: string;
@@ -35,5 +40,10 @@ export type ResponseLoginType = {
     verified: boolean; // подтвердил ли почту
     rememberMe: boolean;
     error?: string;
+}
+
+export type ResponseRegisterType = {
+    addedUser: any,
+    error?: string
 }
 

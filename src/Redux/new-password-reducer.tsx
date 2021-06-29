@@ -1,7 +1,7 @@
 import React from 'react'
 
-
-const newPasswordReducer = (state: any, action: any) => {
+const initialState = {}
+const newPasswordReducer = (state = initialState, action: any) => {
 
     return state;
 }

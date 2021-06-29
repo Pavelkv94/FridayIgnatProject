@@ -104,6 +104,5 @@ export const authTC = () => (dispatch: Dispatch) => {
             alert("Введите свои данные")
         })
 
-}
 
 export default loginReducer;
