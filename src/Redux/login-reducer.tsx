@@ -89,7 +89,7 @@ export const logoutTC = () => (dispatch: Dispatch) => {
         .then(res => {
             dispatch(isLoggedInAC(""))
         }).catch(err => {
-            
+
         })
 
 }
@@ -104,5 +104,5 @@ export const authTC = () => (dispatch: Dispatch) => {
             alert("Введите свои данные")
         })
 
-
+}
 export default loginReducer;

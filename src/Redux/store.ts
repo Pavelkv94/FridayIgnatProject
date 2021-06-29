@@ -12,7 +12,7 @@ export const rootReducer = combineReducers({
     // profile: profileReducer,
     // newPassPage: newPasswordReducer,
     // recovPass: PasswordRecoveryReducer,
-    // reg: registrationReducer,
+    reg: registrationReducer,
 })
 
 
