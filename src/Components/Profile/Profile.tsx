@@ -1,16 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ResponseLoginType } from '../../api/fridayProject-api';
-import { logoutTC } from '../../Redux/login-reducer';
+import { authTC, logoutTC } from '../../Redux/login-reducer';
 import { AppStateType } from '../../Redux/store';
 import { Redirect } from 'react-router-dom';
 
 export function Profile() {
-    
+
     const dispatch = useDispatch();
     const isAuth = useSelector<AppStateType, string>(state => state.loginPage.isAuth)
     const data = useSelector<AppStateType, ResponseLoginType>(state => state.loginPage.userData)
 
+    useEffect(() => {
+        dispatch(authTC())
+    }, [])
 
     const logout = () => {
         dispatch(logoutTC());

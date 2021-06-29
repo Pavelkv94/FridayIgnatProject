@@ -89,7 +89,19 @@ export const logoutTC = () => (dispatch: Dispatch) => {
         .then(res => {
             dispatch(isLoggedInAC(""))
         }).catch(err => {
-            alert(err)
+            
+        })
+
+}
+
+export const authTC = () => (dispatch: Dispatch) => {
+    authApi.me()
+        .then(res => {
+            dispatch(getUserDataAC(res.data))
+            dispatch(isLoggedInAC(res.data._id))
+
+        }).catch(err => {
+            alert("Введите свои данные")
         })
 
 }

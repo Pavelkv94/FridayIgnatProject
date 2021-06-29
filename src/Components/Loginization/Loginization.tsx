@@ -39,6 +39,7 @@ export function Loginization() {
             <div>Password:</div>
             <SuperInputText value={password} onChangeText={setPassword} />
             <br />
+            
             <span><SuperCheckbox checked={rememberMe} onChange={checkboxChange} /> Remember Me</span>
             <div>
                 <SuperButton onClick={onCLickHandler}>Sign Up</SuperButton>
