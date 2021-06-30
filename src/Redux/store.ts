@@ -9,9 +9,9 @@ import PasswordRecoveryReducer from "./password-recovery-reducer";
 
 export const rootReducer = combineReducers({
     loginPage: loginReducer,
-    // profile: profileReducer,
-    // newPassPage: newPasswordReducer,
-    // recovPass: PasswordRecoveryReducer,
+    profile: profileReducer,
+    newPassPage: newPasswordReducer,
+    recovPass: PasswordRecoveryReducer,
     reg: registrationReducer,
 })
 

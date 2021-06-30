@@ -11,7 +11,7 @@ import {TestPage} from "./Components/TestPage/TestPage";
 
 export const PATH = {
     LOGIN: '/login',
-    NEW_PASS: '/newPassword',
+    NEW_PASS: '/newPassword/:token',
     RECOVERY_PASS: '/recoveryPass',
     PROFILE: '/profile',
     REGISTRATION: '/registration',

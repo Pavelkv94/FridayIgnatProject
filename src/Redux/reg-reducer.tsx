@@ -23,14 +23,14 @@ export type RequestStatusType = 'idle' | 'loading' | 'succeeded' | 'failed'
 const registrationReducer = (state: InitialStateType = initialState, action: ActionsType) => {
     switch (action.type) {
         case "REG/SET-ERROR":
-            return {...state, error:action.error}
+            return {...state, error: action.error}
         case "REG/SET-IS-INITIALIZED":
             return {...state, isInitialized: action.isInitialized}
         case "REG/SET-STATUS":
             return {...state, status: action.status}
     }
 
-    return state;
+    return {...state};
 }
 export const setAppErrorAC = (error: string | null) => ({type: 'REG/SET-ERROR', error} as const)
 export const setAppStatusAC = (status: RequestStatusType) => ({type: 'REG/SET-STATUS', status} as const)
@@ -48,7 +48,7 @@ export const registerTC = (email: string, password: string) => (dispatch: Dispat
             dispatch(setAppStatusAC("failed"))
             dispatch(setAppErrorAC(error.response.data.error))
         })
-        .finally(()=> {
+        .finally(() => {
             dispatch(setAppStatusAC("idle"))
         })
 }
