@@ -19,7 +19,7 @@ export type InitialStateType = {
 const from = "test-front-admin<ai73a@yandex.by>"
 const message = `<div style="background-color: lime; padding: 15px"> 
 password recovery link(bla bla): 
-<a href='http://localhost:3000/FridayIgnatProject#/newPassword/$token$'>
+<a href='http://sozdatel31.github.io/FridayIgnatProject#/newPassword/$token$'>
 link</a></div>`
 
 const PasswordRecoveryReducer = (state = initialState, action: ActionsType) => {
