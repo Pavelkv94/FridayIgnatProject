@@ -42,7 +42,7 @@ export function Loginization() {
             
             <span><SuperCheckbox checked={rememberMe} onChange={checkboxChange} /> Remember Me</span>
             <div>
-                <SuperButton onClick={onCLickHandler}>Sign Up</SuperButton>
+                <SuperButton onClick={onCLickHandler}>Sign In</SuperButton>
             </div>
         </div>
     );
