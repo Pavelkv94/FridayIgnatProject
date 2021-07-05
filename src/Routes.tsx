@@ -7,6 +7,7 @@ import {PasswordRecovery} from "./Components/PasswordRecovery/PasswordRecovery";
 import {Profile} from "./Components/Profile/Profile";
 import {Registration} from "./Components/Registration/Registration";
 import {TestPage} from "./Components/TestPage/TestPage";
+import {Packs} from "./Components/Packs/Packs";
 
 
 export const PATH = {
@@ -15,7 +16,9 @@ export const PATH = {
     RECOVERY_PASS: '/recoveryPass',
     PROFILE: '/profile',
     REGISTRATION: '/registration',
-    TEST_PAGE: '/testt'
+    TEST_PAGE: '/testt',
+    CARDS_PAGE: '/cards',
+    PACKS_PAGE: '/packs',
 }
 
 function Routes() {
@@ -24,13 +27,14 @@ function Routes() {
             {/*//Switch выбирает первый подходящий роут*/}
             <Switch>
 
-                {/*exact нужен чтоб указать полное совподение (что после '/' ничего не будет)*/}
+                {/*exact нужен чтоб указать полное совпадение (что после '/' ничего не будет)*/}
                 <Route path={'/'} exact render={() => <Redirect to={PATH.LOGIN}/>}/>
                 <Route path={'/'} exact render={() => <Redirect to={PATH.NEW_PASS}/>}/>
                 <Route path={'/'} exact render={() => <Redirect to={PATH.RECOVERY_PASS}/>}/>
                 <Route path={'/'} exact render={() => <Redirect to={PATH.PROFILE}/>}/>
                 <Route path={'/'} exact render={() => <Redirect to={PATH.REGISTRATION}/>}/>
                 <Route path={'/'} exact render={() => <Redirect to={PATH.TEST_PAGE}/>}/>
+                <Route path={'/'} exact render={() => <Redirect to={PATH.PACKS_PAGE}/>}/>
 
                 <Route path={PATH.LOGIN} render={() => <Loginization/>}/>
                 <Route path={PATH.NEW_PASS} render={() => <NewPassword/>}/>
@@ -38,6 +42,8 @@ function Routes() {
                 <Route path={PATH.PROFILE} render={() => <Profile/>}/>
                 <Route path={PATH.REGISTRATION} render={() => <Registration/>}/>
                 <Route path={PATH.TEST_PAGE} render={() => <TestPage/>}/>
+                <Route path={PATH.PACKS_PAGE} render={() => <Packs/>}/>
+                {/*<Route path={PATH.TEST_PAGE} render={() => <TestPage/>}/>*/}
                 {/*    // add routes*/}
 
                 {/*у этого роута нет пути, он отрисуется если пользователь захочет попасть на несуществующую страницу*/}

@@ -9,6 +9,7 @@ function Header() {
             <NavLink to={PATH.NEW_PASS}>NewPassword </NavLink>
             <NavLink to={PATH.PROFILE}>Profile </NavLink>
             <NavLink to={PATH.RECOVERY_PASS}>PasswordRecovery </NavLink>
+            <NavLink to={PATH.PACKS_PAGE}>PACKS </NavLink>
             <NavLink to={PATH.TEST_PAGE}>Super Component </NavLink>
             {/*// add NavLinks*/}
         </div>
