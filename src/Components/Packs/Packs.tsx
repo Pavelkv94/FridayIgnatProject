@@ -3,16 +3,14 @@ import { useDispatch, useSelector } from "react-redux";
 import {
     cardsType,
     packsAddTC,
-    packsDeleteTC,
     packsTC,
-    packsUpdateTC,
 } from "../../Redux/packs-reducer";
 import s from "./Packs.module.css"
 import { AppStateType } from "../../Redux/store";
-import { authTC, isLoggedInAC } from "../../Redux/login-reducer";
 import { Search } from '../../Common/Search/Search';
 import { Pack } from './Pack/Pack';
-
+import { Paginator } from './../../Common/Paginator/Paginator'
+import Preloader from "../../Common/Preloader/Preloader";
 
 export function Packs() {
 
@@ -20,9 +18,11 @@ export function Packs() {
 
     const packs = useSelector<AppStateType, Array<cardsType>>(state => state.packs.cardPacks)
     const error = useSelector<AppStateType, string | undefined>(state => state.packs.error)
-    const userID = useSelector<AppStateType, string>(state => state.loginPage.userData._id)
-    const isAuth = useSelector<AppStateType, string>(state => state.loginPage.isAuth)
-    const searchResult = useSelector<AppStateType, string | null>(state => state.packs.searchResult)
+    const searchResult = useSelector<AppStateType, string>(state => state.packs.searchResult)
+    const totalCount = useSelector<AppStateType, number>(state => state.packs.cardPacksTotalCount)
+    const pageSize = useSelector<AppStateType, number>(state => state.packs.pageCount)
+    const currentPage = useSelector<AppStateType, number>(state => state.packs.page)
+    const status = useSelector<AppStateType, string>((state) => state.reg.status)
 
     useEffect(() => {
         dispatch(packsTC())
@@ -38,10 +38,13 @@ export function Packs() {
         searchPacks = packs.filter(m => searchName(m.name, searchResult))
     }
 
+    const onPageChanged = (page: number) => {
+        dispatch(packsTC(5, 10, page, 10))
+    }
 
-
-    return <div>
+    return <div className = {s.container}>
         PACKS
+        {status !== 'idle' ? <Preloader /> : null}
         <br />
         {error && <div>{error}</div>}
         <br />
@@ -61,6 +64,7 @@ export function Packs() {
         {searchPacks.map(m => {
             return <Pack card={m} key={m._id} />
         })}
+        <Paginator totalItemsCount={totalCount} pageSize={pageSize} currentPage={currentPage} onPageChanged={onPageChanged}/>
     </div>
 
 }

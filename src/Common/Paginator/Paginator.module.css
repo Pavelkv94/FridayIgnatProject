@@ -1,0 +1,22 @@
+
+.selected {
+    font-weight: bold;
+    font-size: 20px;
+    text-decoration: underline;
+    color: aqua;
+}
+
+.paginat {
+    width: 50px;
+    height: 50px;
+    margin: 5px;
+    cursor: pointer;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    position: relative;
+    font-size: 16px;
+}
+.container {
+    position: absolute;
+    right: 0;
+    margin: 15px;
+}

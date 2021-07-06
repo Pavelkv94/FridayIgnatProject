@@ -10,10 +10,11 @@ const initialState: initialStateType = {
     maxCardsCount: 5,
     minCardsCount: 0,
     page: 1,
-    pageCount: 4,
+    pageCount: 10,
     error: undefined,
     isInitialized: false,
 
+    status: 'idle',
     searchResult: ""
 }
 type initialStateType = responsePacksType
@@ -42,12 +43,13 @@ const packsReducer = (state = initialState, action: ActionType): initialStateTyp
             return { ...state, isInitialized: action.isInitialized }
         case 'PACKS/SET-SEARCH-VALUE':
             return { ...state, searchResult: action.value }
-
+        case "PACKS/SET-STATUS":
+            return { ...state, status: action.status }
         default: return state
     }
 
 }
-
+export const setAppStatusAC = (status: RequestStatusType) => ({ type: 'PACKS/SET-STATUS', status } as const)
 export const getCardsAC = (cards: initialStateType) => ({ type: 'PACKS/GET_CARDS', cards } as const)
 export const setAppErrorPacksAC = (error: string | undefined) => ({ type: 'PACKS/SET-ERROR', error } as const)
 export const setIsInitializedPackAC = (isInitialized: boolean) => ({
@@ -57,20 +59,21 @@ export const setIsInitializedPackAC = (isInitialized: boolean) => ({
 
 export const setSearchValuePackAC = (value: string) => ({ type: 'PACKS/SET-SEARCH-VALUE', value })
 
-export const packsTC = () => (dispatch: Dispatch<any>) => {
-
-    packsApi.getPacks(0, 10, 1, 10)
-
+export const packsTC = (minCardsCount?: number, maxCardsCount?: number, page?: number, pageCount?: number) => (dispatch: Dispatch<any>) => {
+    dispatch(setAppStatusAC("loading"))
+    packsApi.getPacks(minCardsCount, maxCardsCount, page, pageCount)
         .then((response) => {
+            dispatch(setAppStatusAC("succeeded"))
             dispatch(authTC())
             dispatch(getCardsAC(response.data))
             dispatch(setIsInitializedPackAC(true))
         })
         .catch((error) => {
+            dispatch(setAppStatusAC("failed"))
             dispatch(setAppErrorPacksAC(error.response.data.error))
         })
         .finally(() => {
-
+            dispatch(setAppStatusAC("idle"))
         })
 }
 
@@ -115,6 +118,7 @@ export const packsUpdateTC = (_id: string, name: string) => (dispatch: Dispatch<
         })
 }
 
+export type setAppStatusTypeAC = ReturnType<typeof setAppStatusAC>;
 export type getCardsTypeAC = ReturnType<typeof getCardsAC>;
 export type setAppErrorPacksTypeAC = ReturnType<typeof setAppErrorPacksAC>;
 export type setIsInitializedPackTypeAC = ReturnType<typeof setIsInitializedPackAC>;
@@ -123,4 +127,5 @@ type ActionType = getCardsTypeAC
     | setAppErrorPacksTypeAC
     | setIsInitializedPackTypeAC
     | setSearchValuePackTypeAC
+    | setAppStatusTypeAC
 export default packsReducer;

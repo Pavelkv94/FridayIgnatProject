@@ -1,6 +1,6 @@
 import React from 'react'
-import {Dispatch} from 'redux'
-import {authApi} from "../api/fridayProject-api";
+import { Dispatch } from 'redux'
+import { authApi } from "../api/fridayProject-api";
 
 
 const initialState: InitialStateType = {
@@ -23,18 +23,17 @@ export type RequestStatusType = 'idle' | 'loading' | 'succeeded' | 'failed'
 const registrationReducer = (state: InitialStateType = initialState, action: ActionsType) => {
     switch (action.type) {
         case "REG/SET-ERROR":
-            return {...state, error: action.error}
+            return { ...state, error: action.error }
         case "REG/SET-IS-INITIALIZED":
-            return {...state, isInitialized: action.isInitialized}
+            return { ...state, isInitialized: action.isInitialized }
         case "REG/SET-STATUS":
-            return {...state, status: action.status}
+            return { ...state, status: action.status }
+        default: return { ...state };
     }
-
-    return {...state};
 }
-export const setAppErrorAC = (error: string | null) => ({type: 'REG/SET-ERROR', error} as const)
-export const setAppStatusAC = (status: RequestStatusType) => ({type: 'REG/SET-STATUS', status} as const)
-export const setIsInitializedAC = (isInitialized: boolean) => ({type: 'REG/SET-IS-INITIALIZED', isInitialized} as const)
+export const setAppErrorAC = (error: string | null) => ({ type: 'REG/SET-ERROR', error } as const)
+export const setAppStatusAC = (status: RequestStatusType) => ({ type: 'REG/SET-STATUS', status } as const)
+export const setIsInitializedAC = (isInitialized: boolean) => ({ type: 'REG/SET-IS-INITIALIZED', isInitialized } as const)
 
 
 export const registerTC = (email: string, password: string) => (dispatch: Dispatch<ActionsType>) => {
