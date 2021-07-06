@@ -101,7 +101,7 @@ export const authTC = () => (dispatch: Dispatch) => {
             dispatch(isLoggedInAC(res.data._id))
 
         }).catch(err => {
-            alert("Введите свои данные")
+             alert("Введите свои данные")
         })
 
 }

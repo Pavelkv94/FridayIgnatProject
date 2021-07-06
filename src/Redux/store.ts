@@ -6,6 +6,7 @@ import profileReducer from "./profile-reducer";
 import registrationReducer from "./reg-reducer";
 import PasswordRecoveryReducer from "./password-recovery-reducer";
 import packsReducer from "./packs-reducer";
+import cardsReducer from "./cards-reducer";
 
 
 export const rootReducer = combineReducers({
@@ -15,6 +16,7 @@ export const rootReducer = combineReducers({
     recovPass: PasswordRecoveryReducer,
     reg: registrationReducer,
     packs: packsReducer,
+    cards: cardsReducer,
 })
 
 

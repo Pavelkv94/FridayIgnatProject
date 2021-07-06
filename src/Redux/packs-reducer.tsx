@@ -1,66 +1,118 @@
 import React from 'react'
 import {Dispatch} from 'redux'
-import {authApi} from "../api/fridayProject-api";
-import {cardsAPI} from "../api/cards-api";
+import {packsApi, responsePacksType} from "../api/packs-api";
+import {authTC, isLoggedInAC} from './login-reducer';
 
 
-const initialState: Array<cardsType> = [
-    {
-        name: "123",
-        cardsCount: 2,
-        updated: "21/01/1997",
-        url: "hello.world"
-    },
-    {
-        name: "123",
-        cardsCount: 56,
-        updated: "21/01/1997",
-        url: "hello.wwerorld"
-    },
-    {
-        name: "123",
-        cardsCount: 11,
-        updated: "21/01/1997",
-        url: "hello.11world"
-    },
-    {
-        name: "456",
-        cardsCount: 32,
-        updated: "21/01/1997",
-        url: "hel22lo.world"
-    }
-]
-
+const initialState: initialStateType = {
+    cardPacks: [],
+    cardPacksTotalCount: 14,
+    maxCardsCount: 5,
+    minCardsCount: 0,
+    page: 1,
+    pageCount: 4,
+    error: undefined,
+    isInitialized: false
+}
+type initialStateType = responsePacksType
 
 export type cardsType = {
+    _id: string
+    user_id: string
     name: string
     cardsCount: number
+    created: string
     updated: string
     url: string
 }
 
+
 export type RequestStatusType = 'idle' | 'loading' | 'succeeded' | 'failed'
 
 
-const packsReducer = (state = initialState, action: any): Array<cardsType> => {
-
-    return state;
+const packsReducer = (state = initialState, action: ActionType): initialStateType => {
+    switch (action.type) {
+        case "PACKS/GET_CARDS":
+            return action.cards
+        case "PACKS/SET-ERROR":
+            return {...state, error: action.error}
+        case "PACKS/SET-IS-INITIALIZED":
+            return {...state, isInitialized: action.isInitialized}
+    }
+    return state
 }
 
+export const getCardsAC = (cards: initialStateType) => ({type: 'PACKS/GET_CARDS', cards} as const)
+export const setAppErrorPacksAC = (error: string | undefined) => ({type: 'PACKS/SET-ERROR', error} as const)
+export const setIsInitializedPackAC = (isInitialized: boolean) => ({
+    type: 'PACKS/SET-IS-INITIALIZED',
+    isInitialized
+} as const)
 
-export const packsTC = () => (dispatch: Dispatch) => {
+export const packsTC = () => (dispatch: Dispatch<any>) => {
 
-    cardsAPI.getCards()
-        .then(() => {
+    packsApi.getPacks(0, 10, 1, 10)
 
+        .then((response) => {
+            dispatch(authTC())
+            dispatch(getCardsAC(response.data))
+            dispatch(setIsInitializedPackAC(true))
         })
         .catch((error) => {
-
+            dispatch(setAppErrorPacksAC(error.response.data.error))
         })
         .finally(() => {
 
         })
 }
 
+export const packsAddTC = () => (dispatch: Dispatch<any>) => {
+
+    packsApi.setPacks("privet")
+        .then(() => {
+            dispatch(packsTC())
+        })
+        .catch((error) => {
+            dispatch(setAppErrorPacksAC(error.response.data.error))
+        })
+        .finally(() => {
+
+        })
+}
+
+export const packsDeleteTC = (id: string) => (dispatch: Dispatch<any>) => {
+    packsApi.deletePacks(id)
+        .then(() => {
+            dispatch(packsTC())
+        })
+        .catch((error) => {
+            dispatch(setAppErrorPacksAC(error.response.data.error))
+        })
+        .finally(() => {
+
+        })
+}
+
+export const packsUpdateTC = (_id: string, name: string) => (dispatch: Dispatch<any>) => {
+
+    packsApi.updatePacks(_id, name)
+        .then(() => {
+            dispatch(packsTC())
+        })
+        .catch((error) => {
+            dispatch(setAppErrorPacksAC(error.response.data.error))
+        })
+        .finally(() => {
+
+        })
+}
+
+export type getCardsTypeAC = ReturnType<typeof getCardsAC>;
+export type setAppErrorPacksTypeAC = ReturnType<typeof setAppErrorPacksAC>;
+export type setIsInitializedPackTypeAC = ReturnType<typeof setIsInitializedPackAC>;
+
+type ActionType = getCardsTypeAC
+    | setAppErrorPacksTypeAC
+    | setIsInitializedPackTypeAC
 
 export default packsReducer;
