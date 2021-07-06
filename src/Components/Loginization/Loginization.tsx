@@ -1,13 +1,13 @@
-import React, {useEffect, useState} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
-import {isLoggedInAC, loginTC} from '../../Redux/login-reducer';
-import {AppStateType} from '../../Redux/store';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { isLoggedInAC, loginTC } from '../../Redux/login-reducer';
+import { AppStateType } from '../../Redux/store';
 import SuperInputText from "../../SuperComponents/c1-SuperInputText/SuperInputText";
 import SuperButton from "../../SuperComponents/c2-SuperButton/SuperButton";
-import {Redirect} from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import s from './Loginization.module.css'
 import SuperCheckbox from '../../SuperComponents/c3-SuperCheckbox/SuperCheckbox';
-
+import Preloader from "../../Common/Preloader/Preloader";
 
 export function Loginization() {
     const dispatch = useDispatch();
@@ -15,13 +15,15 @@ export function Loginization() {
     const [password, setPassword] = useState<string>("")
     const [rememberMe, setRememberMe] = useState<boolean>(false)
     const isAuth = useSelector<AppStateType, string>(state => state.loginPage.isAuth)
+    const status = useSelector<AppStateType, string>((state) => state.loginPage.status)
+    const error = useSelector<AppStateType, string | null>((state) => state.loginPage.error)
 
     const onCLickHandler = () => {
         dispatch(loginTC(email, password, rememberMe))
     }
 
     if (isAuth) {
-        return <Redirect to='/profile'/>
+        return <Redirect to='/profile' />
     }
     const checkboxChange = () => {
         setRememberMe(!rememberMe)
@@ -29,18 +31,22 @@ export function Loginization() {
     return (
 
         <div>
+            {status !== 'idle' ? <Preloader /> : null}
             <h1>Loginization</h1>
-            <span style={{color: 'green', margin: "10px"}}>pavlik.gerasim@yandex.by <br/>
-            123456789</span>
-            <hr/>
+            {error && <div className={s.formSummaryError}>
+                {error}
+            </div>}
+            <span style={{ color: 'green', margin: "10px" }}>pavlik.gerasim@yandex.by <br />
+                123456789</span>
+            <hr />
 
             <div>Email:</div>
-            <SuperInputText value={email} onChangeText={setEmail}/>
+            <SuperInputText value={email} onChangeText={setEmail} />
             <div>Password:</div>
-            <SuperInputText value={password} onChangeText={setPassword}/>
-            <br/>
+            <SuperInputText value={password} onChangeText={setPassword} />
+            <br />
 
-            <span><SuperCheckbox checked={rememberMe} onChange={checkboxChange}/> Remember Me</span>
+            <span><SuperCheckbox checked={rememberMe} onChange={checkboxChange} /> Remember Me</span>
             <div>
                 <SuperButton onClick={onCLickHandler}>Sign In</SuperButton>
             </div>

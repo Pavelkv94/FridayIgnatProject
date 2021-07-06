@@ -1,10 +1,14 @@
 import React from 'react'
 import { Dispatch } from 'redux';
+import { idText } from 'typescript';
 import { authApi, ResponseLoginType } from '../api/fridayProject-api';
+import { RequestStatusType } from './reg-reducer';
 
 let initialState = {
     userData: {} as ResponseLoginType,
-    isAuth: "" as string
+    isAuth: "" as string,
+    status: "idle",
+    error: "" as string | null,
 }
 type PayloadType = {
     _id: string;
@@ -22,7 +26,7 @@ type PayloadType = {
 }
 
 export type InitialAuthType = typeof initialState;
-export type LoginActionType = SetUserDataACType | SetErrorACType | IsLoggedInACType
+export type LoginActionType = SetUserDataACType | SetErrorACType | IsLoggedInACType | LogAppASatusACType
 
 const loginReducer = (state: InitialAuthType = initialState, action: LoginActionType) => {
     switch (action.type) {
@@ -41,6 +45,9 @@ const loginReducer = (state: InitialAuthType = initialState, action: LoginAction
                 ...state,
                 isAuth: action._id
             }
+        case 'LOGIN/SET-STATUS':
+            return { ...state, status: action.status }
+
         default:
             return state;
     }
@@ -51,6 +58,12 @@ const loginReducer = (state: InitialAuthType = initialState, action: LoginAction
 type SetUserDataACType = ReturnType<typeof getUserDataAC>
 type SetErrorACType = ReturnType<typeof setErrorAC>
 type IsLoggedInACType = ReturnType<typeof isLoggedInAC>
+type LogAppASatusACType = ReturnType<typeof setAppStatusAC>
+
+export const setAppStatusAC = (status: RequestStatusType) => ({
+    type: 'LOGIN/SET-STATUS',
+    status
+} as const)
 
 export const getUserDataAC = (profileData: PayloadType) => ({
     type: 'LOGIN/SET-USER-DATA',
@@ -69,29 +82,38 @@ export const isLoggedInAC = (_id: string) => ({
 
 //Thunk creators
 export const loginTC = (email: string, password: string, rememberMe: boolean) => (dispatch: Dispatch) => {
+    dispatch(setAppStatusAC("loading"))
     authApi.login(email, password, rememberMe)
         .then(
             res => {
-
                 dispatch(getUserDataAC(res.data))
                 dispatch(isLoggedInAC(res.data._id))
+                dispatch(setAppStatusAC("succeeded"))
             }
         )
         .catch(err => {
-            dispatch(setErrorAC(err))
-            alert("Введены неверные данные")
+            dispatch(setErrorAC(err.response.data.error))
+            dispatch(setAppStatusAC("failed"))
+        })
+        .finally(() => {
+            dispatch(setAppStatusAC("idle"))
         })
 }
 
 
 export const logoutTC = () => (dispatch: Dispatch) => {
+    dispatch(setAppStatusAC("loading"))
     authApi.logout()
         .then(res => {
             dispatch(isLoggedInAC(""))
+            dispatch(setAppStatusAC("succeeded"))
         }).catch(err => {
-
+            dispatch(setErrorAC(err.response.data.error))
+            dispatch(setAppStatusAC("failed"))
         })
-
+        .finally(() => {
+            dispatch(setAppStatusAC("idle"))
+        })
 }
 
 export const authTC = () => (dispatch: Dispatch) => {
@@ -101,7 +123,7 @@ export const authTC = () => (dispatch: Dispatch) => {
             dispatch(isLoggedInAC(res.data._id))
 
         }).catch(err => {
-             alert("Введите свои данные")
+            dispatch(setErrorAC(err.response.data.error))
         })
 
 }
