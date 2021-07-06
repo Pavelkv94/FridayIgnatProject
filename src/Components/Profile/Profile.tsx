@@ -13,6 +13,7 @@ export function Profile() {
 
     useEffect(() => {
         dispatch(authTC())
+
     }, [])
 
     const logout = () => {

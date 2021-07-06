@@ -117,14 +117,19 @@ export const logoutTC = () => (dispatch: Dispatch) => {
 }
 
 export const authTC = () => (dispatch: Dispatch) => {
+    dispatch(setAppStatusAC("loading"))
     authApi.me()
         .then(res => {
             dispatch(getUserDataAC(res.data))
             dispatch(isLoggedInAC(res.data._id))
+            dispatch(setAppStatusAC("succeeded"))
 
         }).catch(err => {
             dispatch(setErrorAC(err.response.data.error))
+            dispatch(setAppStatusAC("failed"))
         })
-
+        .finally(() => {
+            dispatch(setAppStatusAC("idle"))
+        })
 }
 export default loginReducer;
