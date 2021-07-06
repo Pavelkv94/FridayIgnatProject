@@ -91,6 +91,8 @@ export type responsePacksType = {
     pageCount: number,
     error?: string,
     isInitialized: boolean
+    
+    searchResult : string 
 }
 
 export type cardType = {

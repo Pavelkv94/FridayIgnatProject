@@ -1,7 +1,7 @@
 import React from 'react'
-import {Dispatch} from 'redux'
-import {packsApi, responsePacksType} from "../api/packs-api";
-import {authTC, isLoggedInAC} from './login-reducer';
+import { Dispatch } from 'redux'
+import { packsApi, responsePacksType } from "../api/packs-api";
+import { authTC } from './login-reducer';
 
 
 const initialState: initialStateType = {
@@ -12,7 +12,9 @@ const initialState: initialStateType = {
     page: 1,
     pageCount: 4,
     error: undefined,
-    isInitialized: false
+    isInitialized: false,
+
+    searchResult: ""
 }
 type initialStateType = responsePacksType
 
@@ -35,19 +37,25 @@ const packsReducer = (state = initialState, action: ActionType): initialStateTyp
         case "PACKS/GET_CARDS":
             return action.cards
         case "PACKS/SET-ERROR":
-            return {...state, error: action.error}
+            return { ...state, error: action.error }
         case "PACKS/SET-IS-INITIALIZED":
-            return {...state, isInitialized: action.isInitialized}
+            return { ...state, isInitialized: action.isInitialized }
+        case 'PACKS/SET-SEARCH-VALUE':
+            return { ...state, searchResult: action.value }
+
+        default: return state
     }
-    return state
+
 }
 
-export const getCardsAC = (cards: initialStateType) => ({type: 'PACKS/GET_CARDS', cards} as const)
-export const setAppErrorPacksAC = (error: string | undefined) => ({type: 'PACKS/SET-ERROR', error} as const)
+export const getCardsAC = (cards: initialStateType) => ({ type: 'PACKS/GET_CARDS', cards } as const)
+export const setAppErrorPacksAC = (error: string | undefined) => ({ type: 'PACKS/SET-ERROR', error } as const)
 export const setIsInitializedPackAC = (isInitialized: boolean) => ({
     type: 'PACKS/SET-IS-INITIALIZED',
     isInitialized
 } as const)
+
+export const setSearchValuePackAC = (value: string) => ({ type: 'PACKS/SET-SEARCH-VALUE', value })
 
 export const packsTC = () => (dispatch: Dispatch<any>) => {
 
@@ -110,9 +118,9 @@ export const packsUpdateTC = (_id: string, name: string) => (dispatch: Dispatch<
 export type getCardsTypeAC = ReturnType<typeof getCardsAC>;
 export type setAppErrorPacksTypeAC = ReturnType<typeof setAppErrorPacksAC>;
 export type setIsInitializedPackTypeAC = ReturnType<typeof setIsInitializedPackAC>;
-
+export type setSearchValuePackTypeAC = { type: 'PACKS/SET-SEARCH-VALUE', value: string }
 type ActionType = getCardsTypeAC
     | setAppErrorPacksTypeAC
     | setIsInitializedPackTypeAC
-
+    | setSearchValuePackTypeAC
 export default packsReducer;

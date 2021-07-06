@@ -11,6 +11,7 @@ import s from "./Packs.module.css"
 import { AppStateType } from "../../Redux/store";
 import { authTC, isLoggedInAC } from "../../Redux/login-reducer";
 import { Search } from '../../Common/Search/Search';
+import { Pack } from './Pack/Pack';
 
 
 export function Packs() {
@@ -21,9 +22,20 @@ export function Packs() {
     const error = useSelector<AppStateType, string | undefined>(state => state.packs.error)
     const userID = useSelector<AppStateType, string>(state => state.loginPage.userData._id)
     const isAuth = useSelector<AppStateType, string>(state => state.loginPage.isAuth)
+    const searchResult = useSelector<AppStateType, string | null>(state => state.packs.searchResult)
+
     useEffect(() => {
         dispatch(packsTC())
     }, [])
+
+    let sortedPacks = packs
+console.log(sortedPacks)
+console.log(searchResult)
+    if (searchResult) {
+        sortedPacks = packs.filter(m=>m.name === searchResult)
+    }
+
+
 
     return <div>
         PACKS
@@ -33,7 +45,7 @@ export function Packs() {
         <Search />
         <br />
         <div className={s.packsHeaderContainer}>
-            <div className={s.packsChild}>Namesss</div>
+            <div className={s.packsChild}>Name</div>
             <div className={s.packsChild}>cardsCount</div>
             <div className={s.packsChild}>updated</div>
             <div className={s.packsChild}>url</div>
@@ -43,21 +55,8 @@ export function Packs() {
             </div>
         </div>
 
-        {packs.map(m => {
-            return <div className={s.packsBodyContainer} key={m._id}>
-                <div className={s.packsChild2}>{m.name}</div>
-                <div className={s.packsChild2}>{m.cardsCount}</div>
-                <div className={s.packsChild2}>{m.updated}</div>
-                <div className={s.packsChild2}>{m.url}</div>
-                <div className={s.packsChild2}>
-                    <button disabled={userID !== m.user_id}
-                        onClick={() => dispatch(packsDeleteTC(m._id))}>del
-                    </button>
-                    <button disabled={userID !== m.user_id}
-                        onClick={() => dispatch(packsUpdateTC(m._id, "Hqw"))}>upd
-                    </button>
-                </div>
-            </div>
+        {sortedPacks.map(m => {
+            return <Pack card={m} key={m._id}/>
         })}
     </div>
 
