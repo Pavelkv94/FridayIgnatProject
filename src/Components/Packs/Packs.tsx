@@ -28,11 +28,14 @@ export function Packs() {
         dispatch(packsTC())
     }, [])
 
-    let sortedPacks = packs
-console.log(sortedPacks)
-console.log(searchResult)
+    const searchName = (name: string, search: string) => {
+        if (name.toLowerCase() === search.toLowerCase()) return true
+    }
+
+    let searchPacks = packs
+
     if (searchResult) {
-        sortedPacks = packs.filter(m=>m.name === searchResult)
+        searchPacks = packs.filter(m => searchName(m.name, searchResult))
     }
 
 
@@ -55,8 +58,8 @@ console.log(searchResult)
             </div>
         </div>
 
-        {sortedPacks.map(m => {
-            return <Pack card={m} key={m._id}/>
+        {searchPacks.map(m => {
+            return <Pack card={m} key={m._id} />
         })}
     </div>
 
