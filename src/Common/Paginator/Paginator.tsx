@@ -33,6 +33,7 @@ export function Paginator(props: PaginatorType) {
         })}
         {portionCount > portionNumber &&
             <button onClick={() => { setPortionNumber(portionNumber + 1) }}>NEXT</button>}
+        
 
     </div>)
 }
