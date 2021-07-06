@@ -1,37 +1,43 @@
-import {instance} from "./fridayProject-api";
-import {cardsType, RequestStatusType} from "../Redux/packs-reducer";
+import { instance } from "./fridayProject-api";
+import { cardsType, RequestStatusType } from "../Redux/packs-reducer";
 
 
 //api
 
-
 export const packsApi = {
 
-    getPacks(minCardsCount?: number, maxCardsCount?: number, page?: number, pageCount?: number) {
-        return instance.get<responsePacksType>("/cards/pack",
-            {params: {minCardsCount, maxCardsCount, page, pageCount}})
+    getPacks(
+        min?: number,
+        max?: number,
+        page?: number,
+        pageCount?: number,
+        packName?: string,
+        sortPacks?: string
+    ) {
+        return instance.get<responsePacksType>(`/cards/pack`,
+            { params: { packName, min, max, sortPacks, page, pageCount } })
     },
     setPacks(name: string) {
-        return instance.post("cards/pack", {cardsPack: {name}})
+        return instance.post("cards/pack", { cardsPack: { name } })
     },
     deletePacks(id: string) {
-        return instance.delete("cards/pack", {params: {id}})
+        return instance.delete("cards/pack", { params: { id } })
     },
     updatePacks(_id: string, name: string) {
-        return instance.put("cards/pack", {cardsPack: {_id, name}})
+        return instance.put("cards/pack", { cardsPack: { _id, name } })
     },
     getCards(cardsPack_id: string) {
         return instance.get<responseCardType>("/cards/card",
-            {params: cardsPack_id})
+            { params: cardsPack_id })
     },
     setCards(name: string) {
-        return instance.post("cards/card", {cardsPack: {name}})
+        return instance.post("cards/card", { cardsPack: { name } })
     },
     deleteCards(id: string) {
-        return instance.delete("cards/card", {params: {id}})
+        return instance.delete("cards/card", { params: { id } })
     },
     updateCards(_id: string, question?: string) {
-        return instance.put("cards/card", {card: {_id, question}})
+        return instance.put("cards/card", { card: { _id, question } })
     },
 
 }
@@ -43,7 +49,7 @@ export type responseCardType = {
     maxGrade: number,
     minGrade: number,
     page: number,
-    pageCount:number,
+    pageCount: number,
     packUserId: string,
     error?: string,
     isInitialized: boolean
@@ -78,22 +84,23 @@ type setCardParams = {
     shots?: number,
     answerlmg?: string,
     questionImg?: string,
-    questionVideo?:string,
+    questionVideo?: string,
     answerVideo?: string
 }
 
 export type responsePacksType = {
     cardPacks: Array<cardsType>,
     cardPacksTotalCount: number,
-    maxCardsCount: number,
-    minCardsCount: number,
+    max: number,
+    min: number,
     page: number,
     pageCount: number,
     error?: string,
-    isInitialized: boolean
-    
+    isInitialized: boolean,
+
+    sortPacks: string,
     status: RequestStatusType,
-    searchResult : string 
+    packName: string
 }
 
 export type cardType = {

@@ -21,7 +21,8 @@
 }
 .packsChild {
     border: dodgerblue 1px solid;
-    width: 200px
+    width: 200px;
+    display: flex;
 }
 
 .packsBodyContainer {

@@ -2,20 +2,23 @@ import React from 'react'
 import { Dispatch } from 'redux'
 import { packsApi, responsePacksType } from "../api/packs-api";
 import { authTC } from './login-reducer';
+import { AppStateType } from './store';
 
+export type SortValueType = "name" | "cardCount" | "updated" | "url" | ""
 
 const initialState: initialStateType = {
     cardPacks: [],
-    cardPacksTotalCount: 14,
-    maxCardsCount: 5,
-    minCardsCount: 0,
+    cardPacksTotalCount: 10,
+    max: 10,
+    min: 5,
     page: 1,
     pageCount: 10,
     error: undefined,
     isInitialized: false,
 
+    sortPacks: "",
     status: 'idle',
-    searchResult: ""
+    packName: ""
 }
 type initialStateType = responsePacksType
 
@@ -42,13 +45,22 @@ const packsReducer = (state = initialState, action: ActionType): initialStateTyp
         case "PACKS/SET-IS-INITIALIZED":
             return { ...state, isInitialized: action.isInitialized }
         case 'PACKS/SET-SEARCH-VALUE':
-            return { ...state, searchResult: action.value }
+            return { ...state, packName: action.value }
         case "PACKS/SET-STATUS":
             return { ...state, status: action.status }
+        case 'PACKS/SORT':
+            return { ...state, sortPacks: action.sortPacks }
+
         default: return state
     }
 
 }
+
+
+
+
+export const sortPAckAC = (sortPacks: string) => ({ type: 'PACKS/SORT', sortPacks } as const)
+
 export const setAppStatusAC = (status: RequestStatusType) => ({ type: 'PACKS/SET-STATUS', status } as const)
 export const getCardsAC = (cards: initialStateType) => ({ type: 'PACKS/GET_CARDS', cards } as const)
 export const setAppErrorPacksAC = (error: string | undefined) => ({ type: 'PACKS/SET-ERROR', error } as const)
@@ -59,9 +71,11 @@ export const setIsInitializedPackAC = (isInitialized: boolean) => ({
 
 export const setSearchValuePackAC = (value: string) => ({ type: 'PACKS/SET-SEARCH-VALUE', value })
 
-export const packsTC = (minCardsCount?: number, maxCardsCount?: number, page?: number, pageCount?: number) => (dispatch: Dispatch<any>) => {
+export const packsTC = (min?: number, max?: number, page?: number, pageCount?: number, packName?: string, sortPacks?: string) => (dispatch: Dispatch<any>, getState: () => AppStateType) => {
+    let state = getState();
+
     dispatch(setAppStatusAC("loading"))
-    packsApi.getPacks(minCardsCount, maxCardsCount, page, pageCount)
+    packsApi.getPacks(min, max, page, pageCount, packName, sortPacks)
         .then((response) => {
             dispatch(setAppStatusAC("succeeded"))
             dispatch(authTC())
@@ -118,6 +132,7 @@ export const packsUpdateTC = (_id: string, name: string) => (dispatch: Dispatch<
         })
 }
 
+export type sortPAckACType = ReturnType<typeof sortPAckAC>;
 export type setAppStatusTypeAC = ReturnType<typeof setAppStatusAC>;
 export type getCardsTypeAC = ReturnType<typeof getCardsAC>;
 export type setAppErrorPacksTypeAC = ReturnType<typeof setAppErrorPacksAC>;
@@ -128,4 +143,5 @@ type ActionType = getCardsTypeAC
     | setIsInitializedPackTypeAC
     | setSearchValuePackTypeAC
     | setAppStatusTypeAC
+    | sortPAckACType
 export default packsReducer;
