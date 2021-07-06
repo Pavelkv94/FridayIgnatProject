@@ -9,17 +9,14 @@ import {
 } from "../../Redux/packs-reducer";
 import s from "./Packs.module.css"
 import {AppStateType} from "../../Redux/store";
-import {authTC, isLoggedInAC} from "../../Redux/login-reducer";
-
+import {NavLink} from "react-router-dom";
 
 export function Packs() {
 
     const dispatch = useDispatch()
-
     const packs = useSelector<AppStateType, Array<cardsType>>(state => state.packs.cardPacks)
     const error = useSelector<AppStateType, string | undefined>(state => state.packs.error)
     const userID = useSelector<AppStateType, string>(state => state.loginPage.userData._id)
-    const isAuth = useSelector<AppStateType, string>(state => state.loginPage.isAuth)
     useEffect(() => {
         dispatch(packsTC())
     }, [])
@@ -51,6 +48,7 @@ export function Packs() {
                     <button disabled={userID !== m.user_id}
                             onClick={() => dispatch(packsUpdateTC(m._id, "Hqw"))}>upd
                     </button>
+                    <NavLink to={`cards/${m._id}`}> cards </NavLink>
                 </div>
             </div>
         })}

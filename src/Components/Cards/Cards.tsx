@@ -1,27 +1,24 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {
-    cardsType,
-    packsAddTC,
-    packsDeleteTC,
-    packsTC,
-    packsUpdateTC,
-} from "../../Redux/packs-reducer";
+
 import s from "./Cards.module.css"
 import {AppStateType} from "../../Redux/store";
-import {cardsAdd, cardsDeleteTC} from "../../Redux/cards-reducer";
+import {cardsAdd, cardsDeleteTC, cardsTC, cardsUpdateTC} from "../../Redux/cards-reducer";
 import {ArrCardType} from "../../api/packs-api";
+import {useParams} from 'react-router-dom';
 
 export function Cards() {
 
     const dispatch = useDispatch()
+    const {packId} = useParams<{ packId: string }>()
+    debugger
+
 
     const cards = useSelector<AppStateType, Array<ArrCardType>>(state => state.cards.cards)
     const error = useSelector<AppStateType, string | undefined>(state => state.packs.error)
     const userID = useSelector<AppStateType, string>(state => state.loginPage.userData._id)
-    const isAuth = useSelector<AppStateType, string>(state => state.loginPage.isAuth)
     useEffect(() => {
-        dispatch(packsTC())
+        dispatch(cardsTC(packId))
     }, [])
 
     return <div>
@@ -34,7 +31,7 @@ export function Cards() {
             <div className={s.packsChild}>updated</div>
             <div className={s.packsChild}>url</div>
             <div className={s.packsChild}>
-                <button onClick={() => dispatch(cardsAdd("60e38c5da8b1610004c03d02"))}>add</button>
+                <button onClick={() => dispatch(cardsAdd(packId))}>add</button>
 
             </div>
         </div>
@@ -47,12 +44,12 @@ export function Cards() {
                 <div className={s.packsChild2}>{m.updated}</div>
                 <div className={s.packsChild2}>{m.created}</div>
                 <div className={s.packsChild2}>
-                    {/*<button disabled={userID !== m.user_id}*/}
-                    {/*        onClick={() => dispatch(cardsDeleteTC("60e38c5da8b1610004c03d02"))}>del*/}
-                    {/*</button>*/}
-                    {/*<button disabled={userID !== m.user_id}*/}
-                    {/*        onClick={() => dispatch(cardsUpdateTC(m.cardsPack_id, "Hqw"))}>upd*/}
-                    {/*</button>*/}
+                    <button
+                            onClick={() => dispatch(cardsDeleteTC(m._id, m.cardsPack_id))}>del
+                    </button>
+                    <button disabled={userID !== m.user_id}
+                            onClick={() => dispatch(cardsUpdateTC(m._id, m.cardsPack_id))}>upd
+                    </button>
                 </div>
             </div>
         })}

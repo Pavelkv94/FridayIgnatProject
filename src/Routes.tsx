@@ -18,7 +18,7 @@ export const PATH = {
     PROFILE: '/profile',
     REGISTRATION: '/registration',
     TEST_PAGE: '/testt',
-    CARDS_PAGE: '/cards',
+    CARDS_PAGE: '/cards/:packId',
     PACKS_PAGE: '/packs',
 }
 
