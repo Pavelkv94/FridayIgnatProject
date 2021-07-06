@@ -10,6 +10,8 @@ import {
 import s from "./Packs.module.css"
 import {AppStateType} from "../../Redux/store";
 import {authTC, isLoggedInAC} from "../../Redux/login-reducer";
+import {NavLink} from "react-router-dom";
+import {PATH} from "../../Routes";
 
 
 export function Packs() {
@@ -51,6 +53,7 @@ export function Packs() {
                     <button disabled={userID !== m.user_id}
                             onClick={() => dispatch(packsUpdateTC(m._id, "Hqw"))}>upd
                     </button>
+                    <NavLink to={PATH.CARDS_PAGE + "/" + m._id}> cards </NavLink>
                 </div>
             </div>
         })}
