@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/FridayIgnatProject/static/css/main.4d7537a3.chunk.css",
-    "main.js": "/FridayIgnatProject/static/js/main.b849b160.chunk.js",
-    "main.js.map": "/FridayIgnatProject/static/js/main.b849b160.chunk.js.map",
-    "runtime-main.js": "/FridayIgnatProject/static/js/runtime-main.bf6c4e47.js",
-    "runtime-main.js.map": "/FridayIgnatProject/static/js/runtime-main.bf6c4e47.js.map",
-    "static/js/2.ecdb84da.chunk.js": "/FridayIgnatProject/static/js/2.ecdb84da.chunk.js",
-    "static/js/2.ecdb84da.chunk.js.map": "/FridayIgnatProject/static/js/2.ecdb84da.chunk.js.map",
-    "static/js/3.503088cc.chunk.js": "/FridayIgnatProject/static/js/3.503088cc.chunk.js",
-    "static/js/3.503088cc.chunk.js.map": "/FridayIgnatProject/static/js/3.503088cc.chunk.js.map",
+    "main.css": "/FridayIgnatProject/static/css/main.f887459f.chunk.css",
+    "main.js": "/FridayIgnatProject/static/js/main.dc53de04.chunk.js",
+    "main.js.map": "/FridayIgnatProject/static/js/main.dc53de04.chunk.js.map",
+    "runtime-main.js": "/FridayIgnatProject/static/js/runtime-main.31447088.js",
+    "runtime-main.js.map": "/FridayIgnatProject/static/js/runtime-main.31447088.js.map",
+    "static/js/2.8f228578.chunk.js": "/FridayIgnatProject/static/js/2.8f228578.chunk.js",
+    "static/js/2.8f228578.chunk.js.map": "/FridayIgnatProject/static/js/2.8f228578.chunk.js.map",
+    "static/js/3.bd60ba22.chunk.js": "/FridayIgnatProject/static/js/3.bd60ba22.chunk.js",
+    "static/js/3.bd60ba22.chunk.js.map": "/FridayIgnatProject/static/js/3.bd60ba22.chunk.js.map",
     "index.html": "/FridayIgnatProject/index.html",
-    "static/css/main.4d7537a3.chunk.css.map": "/FridayIgnatProject/static/css/main.4d7537a3.chunk.css.map",
-    "static/js/2.ecdb84da.chunk.js.LICENSE.txt": "/FridayIgnatProject/static/js/2.ecdb84da.chunk.js.LICENSE.txt",
+    "static/css/main.f887459f.chunk.css.map": "/FridayIgnatProject/static/css/main.f887459f.chunk.css.map",
+    "static/js/2.8f228578.chunk.js.LICENSE.txt": "/FridayIgnatProject/static/js/2.8f228578.chunk.js.LICENSE.txt",
     "static/media/Circles-menu.20a21d3c.gif": "/FridayIgnatProject/static/media/Circles-menu.20a21d3c.gif"
   },
   "entrypoints": [
-    "static/js/runtime-main.bf6c4e47.js",
-    "static/js/2.ecdb84da.chunk.js",
-    "static/css/main.4d7537a3.chunk.css",
-    "static/js/main.b849b160.chunk.js"
+    "static/js/runtime-main.31447088.js",
+    "static/js/2.8f228578.chunk.js",
+    "static/css/main.f887459f.chunk.css",
+    "static/js/main.dc53de04.chunk.js"
   ]
 }
