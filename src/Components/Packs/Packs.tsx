@@ -1,5 +1,5 @@
-import React, {useEffect} from 'react';
-import {useDispatch, useSelector} from "react-redux";
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from "react-redux";
 import {
     cardsType,
     packsAddTC,
@@ -8,8 +8,9 @@ import {
     packsUpdateTC,
 } from "../../Redux/packs-reducer";
 import s from "./Packs.module.css"
-import {AppStateType} from "../../Redux/store";
-import {authTC, isLoggedInAC} from "../../Redux/login-reducer";
+import { AppStateType } from "../../Redux/store";
+import { authTC, isLoggedInAC } from "../../Redux/login-reducer";
+import { Search } from '../../Common/Search/Search';
 
 
 export function Packs() {
@@ -26,7 +27,11 @@ export function Packs() {
 
     return <div>
         PACKS
+        <br />
         {error && <div>{error}</div>}
+        <br />
+        <Search />
+        <br />
         <div className={s.packsHeaderContainer}>
             <div className={s.packsChild}>Namesss</div>
             <div className={s.packsChild}>cardsCount</div>
@@ -39,17 +44,17 @@ export function Packs() {
         </div>
 
         {packs.map(m => {
-            return <div className={s.packsBodyContainer}>
+            return <div className={s.packsBodyContainer} key={m._id}>
                 <div className={s.packsChild2}>{m.name}</div>
                 <div className={s.packsChild2}>{m.cardsCount}</div>
                 <div className={s.packsChild2}>{m.updated}</div>
                 <div className={s.packsChild2}>{m.url}</div>
                 <div className={s.packsChild2}>
                     <button disabled={userID !== m.user_id}
-                            onClick={() => dispatch(packsDeleteTC(m._id))}>del
+                        onClick={() => dispatch(packsDeleteTC(m._id))}>del
                     </button>
                     <button disabled={userID !== m.user_id}
-                            onClick={() => dispatch(packsUpdateTC(m._id, "Hqw"))}>upd
+                        onClick={() => dispatch(packsUpdateTC(m._id, "Hqw"))}>upd
                     </button>
                 </div>
             </div>
