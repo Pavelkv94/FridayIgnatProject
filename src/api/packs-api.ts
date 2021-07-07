@@ -99,7 +99,6 @@ export type responsePacksType = {
     pageCount: number,
     error?: string,
     isInitialized: boolean,
-
     sortPacks: string,
     status: RequestStatusType,
     packName: string

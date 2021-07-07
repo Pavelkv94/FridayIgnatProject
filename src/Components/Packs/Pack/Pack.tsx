@@ -9,6 +9,7 @@ import {
 } from "../../../Redux/packs-reducer";
 import { AppStateType } from '../../../Redux/store';
 import s from "./Pack.module.css"
+import {NavLink} from "react-router-dom";
 
 type PropsType = {
    card: cardsType
@@ -30,6 +31,7 @@ export function Pack(props: PropsType) {
             <button disabled={userID !== props.card.user_id}
                 onClick={() => dispatch(packsUpdateTC(props.card._id, "Hqw"))}>upd
             </button>
+            <NavLink to={`cards/${props.card._id}`}> cards </NavLink>
         </div>
     </div>
 
