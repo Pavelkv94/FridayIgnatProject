@@ -34,10 +34,13 @@ const cardsReducer = (state = initialState, action: ActionType): initialStateTyp
             return { ...state, isInitialized: action.isInitialized }
         case 'CARDS/SET-SEARCH-VALUE':
             return { ...state, cardQuestion: action.value }
+        case 'CARDS/SORT':
+            return { ...state, sortCards: action.sortCards }
         default: return state
     }
 
 }
+export const sortCardAC = (sortCards: string) => ({ type: 'CARDS/SORT', sortCards } as const)
 export const setSearchValueCardAC = (value: string) => ({ type: 'CARDS/SET-SEARCH-VALUE', value } as const)
 export const getCardAC = (cards: initialStateType) => ({ type: 'CARDS/GET_CARDS', cards } as const)
 export const setAppErrorPacksAC = (error: string | undefined) => ({ type: 'CARDS/SET-ERROR', error } as const)
@@ -108,7 +111,7 @@ export const cardsUpdateTC = (id: string, cardsPack_id: string) => (dispatch: Di
 
         })
 }
-
+export type sortCardACType = ReturnType<typeof sortCardAC>;
 export type setSearchValueCardTypeAC = ReturnType<typeof setSearchValueCardAC>;
 export type getCardsTypeAC = ReturnType<typeof getCardAC>;
 export type setAppErrorPacksTypeAC = ReturnType<typeof setAppErrorPacksAC>;
@@ -118,4 +121,5 @@ type ActionType = getCardsTypeAC
     | setAppErrorPacksTypeAC
     | setIsInitializedPackTypeAC
     | setSearchValueCardTypeAC
+    | sortCardACType
 export default cardsReducer;

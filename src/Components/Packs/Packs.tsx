@@ -1,6 +1,7 @@
 import React, { ChangeEvent, useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import {
+    sortPackAC,
     packsAddTC,
     packsTC,
     setSearchValuePackAC,
@@ -40,6 +41,12 @@ export function Packs() {
         dispatch(packsTC(min, max, page, pageCount, packName, sortPacks))
     }
 
+    //сортировка 
+    const sortingPack = (n: 1 | 0, sortPacks: string, sortValue: string) => {
+        dispatch(sortPackAC(sortPacks))
+        dispatch(packsTC(min, max, page, pageCount, packName, `${n}${sortValue}`))
+    }
+
     return <div className={s.container}>
         PACKS
         {status !== 'idle' ? <Preloader /> : null}
@@ -49,10 +56,10 @@ export function Packs() {
         <Search packName={packName} inputCallback={setSearchResult} btnCallback={searchPackCallback} />
         <br />
         <div className={s.packsHeaderContainer}>
-            <div className={s.packsChild}>Name <SortButton sortValue="name" /></div>
-            <div className={s.packsChild}>cardsCount<SortButton sortValue="cardsCount" /></div>
-            <div className={s.packsChild}>updated<SortButton sortValue="updated" /></div>
-            <div className={s.packsChild}>created<SortButton sortValue="created" /></div>
+            <div className={s.packsChild}>Name <SortButton sortValue="name" sortPacks={sortPacks} sortCallback={sortingPack} /></div>
+            <div className={s.packsChild}>cardsCount<SortButton sortValue="cardsCount" sortPacks={sortPacks} sortCallback={sortingPack} /></div>
+            <div className={s.packsChild}>updated<SortButton sortValue="updated" sortPacks={sortPacks} sortCallback={sortingPack} /></div>
+            <div className={s.packsChild}>created<SortButton sortValue="created" sortPacks={sortPacks} sortCallback={sortingPack} /></div>
             <div className={s.packsChild}>
                 <button onClick={() => dispatch(packsAddTC())}>add</button>
 

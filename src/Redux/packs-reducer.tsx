@@ -4,7 +4,6 @@ import { packsApi, responsePacksType } from "../api/packs-api";
 import { authTC } from './login-reducer';
 import { AppStateType } from './store';
 
-export type SortValueType = "name" | "cardCount" | "updated" | "url" | ""
 
 const initialState: initialStateType = {
     cardPacks: [],
@@ -58,7 +57,7 @@ const packsReducer = (state = initialState, action: ActionType): initialStateTyp
 
 
 export const setRangeAC = (min: number, max: number) => ({ type: 'PACKS/SET-RANGE', min, max } as const)
-export const sortPAckAC = (sortPacks: string) => ({ type: 'PACKS/SORT', sortPacks } as const)
+export const sortPackAC = (sortPacks: string) => ({ type: 'PACKS/SORT', sortPacks } as const)
 
 export const setAppStatusAC = (status: RequestStatusType) => ({ type: 'PACKS/SET-STATUS', status } as const)
 export const getCardsAC = (cards: initialStateType) => ({ type: 'PACKS/GET_CARDS', cards } as const)
@@ -132,7 +131,7 @@ export const packsUpdateTC = (_id: string, name: string) => (dispatch: Dispatch<
 }
 
 export type setRangeACType = ReturnType<typeof setRangeAC>;
-export type sortPAckACType = ReturnType<typeof sortPAckAC>;
+export type sortPackACType = ReturnType<typeof sortPackAC>;
 export type setAppStatusTypeAC = ReturnType<typeof setAppStatusAC>;
 export type getCardsTypeAC = ReturnType<typeof getCardsAC>;
 export type setAppErrorPacksTypeAC = ReturnType<typeof setAppErrorPacksAC>;
@@ -143,6 +142,6 @@ type ActionType = getCardsTypeAC
     | setIsInitializedPackTypeAC
     | setSearchValuePackTypeAC
     | setAppStatusTypeAC
-    | sortPAckACType
+    | sortPackACType
     | setRangeACType
 export default packsReducer;
