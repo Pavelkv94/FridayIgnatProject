@@ -1,14 +1,21 @@
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { packsTC } from '../../Redux/packs-reducer';
+import { AppStateType } from '../../Redux/store';
 import s from './Paginator.module.css'
 
 type PaginatorType = {
     totalItemsCount: number
     pageSize: number
     currentPage: number
+    pageCount: number
     onPageChanged: (pageNumber: number) => void
 }
 
 export function Paginator(props: PaginatorType) {
+    const dispatch = useDispatch();
+    const { min, max, page, pageCount, packName, sortPacks } = useSelector<AppStateType, any>(state => state.packs)
+
     let pagesCount = Math.ceil(props.totalItemsCount / props.pageSize);
     let pages = [];
     for (let i = 1; i <= pagesCount; i++) {
@@ -21,8 +28,19 @@ export function Paginator(props: PaginatorType) {
     let leftPortionPageNumber = (portionNumber - 1) * portionSize + 1;
     let rightPortionPageNumber = portionNumber * portionSize;
 
+    const onChangeHandler = (e: ChangeEvent<HTMLSelectElement>) => {
+        console.log(e)
+        dispatch(packsTC(min, max, page, Number(e.currentTarget.value), packName, sortPacks))
+    }
 
     return (<div className={s.container}>
+        <select value={props.pageCount} onChange={(e)=>onChangeHandler(e)} >
+            <option value={4}>4</option>
+            <option value={7}>7</option>
+            <option value={10}>10</option>
+            <option value={20}>20</option>
+            <option value={50}>50</option>
+        </select>
         {portionNumber > 1 &&
             <button onClick={() => { setPortionNumber(portionNumber - 1) }}>PREV</button>}
         {pages.filter(p => p >= leftPortionPageNumber && p <= rightPortionPageNumber).map(p => {
@@ -33,7 +51,7 @@ export function Paginator(props: PaginatorType) {
         })}
         {portionCount > portionNumber &&
             <button onClick={() => { setPortionNumber(portionNumber + 1) }}>NEXT</button>}
-        
+
 
     </div>)
 }

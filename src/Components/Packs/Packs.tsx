@@ -20,8 +20,8 @@ export function Packs() {
 
     const packs = useSelector<AppStateType, Array<cardsType>>(state => state.packs.cardPacks)
     const error = useSelector<AppStateType, string | undefined>(state => state.packs.error)
-    const searchResult = useSelector<AppStateType, string>(state => state.packs.packName)
     const totalCount = useSelector<AppStateType, number>(state => state.packs.cardPacksTotalCount)
+    const pageCount = useSelector<AppStateType, number>(state => state.packs.pageCount)
     const pageSize = useSelector<AppStateType, number>(state => state.packs.pageCount)
     const currentPage = useSelector<AppStateType, number>(state => state.packs.page)
     const status = useSelector<AppStateType, string>((state) => state.reg.status)
@@ -30,17 +30,6 @@ export function Packs() {
     useEffect(() => {
         dispatch(packsTC())
     }, [])
-
-
-    // const searchName = (name: string, search: string) => {
-    //     if (name.toLowerCase() === search.toLowerCase()) return true
-    // }
-
-    // let searchPacks = packs
-
-    // if (searchResult) {
-    //     searchPacks = packs.filter(m => searchName(m.name, searchResult))
-    // }
 
     const onPageChanged = (page: number) => {
         dispatch(packsTC(5, 10, page, 10))
@@ -69,7 +58,7 @@ export function Packs() {
         {packs.map(m => {
             return <Pack card={m} key={m._id} />
         })}
-        <Paginator totalItemsCount={totalCount} pageSize={pageSize} currentPage={currentPage} onPageChanged={onPageChanged} />
+        <Paginator totalItemsCount={totalCount} pageSize={pageSize} currentPage={currentPage} pageCount={pageCount} onPageChanged={onPageChanged} />
     </div>
 
 }
