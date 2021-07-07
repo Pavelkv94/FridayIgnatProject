@@ -29,7 +29,7 @@ const PriceRange: React.FC<IPriceRangeProps> = (
     const dispatch = useDispatch()
     const min = useSelector<AppStateType, number>(state => state.packs.min)
     const max = useSelector<AppStateType, number>(state => state.packs.max)
-    const [values, setValues] = useState([min, max]);
+    const [values, setValues] = useState([1, 40]);
 
     const setMinMAxlValues = (newValues: number[]) => {
         dispatch(setRangeAC(newValues[0], newValues[1]));
@@ -47,7 +47,7 @@ const PriceRange: React.FC<IPriceRangeProps> = (
             values={values}
             step={1}
             min={0}
-            max={1000}
+            max={500}
             onChange={values => setMinMAxlValues(values)}
             renderTrack={({ props, children }) => (
                 <div
@@ -71,7 +71,7 @@ const PriceRange: React.FC<IPriceRangeProps> = (
                                 values: values,
                                 colors: ['#ccc', '#548BF4', '#ccc'],
                                 min: 0,
-                                max: 1000
+                                max: 500
                             }),
                             alignSelf: 'center'
                         }}

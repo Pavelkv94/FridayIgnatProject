@@ -1,29 +1,37 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-
+import { Search } from '../../Common/Search/Search';
 import s from "./Cards.module.css"
 import { AppStateType } from "../../Redux/store";
 import { cardsAdd, cardsDeleteTC, cardsTC, cardsUpdateTC } from "../../Redux/cards-reducer";
-import { ArrCardType } from "../../api/packs-api";
+import { ArrCardType, responseCardType } from "../../api/packs-api";
 import { useParams } from 'react-router-dom';
+import { Paginator } from './../../Common/Paginator/Paginator'
 
 export function Cards() {
 
     const dispatch = useDispatch()
     const { packId } = useParams<{ packId: string }>()
 
-    console.log(packId)
     const cards = useSelector<AppStateType, Array<ArrCardType>>(state => state.cards.cards)
     const error = useSelector<AppStateType, string | undefined>(state => state.packs.error)
     const userID = useSelector<AppStateType, string>(state => state.loginPage.userData._id)
-
+    const { cardsTotalCount, page, pageCount } = useSelector<AppStateType, responseCardType>(state => state.cards)
     useEffect(() => {
         dispatch(cardsTC(packId))
     }, [])
 
+
+    const onPageChanged = (page: number) => {
+        dispatch(cardsTC(packId))
+    }
+
     return <div>
         Cards
         {error && <div>{error}</div>}
+        <br />
+        <Search />
+        <br />
         <div className={s.packsHeaderContainer}>
             <div className={s.packsChild}>question</div>
             <div className={s.packsChild}>answer</div>
@@ -53,6 +61,7 @@ export function Cards() {
                 </div>
             </div>
         })}
+        <Paginator totalItemsCount={cardsTotalCount} pageSize={pageCount} currentPage={page} pageCount={pageCount} onPageChanged={onPageChanged} />
     </div>
 
 }
