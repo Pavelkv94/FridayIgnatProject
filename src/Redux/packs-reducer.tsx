@@ -76,7 +76,6 @@ export const packsTC = (min?: number, max?: number, page?: number, pageCount?: n
     dispatch(setAppStatusAC("loading"))
     packsApi.getPacks(min, max, page, pageCount, packName, sortPacks)
         .then((response) => {
-            debugger
             dispatch(setAppStatusAC("succeeded"))
             dispatch(authTC())
             dispatch(getCardsAC(response.data))

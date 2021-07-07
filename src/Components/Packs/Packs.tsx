@@ -4,6 +4,7 @@ import {
     cardsType,
     packsAddTC,
     packsTC,
+    setSearchValuePackAC,
     sortPAckAC,
 } from "../../Redux/packs-reducer";
 import s from "./Packs.module.css"
@@ -13,6 +14,7 @@ import { Pack } from './Pack/Pack';
 import { Paginator } from './../../Common/Paginator/Paginator'
 import Preloader from "../../Common/Preloader/Preloader";
 import { SortButton } from '../../Common/SortButton/SortButton';
+import { responsePacksType } from '../../api/packs-api';
 
 export function Packs() {
 
@@ -20,7 +22,7 @@ export function Packs() {
     const packs = useSelector<AppStateType, Array<cardsType>>(state => state.packs.cardPacks)
     const error = useSelector<AppStateType, string | undefined>(state => state.packs.error)
     const totalCount = useSelector<AppStateType, number>(state => state.packs.cardPacksTotalCount)
-    const pageCount = useSelector<AppStateType, number>(state => state.packs.pageCount)
+    const { min, max, page, pageCount, packName, sortPacks } = useSelector<AppStateType, responsePacksType>(state => state.packs)
     const currentPage = useSelector<AppStateType, number>(state => state.packs.page)
     const status = useSelector<AppStateType, string>((state) => state.reg.status)
     const userID = useSelector<AppStateType, string>(state => state.loginPage.userData._id)
@@ -31,13 +33,19 @@ export function Packs() {
     const onPageChanged = (page: number) => {
         dispatch(packsTC(5, 10, page, 10))
     }
+    const setSearchResult = (value: string) => {
+        dispatch(setSearchValuePackAC(value))
+    }
+    const searchPackCallback = () => {
+        dispatch(packsTC(min, max, page, pageCount, packName, sortPacks))
+    }
     return <div className={s.container}>
         PACKS
         {status !== 'idle' ? <Preloader /> : null}
         <br />
         {error && <div>{error}</div>}
         <br />
-        <Search />
+        <Search packName={packName} inputCallback={setSearchResult} btnCallback={searchPackCallback} />
         <br />
         <div className={s.packsHeaderContainer}>
             <div className={s.packsChild}>Name <SortButton sortValue="name" /></div>
