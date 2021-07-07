@@ -1,18 +1,16 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import {
     cardsType,
-    packsAddTC,
     packsDeleteTC,
-    packsTC,
     packsUpdateTC,
 } from "../../../Redux/packs-reducer";
 import { AppStateType } from '../../../Redux/store';
 import s from "./Pack.module.css"
-import {NavLink} from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 type PropsType = {
-   card: cardsType
+    card: cardsType
 }
 
 export function Pack(props: PropsType) {
