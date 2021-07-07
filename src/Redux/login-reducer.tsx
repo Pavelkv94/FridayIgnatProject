@@ -1,6 +1,5 @@
 import React from 'react'
 import { Dispatch } from 'redux';
-import { idText } from 'typescript';
 import { authApi, ResponseLoginType } from '../api/fridayProject-api';
 import { RequestStatusType } from './reg-reducer';
 

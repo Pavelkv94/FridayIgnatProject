@@ -1,26 +1,32 @@
-import {instance} from "./fridayProject-api";
-import {cardsType} from "../Redux/packs-reducer";
+import { instance } from "./fridayProject-api";
+import { cardsType, RequestStatusType } from "../Redux/packs-reducer";
 
 
 //api
 
-
 export const packsApi = {
 
-    getPacks(minCardsCount?: number, maxCardsCount?: number, page?: number, pageCount?: number) {
-        return instance.get<responsePacksType>("/cards/pack",
-            {params: {minCardsCount, maxCardsCount, page, pageCount}})
+    getPacks(
+        min?: number,
+        max?: number,
+        page?: number,
+        pageCount?: number,
+        packName?: string,
+        sortPacks?: string
+    ) {
+        return instance.get<responsePacksType>(`/cards/pack`,
+            { params: { min, max, page, pageCount, packName, sortPacks } })
     },
     setPacks(name: string) {
-        return instance.post("cards/pack", {cardsPack: {name}})
+        return instance.post("cards/pack", { cardsPack: { name } })
     },
     deletePacks(id: string) {
-        return instance.delete("cards/pack", {params: {id}})
+        return instance.delete("cards/pack", { params: { id } })
     },
     updatePacks(_id: string, name: string) {
-        return instance.put("cards/pack", {cardsPack: {_id, name}})
+        return instance.put("cards/pack", { cardsPack: { _id, name } })
     },
-    getCards(cardsPack_id: string) {
+      getCards(cardsPack_id: string) {
         return instance.get<responseCardType>("/cards/card",
             {params: {cardsPack_id}})
     },
@@ -43,7 +49,7 @@ export type responseCardType = {
     maxGrade: number,
     minGrade: number,
     page: number,
-    pageCount:number,
+    pageCount: number,
     packUserId: string,
     error?: string,
     isInitialized: boolean
@@ -71,6 +77,7 @@ export type getCardParams = {
     pageCount?: number
 }
 
+
 // type setCardParams = {
 //     cardsPack_id: string,
 //     question?: string,
@@ -86,12 +93,16 @@ export type getCardParams = {
 export type responsePacksType = {
     cardPacks: Array<cardsType>,
     cardPacksTotalCount: number,
-    maxCardsCount: number,
-    minCardsCount: number,
+    max: number,
+    min: number,
     page: number,
     pageCount: number,
     error?: string,
-    isInitialized: boolean
+    isInitialized: boolean,
+
+    sortPacks: string,
+    status: RequestStatusType,
+    packName: string
 }
 
 export type cardType = {

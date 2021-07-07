@@ -1,28 +1,6 @@
-.packsHeaderContainer {
-    border: red 1px solid;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    -webkit-flex-direction: row;
-    -ms-flex-direction: row;
-    flex-direction: row;
-    -webkit-flex-wrap: nowrap;
-    -ms-flex-wrap: nowrap;
-    flex-wrap: nowrap;
-    -webkit-justify-content: space-around;
-    -ms-flex-pack: distribute;
-    justify-content: space-between;
-    -webkit-align-content: flex-end;
-    -ms-flex-line-pack: end;
-    align-content: flex-end;
-    -webkit-align-items: flex-start;
-    -ms-flex-align: start;
-    align-items: flex-start;
-}
 .packsChild {
     border: dodgerblue 1px solid;
-    width: 200px;
-    display: flex;
+    width: 200px
 }
 
 .packsBodyContainer {
@@ -49,8 +27,4 @@
 .packsChild2 {
     border: dodgerblue 1px solid;
     width: 200px
-}
-
-.container {
-    position: relative;
 }
