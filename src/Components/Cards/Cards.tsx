@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { ChangeEvent, useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { Search } from '../../Common/Search/Search';
 import s from "./Cards.module.css"
@@ -22,11 +22,16 @@ export function Cards() {
         dispatch(cardsTC(packId))
     }, [])
 
+    //пагинация
+    const onPageChanged = (newPage: number) => {
+        dispatch(cardsTC(packId, cardQuestion, minGrade, maxGrade, sortCards, newPage, pageCount))
+    }
+    const onChangeHandler = (e: ChangeEvent<HTMLSelectElement>) => {
+        dispatch(cardsTC(packId, cardQuestion, minGrade, maxGrade, sortCards, page, Number(e.currentTarget.value)))
+    }
+    //поиск
     const setSearchResult = (value: string) => {
         dispatch(setSearchValueCardAC(value))
-    }
-    const onPageChanged = (page: number) => {
-        dispatch(cardsTC(packId))
     }
     const searchCardCallback = () => {
         dispatch(cardsTC(packId, cardQuestion, minGrade, maxGrade, sortCards, page, pageCount))
@@ -66,7 +71,7 @@ export function Cards() {
                 </div>
             </div>
         })}
-        <Paginator totalItemsCount={cardsTotalCount} pageSize={pageCount} currentPage={page} pageCount={pageCount} onPageChanged={onPageChanged} />
+        <Paginator totalItemsCount={cardsTotalCount} pageSize={pageCount} currentPage={page} pageCount={pageCount} onPageChanged={onPageChanged} onChangeHandler={onChangeHandler} />
     </div>
 
 }

@@ -1,7 +1,7 @@
 import { ChangeEvent, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { packsTC } from '../../Redux/packs-reducer';
-import { AppStateType } from '../../Redux/store';
+// import { useDispatch, useSelector } from 'react-redux';
+// import { packsTC } from '../../Redux/packs-reducer';
+// import { AppStateType } from '../../Redux/store';
 import s from './Paginator.module.css'
 
 type PaginatorType = {
@@ -10,11 +10,12 @@ type PaginatorType = {
     currentPage: number
     pageCount: number
     onPageChanged: (pageNumber: number) => void
+    onChangeHandler: (e: ChangeEvent<HTMLSelectElement>) => void
 }
 
 export function Paginator(props: PaginatorType) {
-    const dispatch = useDispatch();
-    const { min, max, page, pageCount, packName, sortPacks } = useSelector<AppStateType, any>(state => state.packs)
+    //const dispatch = useDispatch();
+    //const { min, max, page, pageCount, packName, sortPacks } = useSelector<AppStateType, any>(state => state.packs)
 
     let pagesCount = Math.ceil(props.totalItemsCount / props.pageSize);
     let pages = [];
@@ -28,13 +29,12 @@ export function Paginator(props: PaginatorType) {
     let leftPortionPageNumber = (portionNumber - 1) * portionSize + 1;
     let rightPortionPageNumber = portionNumber * portionSize;
 
-    const onChangeHandler = (e: ChangeEvent<HTMLSelectElement>) => {
-        console.log(e)
-        dispatch(packsTC(min, max, page, Number(e.currentTarget.value), packName, sortPacks))
-    }
+    // const onChangeHandler = (e: ChangeEvent<HTMLSelectElement>) => {
+    //     dispatch(packsTC(min, max, page, Number(e.currentTarget.value), packName, sortPacks))
+    // }
 
     return (<div className={s.container}>
-        <select value={props.pageCount} onChange={(e)=>onChangeHandler(e)} >
+        <select value={props.pageCount} onChange={(e) => props.onChangeHandler(e)} >
             <option value={4}>4</option>
             <option value={7}>7</option>
             <option value={10}>10</option>
