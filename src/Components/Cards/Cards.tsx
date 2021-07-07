@@ -1,28 +1,28 @@
-import React, {useEffect} from 'react';
-import {useDispatch, useSelector} from "react-redux";
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from "react-redux";
 
 import s from "./Cards.module.css"
-import {AppStateType} from "../../Redux/store";
-import {cardsAdd, cardsDeleteTC, cardsTC, cardsUpdateTC} from "../../Redux/cards-reducer";
-import {ArrCardType} from "../../api/packs-api";
-import {useParams} from 'react-router-dom';
+import { AppStateType } from "../../Redux/store";
+import { cardsAdd, cardsDeleteTC, cardsTC, cardsUpdateTC } from "../../Redux/cards-reducer";
+import { ArrCardType } from "../../api/packs-api";
+import { useParams } from 'react-router-dom';
 
 export function Cards() {
 
     const dispatch = useDispatch()
-    const {packId} = useParams<{ packId: string }>()
-    debugger
+    const { packId } = useParams<{ packId: string }>()
 
-
+    console.log(packId)
     const cards = useSelector<AppStateType, Array<ArrCardType>>(state => state.cards.cards)
     const error = useSelector<AppStateType, string | undefined>(state => state.packs.error)
     const userID = useSelector<AppStateType, string>(state => state.loginPage.userData._id)
+
     useEffect(() => {
         dispatch(cardsTC(packId))
     }, [])
 
     return <div>
-        PACKS
+        Cards
         {error && <div>{error}</div>}
         <div className={s.packsHeaderContainer}>
             <div className={s.packsChild}>question</div>
@@ -45,10 +45,10 @@ export function Cards() {
                 <div className={s.packsChild2}>{m.created}</div>
                 <div className={s.packsChild2}>
                     <button
-                            onClick={() => dispatch(cardsDeleteTC(m._id, m.cardsPack_id))}>del
+                        onClick={() => dispatch(cardsDeleteTC(m._id, m.cardsPack_id))}>del
                     </button>
                     <button disabled={userID !== m.user_id}
-                            onClick={() => dispatch(cardsUpdateTC(m._id, m.cardsPack_id))}>upd
+                        onClick={() => dispatch(cardsUpdateTC(m._id, m.cardsPack_id))}>upd
                     </button>
                 </div>
             </div>

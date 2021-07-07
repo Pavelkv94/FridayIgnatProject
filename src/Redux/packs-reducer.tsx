@@ -15,7 +15,6 @@ const initialState: initialStateType = {
     pageCount: 5,
     error: undefined,
     isInitialized: false,
-
     sortPacks: "1update",
     status: 'idle',
     packName: ""
@@ -58,8 +57,6 @@ const packsReducer = (state = initialState, action: ActionType): initialStateTyp
 }
 
 
-
-
 export const setRangeAC = (min: number, max: number) => ({ type: 'PACKS/SET-RANGE', min, max } as const)
 export const sortPAckAC = (sortPacks: string) => ({ type: 'PACKS/SORT', sortPacks } as const)
 
@@ -79,6 +76,7 @@ export const packsTC = (min?: number, max?: number, page?: number, pageCount?: n
     dispatch(setAppStatusAC("loading"))
     packsApi.getPacks(min, max, page, pageCount, packName, sortPacks)
         .then((response) => {
+            debugger
             dispatch(setAppStatusAC("succeeded"))
             dispatch(authTC())
             dispatch(getCardsAC(response.data))

@@ -21,7 +21,6 @@ export function Packs() {
     const dispatch = useDispatch()
     const packs = useSelector<AppStateType, Array<cardsType>>(state => state.packs.cardPacks)
     const error = useSelector<AppStateType, string | undefined>(state => state.packs.error)
-
     const totalCount = useSelector<AppStateType, number>(state => state.packs.cardPacksTotalCount)
     const pageCount = useSelector<AppStateType, number>(state => state.packs.pageCount)
     const pageSize = useSelector<AppStateType, number>(state => state.packs.pageCount)

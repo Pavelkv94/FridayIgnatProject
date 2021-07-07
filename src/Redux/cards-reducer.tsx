@@ -1,6 +1,6 @@
-import {Dispatch} from 'redux'
-import { packsApi, responseCardType} from "../api/packs-api";
-import {authTC} from './login-reducer';
+import { Dispatch } from 'redux'
+import { packsApi, responseCardType } from "../api/packs-api";
+import { authTC } from './login-reducer';
 
 
 const initialState: initialStateType = {
@@ -9,7 +9,7 @@ const initialState: initialStateType = {
     maxGrade: 0,
     minGrade: 5,
     page: 1,
-    pageCount:4,
+    pageCount: 4,
     packUserId: "" as string,
     error: undefined,
     isInitialized: true
@@ -27,15 +27,16 @@ const cardsReducer = (state = initialState, action: ActionType): initialStateTyp
         case "CARDS/GET_CARDS":
             return action.cards
         case "CARDS/SET-ERROR":
-            return {...state, error: action.error}
+            return { ...state, error: action.error }
         case "CARDS/SET-IS-INITIALIZED":
-            return {...state, isInitialized: action.isInitialized}
+            return { ...state, isInitialized: action.isInitialized }
+             default : return state
     }
-    return state
+   
 }
 
-export const getCardAC = (cards: initialStateType) => ({type: 'CARDS/GET_CARDS', cards} as const)
-export const setAppErrorPacksAC = (error: string | undefined) => ({type: 'CARDS/SET-ERROR', error} as const)
+export const getCardAC = (cards: initialStateType) => ({ type: 'CARDS/GET_CARDS', cards } as const)
+export const setAppErrorPacksAC = (error: string | undefined) => ({ type: 'CARDS/SET-ERROR', error } as const)
 export const setIsInitializedPackAC = (isInitialized: boolean) => ({
     type: 'CARDS/SET-IS-INITIALIZED',
     isInitialized
@@ -46,6 +47,7 @@ export const cardsTC = (cardsPack_id: string) => (dispatch: Dispatch<any>) => {
     packsApi.getCards(cardsPack_id)
 
         .then((response) => {
+            debugger
             dispatch(authTC())
             dispatch(getCardAC(response.data))
             dispatch(setIsInitializedPackAC(true))

@@ -29,7 +29,7 @@ const PriceRange: React.FC<IPriceRangeProps> = (
     const dispatch = useDispatch()
     const min = useSelector<AppStateType, number>(state => state.packs.min)
     const max = useSelector<AppStateType, number>(state => state.packs.max)
-    const [values, setValues] = useState([0, 200]);
+    const [values, setValues] = useState([min, max]);
 
     const setMinMAxlValues = (newValues: number[]) => {
         dispatch(setRangeAC(newValues[0], newValues[1]));
