@@ -13,20 +13,21 @@ import { Pack } from './Pack/Pack';
 import { Paginator } from './../../Common/Paginator/Paginator'
 import Preloader from "../../Common/Preloader/Preloader";
 import { SortButton } from '../../Common/SortButton/SortButton';
+import {NavLink} from "react-router-dom";
+
 
 export function Packs() {
 
     const dispatch = useDispatch()
-
     const packs = useSelector<AppStateType, Array<cardsType>>(state => state.packs.cardPacks)
     const error = useSelector<AppStateType, string | undefined>(state => state.packs.error)
+
     const totalCount = useSelector<AppStateType, number>(state => state.packs.cardPacksTotalCount)
     const pageCount = useSelector<AppStateType, number>(state => state.packs.pageCount)
     const pageSize = useSelector<AppStateType, number>(state => state.packs.pageCount)
     const currentPage = useSelector<AppStateType, number>(state => state.packs.page)
     const status = useSelector<AppStateType, string>((state) => state.reg.status)
-
-
+    const userID = useSelector<AppStateType, string>(state => state.loginPage.userData._id)
     useEffect(() => {
         dispatch(packsTC())
     }, [])
@@ -56,7 +57,9 @@ export function Packs() {
         </div>
 
         {packs.map(m => {
+
             return <Pack card={m} key={m._id} />
+
         })}
         <Paginator totalItemsCount={totalCount} pageSize={pageSize} currentPage={currentPage} pageCount={pageCount} onPageChanged={onPageChanged} />
     </div>

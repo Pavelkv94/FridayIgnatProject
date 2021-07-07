@@ -26,18 +26,18 @@ export const packsApi = {
     updatePacks(_id: string, name: string) {
         return instance.put("cards/pack", { cardsPack: { _id, name } })
     },
-    getCards(cardsPack_id: string) {
+      getCards(cardsPack_id: string) {
         return instance.get<responseCardType>("/cards/card",
-            { params: cardsPack_id })
+            {params: {cardsPack_id}})
     },
-    setCards(name: string) {
-        return instance.post("cards/card", { cardsPack: { name } })
+    setCards(cardsPack_id: string) {
+        return instance.post("cards/card", {card: {cardsPack_id}})
     },
     deleteCards(id: string) {
-        return instance.delete("cards/card", { params: { id } })
+        return instance.delete("cards/card", {params: {id}})
     },
-    updateCards(_id: string, question?: string) {
-        return instance.put("cards/card", { card: { _id, question } })
+    updateCards(_id: string) {
+        return instance.put("cards/card", {card: {_id}})
     },
 
 }
@@ -62,7 +62,8 @@ export type ArrCardType = {
     shots: number,
     user_id: string,
     created: number,
-    updated: number
+    updated: number,
+    _id: string
 }
 
 export type getCardParams = {
@@ -76,17 +77,18 @@ export type getCardParams = {
     pageCount?: number
 }
 
-type setCardParams = {
-    cardsPack_id: string,
-    question?: string,
-    answer?: string,
-    grade?: number
-    shots?: number,
-    answerlmg?: string,
-    questionImg?: string,
-    questionVideo?: string,
-    answerVideo?: string
-}
+
+// type setCardParams = {
+//     cardsPack_id: string,
+//     question?: string,
+//     answer?: string,
+//     grade?: number
+//     shots?: number,
+//     answerlmg?: string,
+//     questionImg?: string,
+//     questionVideo?:string,
+//     answerVideo?: string
+// }
 
 export type responsePacksType = {
     cardPacks: Array<cardsType>,

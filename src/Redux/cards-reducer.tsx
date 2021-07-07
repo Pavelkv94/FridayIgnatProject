@@ -1,7 +1,6 @@
-import React from 'react'
 import {Dispatch} from 'redux'
-import {ArrCardType, packsApi, responseCardType} from "../api/packs-api";
-import {authTC, isLoggedInAC} from './login-reducer';
+import { packsApi, responseCardType} from "../api/packs-api";
+import {authTC} from './login-reducer';
 
 
 const initialState: initialStateType = {
@@ -61,7 +60,7 @@ export const cardsTC = (cardsPack_id: string) => (dispatch: Dispatch<any>) => {
 
 export const cardsAdd = (cardsPack_id: string) => (dispatch: Dispatch<any>) => {
 
-    packsApi.setCards("privettttt")
+    packsApi.setCards(cardsPack_id)
         .then(() => {
             dispatch(cardsTC(cardsPack_id))
         })
@@ -86,19 +85,19 @@ export const cardsDeleteTC = (id: string, cardsPack_id: string) => (dispatch: Di
         })
 }
 
-// export const cardsUpdateTC = (_id: string, question?: string,cardsPack_id?: string) => (dispatch: Dispatch<any>) => {
-//
-//     packsApi.updateCards(_id, question)
-//         .then(() => {
-//             dispatch(cardsTC(cardsPack_id))
-//         })
-//         .catch((error) => {
-//             dispatch(setAppErrorPacksAC(error.response.data.error))
-//         })
-//         .finally(() => {
-//
-//         })
-// }
+export const cardsUpdateTC = (id: string, cardsPack_id: string) => (dispatch: Dispatch<any>) => {
+
+    packsApi.updateCards(id)
+        .then(() => {
+            dispatch(cardsTC(cardsPack_id))
+        })
+        .catch((error) => {
+            dispatch(setAppErrorPacksAC(error.response.data.error))
+        })
+        .finally(() => {
+
+        })
+}
 
 export type getCardsTypeAC = ReturnType<typeof getCardAC>;
 export type setAppErrorPacksTypeAC = ReturnType<typeof setAppErrorPacksAC>;
