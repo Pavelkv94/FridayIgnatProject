@@ -25,18 +25,18 @@ export function Packs() {
     const pageSize = useSelector<AppStateType, number>(state => state.packs.pageCount)
     const currentPage = useSelector<AppStateType, number>(state => state.packs.page)
     const status = useSelector<AppStateType, string>((state) => state.reg.status)
-   
+
 
     useEffect(() => {
         dispatch(packsTC())
     }, [])
 
 
-    const searchName = (name: string, search: string) => {
-        if (name.toLowerCase() === search.toLowerCase()) return true
-    }
+    // const searchName = (name: string, search: string) => {
+    //     if (name.toLowerCase() === search.toLowerCase()) return true
+    // }
 
-    let searchPacks = packs
+    // let searchPacks = packs
 
     // if (searchResult) {
     //     searchPacks = packs.filter(m => searchName(m.name, searchResult))
@@ -56,17 +56,17 @@ export function Packs() {
         <Search />
         <br />
         <div className={s.packsHeaderContainer}>
-            <div className={s.packsChild}>Name <SortButton  /></div>
-            <div className={s.packsChild}>cardsCount<SortButton  /></div>
-            <div className={s.packsChild}>updated<SortButton  /></div>
-            <div className={s.packsChild}>url<SortButton  /></div>
+            <div className={s.packsChild}>Name <SortButton sortValue="name" /></div>
+            <div className={s.packsChild}>cardsCount<SortButton sortValue="cardsCount" /></div>
+            <div className={s.packsChild}>updated<SortButton sortValue="updated" /></div>
+            <div className={s.packsChild}>created<SortButton sortValue="created" /></div>
             <div className={s.packsChild}>
                 <button onClick={() => dispatch(packsAddTC())}>add</button>
 
             </div>
         </div>
 
-        {searchPacks.map(m => {
+        {packs.map(m => {
             return <Pack card={m} key={m._id} />
         })}
         <Paginator totalItemsCount={totalCount} pageSize={pageSize} currentPage={currentPage} onPageChanged={onPageChanged} />

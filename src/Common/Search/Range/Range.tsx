@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Range, getTrackBackground } from 'react-range';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppStateType } from '../../../Redux/store';
 
 interface IPriceRangeProps {
     // loading: boolean;	
@@ -23,14 +25,18 @@ const PriceRange: React.FC<IPriceRangeProps> = (
 
     }
 ) => {
-    const [values, setValues] = useState([4000, 8000]);
+    const dispatch = useDispatch()
+    const min = useSelector<AppStateType, number>(state => state.packs.min)
+    const max = useSelector<AppStateType, number>(state => state.packs.max)
+    
+    const [values, setValues] = useState([1, 500]);
 
     return (
         <Range
             values={values}
-            step={500}
-            min={3000}
-            max={9000}
+            step={1}
+            min={0}
+            max={1000}
             onChange={values => setValues(values)}
             renderTrack={({ props, children }) => (
                 <div
@@ -53,8 +59,8 @@ const PriceRange: React.FC<IPriceRangeProps> = (
                             background: getTrackBackground({
                                 values: values,
                                 colors: ['#ccc', '#548BF4', '#ccc'],
-                                min: 3000,
-                                max: 9000
+                                min: 0,
+                                max: 1000
                             }),
                             alignSelf: 'center'
                         }}

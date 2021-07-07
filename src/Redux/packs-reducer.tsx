@@ -10,13 +10,13 @@ const initialState: initialStateType = {
     cardPacks: [],
     cardPacksTotalCount: 10,
     max: 10,
-    min: 5,
+    min: 0,
     page: 1,
-    pageCount: 10,
+    pageCount: 5,
     error: undefined,
     isInitialized: false,
 
-    sortPacks: "",
+    sortPacks: "1update",
     status: 'idle',
     packName: ""
 }
@@ -50,7 +50,8 @@ const packsReducer = (state = initialState, action: ActionType): initialStateTyp
             return { ...state, status: action.status }
         case 'PACKS/SORT':
             return { ...state, sortPacks: action.sortPacks }
-
+        case 'PACKS/SET-RANGE':
+            return { ...state, min: action.min, max: action.max }
         default: return state
     }
 
@@ -59,6 +60,7 @@ const packsReducer = (state = initialState, action: ActionType): initialStateTyp
 
 
 
+export const setRangeAC = (min: number, max: number) => ({ type: 'PACKS/SET-RANGE', min, max } as const)
 export const sortPAckAC = (sortPacks: string) => ({ type: 'PACKS/SORT', sortPacks } as const)
 
 export const setAppStatusAC = (status: RequestStatusType) => ({ type: 'PACKS/SET-STATUS', status } as const)
@@ -132,6 +134,7 @@ export const packsUpdateTC = (_id: string, name: string) => (dispatch: Dispatch<
         })
 }
 
+export type setRangeACType = ReturnType<typeof setRangeAC>;
 export type sortPAckACType = ReturnType<typeof sortPAckAC>;
 export type setAppStatusTypeAC = ReturnType<typeof setAppStatusAC>;
 export type getCardsTypeAC = ReturnType<typeof getCardsAC>;
@@ -144,4 +147,5 @@ type ActionType = getCardsTypeAC
     | setSearchValuePackTypeAC
     | setAppStatusTypeAC
     | sortPAckACType
+    | setRangeACType
 export default packsReducer;

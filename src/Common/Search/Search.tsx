@@ -10,18 +10,18 @@ import { cardsType, packsTC, setSearchValuePackAC } from '../../Redux/packs-redu
 export const Search: React.FC<any> = () => {
     const dispatch = useDispatch();
     const packs = useSelector<AppStateType, Array<cardsType>>(state => state.packs.cardPacks)
-    const searchResult = useSelector<AppStateType, string>(state => state.packs.packName)
+    const { min, max, page, pageCount, packName, sortPacks } = useSelector<AppStateType, any>(state => state.packs)
 
-    const setSearchResult = (e: string) => {
-        dispatch(setSearchValuePackAC(e))
+    const setSearchResult = (value: string) => {
+        dispatch(setSearchValuePackAC(value))
     }
 
     return (
         <div className={s.container}>
             Search:
-            <SuperInputText value={searchResult} onChangeText={setSearchResult} />
+            <SuperInputText value={packName} onChangeText={setSearchResult} />
             <Range />
-            <SuperButton onClick={() => dispatch(dispatch(packsTC(10, 1, 10, 10, searchResult)))}>Search</SuperButton>
+            <SuperButton onClick={() => dispatch(packsTC(min, max, page, pageCount, packName, sortPacks))}>Search</SuperButton>
         </div>
     )
 };

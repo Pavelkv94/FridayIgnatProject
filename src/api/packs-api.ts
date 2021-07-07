@@ -15,7 +15,7 @@ export const packsApi = {
         sortPacks?: string
     ) {
         return instance.get<responsePacksType>(`/cards/pack`,
-            { params: { packName, min, max, sortPacks, page, pageCount } })
+            { params: { min, max, page: 1, pageCount : 10, packName, sortPacks, } })
     },
     setPacks(name: string) {
         return instance.post("cards/pack", { cardsPack: { name } })

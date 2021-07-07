@@ -22,7 +22,7 @@ export function Pack(props: PropsType) {
         <div className={s.packsChild2}>{props.card.name}</div>
         <div className={s.packsChild2}>{props.card.cardsCount}</div>
         <div className={s.packsChild2}>{props.card.updated}</div>
-        <div className={s.packsChild2}>{props.card.url}</div>
+        <div className={s.packsChild2}>{props.card.created}</div>
         <div className={s.packsChild2}>
             <button disabled={userID !== props.card.user_id}
                 onClick={() => dispatch(packsDeleteTC(props.card._id))}>del
