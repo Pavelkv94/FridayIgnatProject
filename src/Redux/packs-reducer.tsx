@@ -9,8 +9,8 @@ export type SortValueType = "name" | "cardCount" | "updated" | "url" | ""
 const initialState: initialStateType = {
     cardPacks: [],
     cardPacksTotalCount: 10,
-    max: 10,
     min: 0,
+    max: 10,
     page: 1,
     pageCount: 5,
     error: undefined,
