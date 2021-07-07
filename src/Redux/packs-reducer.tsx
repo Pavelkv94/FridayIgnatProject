@@ -8,8 +8,8 @@ import { AppStateType } from './store';
 const initialState: initialStateType = {
     cardPacks: [],
     cardPacksTotalCount: 10,
-    min: 0,
-    max: 10,
+    min: 5,
+    max: 15,
     page: 1,
     pageCount: 5,
     error: undefined,
