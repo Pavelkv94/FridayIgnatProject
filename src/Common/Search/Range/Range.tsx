@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { EffectCallback, useEffect, useState } from 'react';
 import { Range, getTrackBackground } from 'react-range';
 import { useDispatch, useSelector } from 'react-redux';
+import { setRangeAC } from '../../../Redux/packs-reducer';
 import { AppStateType } from '../../../Redux/store';
 
 interface IPriceRangeProps {
@@ -28,16 +29,27 @@ const PriceRange: React.FC<IPriceRangeProps> = (
     const dispatch = useDispatch()
     const min = useSelector<AppStateType, number>(state => state.packs.min)
     const max = useSelector<AppStateType, number>(state => state.packs.max)
-    
-    const [values, setValues] = useState([1, 500]);
+
+    const [values, setValues] = useState([min, max]);
+
+    const setMinMAxlValues = (newValues: number[]) => {
+        dispatch(setRangeAC(newValues[0], newValues[1]));
+        setValues(newValues);
+    };
+
+    useEffect(() => {
+        setMinMAxlValues([min,max]);
+    }, []);
+
+
 
     return (
         <Range
             values={values}
             step={1}
-            min={0}
-            max={1000}
-            onChange={values => setValues(values)}
+            min={min}
+            max={max}
+            onChange={values => setMinMAxlValues(values)}
             renderTrack={({ props, children }) => (
                 <div
                     onMouseDown={props.onMouseDown}
@@ -59,8 +71,8 @@ const PriceRange: React.FC<IPriceRangeProps> = (
                             background: getTrackBackground({
                                 values: values,
                                 colors: ['#ccc', '#548BF4', '#ccc'],
-                                min: 0,
-                                max: 1000
+                                min: min,
+                                max: max
                             }),
                             alignSelf: 'center'
                         }}
@@ -114,3 +126,4 @@ const PriceRange: React.FC<IPriceRangeProps> = (
 };
 
 export default PriceRange;
+

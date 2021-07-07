@@ -5,11 +5,10 @@ import SuperInputText from "../../SuperComponents/c1-SuperInputText/SuperInputTe
 import SuperButton from "../../SuperComponents/c2-SuperButton/SuperButton";
 import { AppStateType } from '../../Redux/store';
 import { useDispatch, useSelector } from 'react-redux';
-import { cardsType, packsTC, setSearchValuePackAC } from '../../Redux/packs-reducer';
+import {  packsTC, setSearchValuePackAC } from '../../Redux/packs-reducer';
 
 export const Search: React.FC<any> = () => {
     const dispatch = useDispatch();
-    const packs = useSelector<AppStateType, Array<cardsType>>(state => state.packs.cardPacks)
     const { min, max, page, pageCount, packName, sortPacks } = useSelector<AppStateType, any>(state => state.packs)
 
     const setSearchResult = (value: string) => {

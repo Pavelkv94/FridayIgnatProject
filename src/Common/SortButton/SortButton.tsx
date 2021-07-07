@@ -17,7 +17,7 @@ export const SortButton: React.FC<any> = (props) => {
     const sorting = (n: 1 | 0) => {
 
         dispatch(sortPAckAC(sortPacks))
-        dispatch(packsTC(min, max, page, pageCount, packName, `${n}${props.sorValue}`))
+        dispatch(packsTC(min, max, page, pageCount, packName, `${n}${props.sortValue}`))
         console.log("click")
     }
 
