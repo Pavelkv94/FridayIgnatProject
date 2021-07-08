@@ -3,34 +3,44 @@ import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
 import { useDispatch, useSelector } from 'react-redux';
-import { AppStateType } from '../../../Redux/store';
-import { responsePacksType } from '../../../api/packs-api';
-import { setRangeAC } from '../../../Redux/packs-reducer';
+import { setRangeCardsAC } from '../../../Redux/cards-reducer';
+import { setRangePacksAC } from '../../../Redux/packs-reducer';
 
 const useStyles = makeStyles({
   root: {
     width: 600,
+    marginLeft: 30,
+    marginRight: 30,
   },
 });
 
-
-export default function RangeSlider() {
+type PropsRangeType = {
+  min: number
+  max: number
+  target: "packs" | "cards"
+}
+export default function RangeSlider(props: PropsRangeType) {
   const dispatch = useDispatch()
-  const { min, max } = useSelector<AppStateType, responsePacksType>(state => state.packs)
 
   const classes = useStyles();
-  const [values, setValue] = React.useState<number[]>([min, max]);
+  const [values, setValue] = React.useState<number[]>([props.min, props.max]);
 
   const handleChange = (e: any, values: number | number[]) => {
-    //@ts-ignore   //!<<<<---------------
-    dispatch(setRangeAC(values[0], values[1]));
-    setValue(values as number[]);
-  };
+    if (props.target === "packs") {
+      //@ts-ignore   //!<<<<---------------
+      dispatch(setRangePacksAC(values[0], values[1]));
+      setValue(values as number[]);
+    } else {
+      //@ts-ignore   //!<<<<---------------
+      dispatch(setRangeCardsAC(values[0], values[1]));
+      setValue(values as number[]);
+    }
+  }
 
   return (
     <div className={classes.root}>
       <Typography id="range-slider" gutterBottom>
-        Cards range
+        Range
       </Typography>
       <Slider
         value={values}

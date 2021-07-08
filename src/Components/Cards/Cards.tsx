@@ -48,7 +48,15 @@ export function Cards() {
         Cards
         {error && <div>{error}</div>}
         <br />
-        <Search packName={cardQuestion} inputCallback={setSearchResult} btnCallback={searchCardCallback} />
+        <Search
+            packName={cardQuestion}
+            min={minGrade}
+            max={maxGrade}
+            target="cards"
+            inputCallback={setSearchResult}
+            btnCallback={searchCardCallback}
+   
+        />
         <br />
         <div className={s.packsHeaderContainer}>
             <div className={s.packsChild}>question<SortButton sortValue="question" sortPacks={sortCards} sortCallback={sortingCard} /></div>

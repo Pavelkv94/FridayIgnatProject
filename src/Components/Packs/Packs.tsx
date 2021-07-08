@@ -5,6 +5,7 @@ import {
     packsAddTC,
     packsTC,
     setSearchValuePackAC,
+    setRangePacksAC,
 } from "../../Redux/packs-reducer";
 import s from "./Packs.module.css"
 import { AppStateType } from "../../Redux/store";
@@ -47,13 +48,22 @@ export function Packs() {
         dispatch(packsTC(min, max, page, pageCount, packName, `${n}${sortValue}`))
     }
 
+
     return <div className={s.container}>
         PACKS
         {status !== 'idle' ? <Preloader /> : null}
         <br />
         {error && <div>{error}</div>}
         <br />
-        <Search packName={packName} inputCallback={setSearchResult} btnCallback={searchPackCallback} />
+        <Search
+            packName={packName}
+            min={min}
+            max={max}
+            target="packs"
+            inputCallback={setSearchResult}
+            btnCallback={searchPackCallback}
+
+        />
         <br />
         <div className={s.packsHeaderContainer}>
             <div className={s.packsChild}>Name <SortButton sortValue="name" sortPacks={sortPacks} sortCallback={sortingPack} /></div>
