@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/FridayIgnatProject/static/css/main.bb0ff149.chunk.css",
-    "main.js": "/FridayIgnatProject/static/js/main.425051fe.chunk.js",
-    "main.js.map": "/FridayIgnatProject/static/js/main.425051fe.chunk.js.map",
+    "main.css": "/FridayIgnatProject/static/css/main.e00a7bef.chunk.css",
+    "main.js": "/FridayIgnatProject/static/js/main.76e2e4af.chunk.js",
+    "main.js.map": "/FridayIgnatProject/static/js/main.76e2e4af.chunk.js.map",
     "runtime-main.js": "/FridayIgnatProject/static/js/runtime-main.b7b045f8.js",
     "runtime-main.js.map": "/FridayIgnatProject/static/js/runtime-main.b7b045f8.js.map",
     "static/js/2.1d8dce7a.chunk.js": "/FridayIgnatProject/static/js/2.1d8dce7a.chunk.js",
@@ -10,14 +10,14 @@
     "static/js/3.cb8fdd91.chunk.js": "/FridayIgnatProject/static/js/3.cb8fdd91.chunk.js",
     "static/js/3.cb8fdd91.chunk.js.map": "/FridayIgnatProject/static/js/3.cb8fdd91.chunk.js.map",
     "index.html": "/FridayIgnatProject/index.html",
-    "static/css/main.bb0ff149.chunk.css.map": "/FridayIgnatProject/static/css/main.bb0ff149.chunk.css.map",
+    "static/css/main.e00a7bef.chunk.css.map": "/FridayIgnatProject/static/css/main.e00a7bef.chunk.css.map",
     "static/js/2.1d8dce7a.chunk.js.LICENSE.txt": "/FridayIgnatProject/static/js/2.1d8dce7a.chunk.js.LICENSE.txt",
     "static/media/Circles-menu.20a21d3c.gif": "/FridayIgnatProject/static/media/Circles-menu.20a21d3c.gif"
   },
   "entrypoints": [
     "static/js/runtime-main.b7b045f8.js",
     "static/js/2.1d8dce7a.chunk.js",
-    "static/css/main.bb0ff149.chunk.css",
-    "static/js/main.425051fe.chunk.js"
+    "static/css/main.e00a7bef.chunk.css",
+    "static/js/main.76e2e4af.chunk.js"
   ]
 }
