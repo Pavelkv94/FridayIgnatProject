@@ -52,7 +52,7 @@ export function Cards() {
                 <div className={s.packsChild2}>{m.updated}</div>
                 <div className={s.packsChild2}>{m.created}</div>
                 <div className={s.packsChild2}>
-                    <button
+                    <button disabled={userID !== m.user_id}
                         onClick={() => dispatch(cardsDeleteTC(m._id, m.cardsPack_id))}>del
                     </button>
                     <button disabled={userID !== m.user_id}
