@@ -26,18 +26,37 @@ export const packsApi = {
     updatePacks(_id: string, name: string) {
         return instance.put("cards/pack", { cardsPack: { _id, name } })
     },
-      getCards(cardsPack_id: string) {
+
+    getCards(
+        cardsPack_id: string,
+        cardQuestion?: string,
+        min?: number,
+        max?: number,
+        sortCards?: string,
+        page?: number,
+        pageCount?: number
+    ) {
         return instance.get<responseCardType>("/cards/card",
-            {params: {cardsPack_id}})
+            {
+                params: {
+                    cardsPack_id,
+                    min,
+                    max,
+                    page,
+                    pageCount,
+                    cardQuestion,
+                    sortCards,
+                }
+            })
     },
     setCards(cardsPack_id: string) {
-        return instance.post("cards/card", {card: {cardsPack_id}})
+        return instance.post("cards/card", { card: { cardsPack_id } })
     },
     deleteCards(id: string) {
-        return instance.delete("cards/card", {params: {id}})
+        return instance.delete("cards/card", { params: { id } })
     },
     updateCards(_id: string) {
-        return instance.put("cards/card", {card: {_id}})
+        return instance.put("cards/card", { card: { _id } })
     },
 
 }
@@ -53,6 +72,8 @@ export type responseCardType = {
     packUserId: string,
     error?: string,
     isInitialized: boolean
+    sortCards: string
+    cardQuestion: string
 }
 export type ArrCardType = {
     answer: string,

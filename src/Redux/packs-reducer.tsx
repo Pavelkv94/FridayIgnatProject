@@ -4,13 +4,12 @@ import { packsApi, responsePacksType } from "../api/packs-api";
 import { authTC } from './login-reducer';
 import { AppStateType } from './store';
 
-export type SortValueType = "name" | "cardCount" | "updated" | "url" | ""
 
 const initialState: initialStateType = {
     cardPacks: [],
     cardPacksTotalCount: 10,
-    min: 0,
-    max: 10,
+    min: 5,
+    max: 15,
     page: 1,
     pageCount: 5,
     error: undefined,
@@ -57,8 +56,8 @@ const packsReducer = (state = initialState, action: ActionType): initialStateTyp
 }
 
 
-export const setRangeAC = (min: number, max: number) => ({ type: 'PACKS/SET-RANGE', min, max } as const)
-export const sortPAckAC = (sortPacks: string) => ({ type: 'PACKS/SORT', sortPacks } as const)
+export const setRangePacksAC = (min: number, max: number) => ({ type: 'PACKS/SET-RANGE', min, max } as const)
+export const sortPackAC = (sortPacks: string) => ({ type: 'PACKS/SORT', sortPacks } as const)
 
 export const setAppStatusAC = (status: RequestStatusType) => ({ type: 'PACKS/SET-STATUS', status } as const)
 export const getCardsAC = (cards: initialStateType) => ({ type: 'PACKS/GET_CARDS', cards } as const)
@@ -76,7 +75,6 @@ export const packsTC = (min?: number, max?: number, page?: number, pageCount?: n
     dispatch(setAppStatusAC("loading"))
     packsApi.getPacks(min, max, page, pageCount, packName, sortPacks)
         .then((response) => {
-            debugger
             dispatch(setAppStatusAC("succeeded"))
             dispatch(authTC())
             dispatch(getCardsAC(response.data))
@@ -132,8 +130,8 @@ export const packsUpdateTC = (_id: string, name: string) => (dispatch: Dispatch<
         })
 }
 
-export type setRangeACType = ReturnType<typeof setRangeAC>;
-export type sortPAckACType = ReturnType<typeof sortPAckAC>;
+export type setRangePacksACType = ReturnType<typeof setRangePacksAC>;
+export type sortPackACType = ReturnType<typeof sortPackAC>;
 export type setAppStatusTypeAC = ReturnType<typeof setAppStatusAC>;
 export type getCardsTypeAC = ReturnType<typeof getCardsAC>;
 export type setAppErrorPacksTypeAC = ReturnType<typeof setAppErrorPacksAC>;
@@ -144,6 +142,6 @@ type ActionType = getCardsTypeAC
     | setIsInitializedPackTypeAC
     | setSearchValuePackTypeAC
     | setAppStatusTypeAC
-    | sortPAckACType
-    | setRangeACType
+    | sortPackACType
+    | setRangePacksACType
 export default packsReducer;

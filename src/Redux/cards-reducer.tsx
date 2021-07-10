@@ -12,7 +12,9 @@ const initialState: initialStateType = {
     pageCount: 4,
     packUserId: "" as string,
     error: undefined,
-    isInitialized: true
+    isInitialized: true,
+    sortCards: "1update",
+    cardQuestion: ""
 }
 type initialStateType = responseCardType
 
@@ -30,11 +32,19 @@ const cardsReducer = (state = initialState, action: ActionType): initialStateTyp
             return { ...state, error: action.error }
         case "CARDS/SET-IS-INITIALIZED":
             return { ...state, isInitialized: action.isInitialized }
-             default : return state
+        case 'CARDS/SET-SEARCH-VALUE':
+            return { ...state, cardQuestion: action.value }
+        case 'CARDS/SORT':
+            return { ...state, sortCards: action.sortCards }
+        case 'CARDS/SET-RANGE':
+            return { ...state, minGrade: action.min, maxGrade: action.max }
+        default: return state
     }
-   
-}
 
+}
+export const setRangeCardsAC = (min: number, max: number) => ({ type: 'CARDS/SET-RANGE', min, max } as const)
+export const sortCardAC = (sortCards: string) => ({ type: 'CARDS/SORT', sortCards } as const)
+export const setSearchValueCardAC = (value: string) => ({ type: 'CARDS/SET-SEARCH-VALUE', value } as const)
 export const getCardAC = (cards: initialStateType) => ({ type: 'CARDS/GET_CARDS', cards } as const)
 export const setAppErrorPacksAC = (error: string | undefined) => ({ type: 'CARDS/SET-ERROR', error } as const)
 export const setIsInitializedPackAC = (isInitialized: boolean) => ({
@@ -42,23 +52,27 @@ export const setIsInitializedPackAC = (isInitialized: boolean) => ({
     isInitialized
 } as const)
 
-export const cardsTC = (cardsPack_id: string) => (dispatch: Dispatch<any>) => {
+export const cardsTC = (cardsPack_id: string,
+    cardQuestion?: string,
+    min?: number,
+    max?: number,
+    sortCards?: string,
+    page?: number,
+    pageCount?: number) => (dispatch: Dispatch<any>) => {
 
-    packsApi.getCards(cardsPack_id)
+        packsApi.getCards(cardsPack_id, cardQuestion, min, max, sortCards, page, pageCount,)
+            .then((response) => {
+                dispatch(authTC())
+                dispatch(getCardAC(response.data))
+                dispatch(setIsInitializedPackAC(true))
+            })
+            .catch((error) => {
+                dispatch(setAppErrorPacksAC(error.response.data.error))
+            })
+            .finally(() => {
 
-        .then((response) => {
-            debugger
-            dispatch(authTC())
-            dispatch(getCardAC(response.data))
-            dispatch(setIsInitializedPackAC(true))
-        })
-        .catch((error) => {
-            dispatch(setAppErrorPacksAC(error.response.data.error))
-        })
-        .finally(() => {
-
-        })
-}
+            })
+    }
 
 export const cardsAdd = (cardsPack_id: string) => (dispatch: Dispatch<any>) => {
 
@@ -100,7 +114,9 @@ export const cardsUpdateTC = (id: string, cardsPack_id: string) => (dispatch: Di
 
         })
 }
-
+export type setRangeCardsACType = ReturnType<typeof setRangeCardsAC>;
+export type sortCardACType = ReturnType<typeof sortCardAC>;
+export type setSearchValueCardTypeAC = ReturnType<typeof setSearchValueCardAC>;
 export type getCardsTypeAC = ReturnType<typeof getCardAC>;
 export type setAppErrorPacksTypeAC = ReturnType<typeof setAppErrorPacksAC>;
 export type setIsInitializedPackTypeAC = ReturnType<typeof setIsInitializedPackAC>;
@@ -108,5 +124,7 @@ export type setIsInitializedPackTypeAC = ReturnType<typeof setIsInitializedPackA
 type ActionType = getCardsTypeAC
     | setAppErrorPacksTypeAC
     | setIsInitializedPackTypeAC
-
+    | setSearchValueCardTypeAC
+    | sortCardACType
+    | setRangeCardsACType
 export default cardsReducer;
