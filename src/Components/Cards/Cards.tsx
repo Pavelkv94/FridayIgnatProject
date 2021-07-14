@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Search } from '../../Common/Search/Search';
 import s from "./Cards.module.css"
 import { AppStateType } from "../../Redux/store";
-import { cardsAdd, cardsDeleteTC, cardsTC, cardsUpdateTC, setSearchValueCardAC, sortCardAC } from "../../Redux/cards-reducer";
+import { cardsAdd, cardsDeleteTC, cardsTC, cardsUpdateTC, setPackUserIdAC, setPageCountOfCardsAC, setPageOfCardsAC, setSearchValueCardAC, sortCardAC } from "../../Redux/cards-reducer";
 import { ArrCardType, responseCardType } from "../../api/packs-api";
 import { useParams } from 'react-router-dom';
 import { Paginator } from './../../Common/Paginator/Paginator'
@@ -13,35 +13,36 @@ export function Cards() {
 
     const dispatch = useDispatch()
     const { packId } = useParams<{ packId: string }>()
-
+    const cardsPackId = useSelector<AppStateType, string>(state => state.cards.packUserId)
     const cards = useSelector<AppStateType, Array<ArrCardType>>(state => state.cards.cards)
     const error = useSelector<AppStateType, string | undefined>(state => state.packs.error)
     const userID = useSelector<AppStateType, string>(state => state.loginPage.userData._id)
     const { cardsTotalCount, page, pageCount, minGrade, maxGrade, sortCards, cardQuestion } = useSelector<AppStateType, responseCardType>(state => state.cards)
 
     useEffect(() => {
-        dispatch(cardsTC(packId))
-    }, [])
+        dispatch(setPackUserIdAC(packId))
+        dispatch(cardsTC())
+    }, [page, pageCount, sortCards])
 
     //пагинация
     const onPageChanged = (newPage: number) => {
-        dispatch(cardsTC(packId, cardQuestion, minGrade, maxGrade, sortCards, newPage, pageCount))
+        dispatch(setPageOfCardsAC(newPage))
     }
     const onChangeHandler = (e: ChangeEvent<HTMLSelectElement>) => {
-        dispatch(cardsTC(packId, cardQuestion, minGrade, maxGrade, sortCards, page, Number(e.currentTarget.value)))
+        dispatch(setPageCountOfCardsAC(Number(e.currentTarget.value)))
     }
     //поиск
     const setSearchResult = (value: string) => {
         dispatch(setSearchValueCardAC(value))
     }
     const searchCardCallback = () => {
-        dispatch(cardsTC(packId, cardQuestion, minGrade, maxGrade, sortCards, page, pageCount))
+        dispatch(cardsTC())
     }
 
     //сортировка 
-    const sortingCard = (n: 1 | 0,  sortValue: string) => {
-        dispatch(sortCardAC(sortCards))
-       // dispatch(cardsTC(packId, cardQuestion, minGrade, maxGrade, `${n}${sortValue}`, page, pageCount))
+    const sortingCard = (n: 1 | 0, sortValue: string) => {
+        dispatch(sortCardAC(n, sortValue))
+        // dispatch(cardsTC(packId, cardQuestion, minGrade, maxGrade, `${n}${sortValue}`, page, pageCount))
     }
 
     return <div>
@@ -55,7 +56,7 @@ export function Cards() {
             target="cards"
             inputCallback={setSearchResult}
             btnCallback={searchCardCallback}
-   
+
         />
         <br />
         <div className={s.packsHeaderContainer}>

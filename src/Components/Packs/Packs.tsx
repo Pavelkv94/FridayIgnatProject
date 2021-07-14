@@ -17,16 +17,18 @@ import { Paginator } from './../../Common/Paginator/Paginator'
 import Preloader from "../../Common/Preloader/Preloader";
 import { SortButton } from '../../Common/SortButton/SortButton';
 import { responsePacksType } from '../../api/packs-api';
+import { Redirect } from 'react-router-dom';
 
 export function Packs() {
 
     const dispatch = useDispatch()
+    const isAuth = useSelector<AppStateType, string>(state => state.loginPage.isAuth)
     const { min, max, page, pageCount, packName, sortPacks, error, cardPacks, cardPacksTotalCount } = useSelector<AppStateType, responsePacksType>(state => state.packs)
     const status = useSelector<AppStateType, string>((state) => state.reg.status)
     const userID = useSelector<AppStateType, string>(state => state.loginPage.userData._id)
     useEffect(() => {
         dispatch(packsTC())
-    }, [ page, pageCount, sortPacks])
+    }, [page, pageCount, sortPacks])
 
     //пагинация
     const onPageChanged = (page: number) => {
@@ -46,12 +48,12 @@ export function Packs() {
     }
 
     //сортировка 
-    const sortingPack = (n: 1 | 0,  sortValue: string) => {
-        
+    const sortingPack = (n: 1 | 0, sortValue: string) => {
+
         dispatch(sortPackAC(n, sortValue))
         //dispatch(packsTC(min, max, page, pageCount, packName, `${n}${sortValue}`))
     }
-
+    if (isAuth === "") { return <Redirect to={"/login"} />; }
 
     return <div className={s.container}>
         PACKS

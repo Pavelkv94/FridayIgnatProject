@@ -9,8 +9,8 @@ const initialState: initialStateType = {
     cardPacksTotalCount: 10,
     minCardsCount: 0,
     maxCardsCount: 4,
-    min: 5,
-    max: 15,
+    min: 0,
+    max: 20,
     page: 1,
     pageCount: 4,
     error: undefined,
@@ -84,7 +84,6 @@ export const setSearchValuePackAC = (value: string) => ({ type: 'PACKS/SET-SEARC
 
 export const packsTC = () => (dispatch: Dispatch<any>, getState: () => AppStateType) => {
     let state = getState().packs;
-    debugger
     dispatch(setAppStatusAC("loading"))
     packsApi.getPacks(state.min, state.max, state.page, state.pageCount, state.packName, state.sortPacks)
         .then((response) => {

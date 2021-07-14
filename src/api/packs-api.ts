@@ -40,12 +40,12 @@ export const packsApi = {
             {
                 params: {
                     cardsPack_id,
+                    cardQuestion,
                     min,
                     max,
+                    sortCards,
                     page,
                     pageCount,
-                    cardQuestion,
-                    sortCards,
                 }
             })
     },
