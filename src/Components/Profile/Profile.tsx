@@ -9,11 +9,11 @@ export function Profile() {
 
     const dispatch = useDispatch();
     const isAuth = useSelector<AppStateType, string>(state => state.loginPage.isAuth)
+    //const isAuthErr = useSelector<AppStateType, string | null>(state => state.loginPage.error)
     const data = useSelector<AppStateType, ResponseLoginType>(state => state.loginPage.userData)
 
     useEffect(() => {
-        dispatch(authTC())
-
+        if (!isAuth) dispatch(authTC())
     }, [])
 
     const logout = () => {
@@ -28,7 +28,6 @@ export function Profile() {
             <h1>Profile</h1>
             <br />
             <h3>Данные пользователя</h3>
-
             <p>email - {data.email}</p>
             <p>name - {data.name}</p>
             <p>created - {data.created}</p>
