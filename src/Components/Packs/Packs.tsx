@@ -6,6 +6,8 @@ import {
     packsTC,
     setSearchValuePackAC,
     setRangePacksAC,
+    setPageOfPacksAC,
+    setPageCountOfPacksAC,
 } from "../../Redux/packs-reducer";
 import s from "./Packs.module.css"
 import { AppStateType } from "../../Redux/store";
@@ -24,28 +26,30 @@ export function Packs() {
     const userID = useSelector<AppStateType, string>(state => state.loginPage.userData._id)
     useEffect(() => {
         dispatch(packsTC())
-    }, [])
+    }, [ page, pageCount, sortPacks])
 
     //пагинация
     const onPageChanged = (page: number) => {
-        dispatch(packsTC(5, 10, page, 10))
+        dispatch(setPageOfPacksAC(page))
     }
     const onChangeHandler = (e: ChangeEvent<HTMLSelectElement>) => {
-        dispatch(packsTC(min, max, page, Number(e.currentTarget.value), packName, sortPacks))
+        dispatch(setPageCountOfPacksAC(Number(e.currentTarget.value)))
     }
 
     //поисковая строка
     const setSearchResult = (value: string) => {
         dispatch(setSearchValuePackAC(value))
+
     }
     const searchPackCallback = () => {
-        dispatch(packsTC(min, max, page, pageCount, packName, sortPacks))
+        dispatch(packsTC())
     }
 
     //сортировка 
-    const sortingPack = (n: 1 | 0, sortPacks: string, sortValue: string) => {
-        dispatch(sortPackAC(sortPacks))
-        dispatch(packsTC(min, max, page, pageCount, packName, `${n}${sortValue}`))
+    const sortingPack = (n: 1 | 0,  sortValue: string) => {
+        
+        dispatch(sortPackAC(n, sortValue))
+        //dispatch(packsTC(min, max, page, pageCount, packName, `${n}${sortValue}`))
     }
 
 

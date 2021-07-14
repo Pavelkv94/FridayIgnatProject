@@ -114,6 +114,8 @@ export type getCardParams = {
 export type responsePacksType = {
     cardPacks: Array<cardsType>,
     cardPacksTotalCount: number,
+    minCardsCount: number,
+    maxCardsCount: number,
     max: number,
     min: number,
     page: number,

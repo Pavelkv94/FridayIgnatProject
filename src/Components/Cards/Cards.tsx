@@ -39,9 +39,9 @@ export function Cards() {
     }
 
     //сортировка 
-    const sortingCard = (n: 1 | 0, sortCards: string, sortValue: string) => {
+    const sortingCard = (n: 1 | 0,  sortValue: string) => {
         dispatch(sortCardAC(sortCards))
-        dispatch(cardsTC(packId, cardQuestion, minGrade, maxGrade, `${n}${sortValue}`, page, pageCount))
+       // dispatch(cardsTC(packId, cardQuestion, minGrade, maxGrade, `${n}${sortValue}`, page, pageCount))
     }
 
     return <div>
