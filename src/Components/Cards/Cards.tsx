@@ -13,7 +13,7 @@ export function Cards() {
 
     const dispatch = useDispatch()
     const { packId } = useParams<{ packId: string }>()
-    const cardsPackId = useSelector<AppStateType, string>(state => state.cards.packUserId)
+    //const cardsPackId = useSelector<AppStateType, string>(state => state.cards.packUserId)
     const cards = useSelector<AppStateType, Array<ArrCardType>>(state => state.cards.cards)
     const error = useSelector<AppStateType, string | undefined>(state => state.packs.error)
     const userID = useSelector<AppStateType, string>(state => state.loginPage.userData._id)
@@ -21,7 +21,7 @@ export function Cards() {
 
     useEffect(() => {
         dispatch(setPackUserIdAC(packId))
-        dispatch(cardsTC())
+        dispatch(cardsTC(packId))
     }, [page, pageCount, sortCards])
 
     //пагинация
@@ -36,7 +36,7 @@ export function Cards() {
         dispatch(setSearchValueCardAC(value))
     }
     const searchCardCallback = () => {
-        dispatch(cardsTC())
+        dispatch(cardsTC(packId))
     }
 
     //сортировка 

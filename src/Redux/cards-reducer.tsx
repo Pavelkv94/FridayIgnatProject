@@ -13,6 +13,7 @@ const initialState: initialStateType = {
     pageCount: 4,
     packUserId: "" as string,
 
+    grade: 2 as number,
     error: undefined,
     isInitialized: true,
     sortCards: "1update",
@@ -51,11 +52,13 @@ const cardsReducer = (state = initialState, action: ActionType): initialStateTyp
             return { ...state, pageCount: action.value }
         case 'CARDS/SET-ID':
             return { ...state, packUserId: action.userId }
+        case 'CARDS/SET-GRADE':
+            return { ...state, grade: action.grade }
         default: return state
     }
 
 }
-
+export const setGradeAC = (grade: number) => ({ type: 'CARDS/SET-GRADE', grade } as const)
 export const setPackUserIdAC = (userId: string) => ({ type: 'CARDS/SET-ID', userId } as const)
 export const setPageCountOfCardsAC = (value: number) => ({ type: 'CARDS/SET-PAGECOUNT', value } as const)
 export const setPageOfCardsAC = (page: number) => ({ type: 'CARDS/SET-PAGE', page } as const)
@@ -69,10 +72,10 @@ export const setIsInitializedPackAC = (isInitialized: boolean) => ({
     isInitialized
 } as const)
 
-export const cardsTC = () => (dispatch: Dispatch<any>, getState: () => AppStateType) => {
+export const cardsTC = (cardsPack_id: string) => (dispatch: Dispatch<any>, getState: () => AppStateType) => {
     let state = getState().cards;
 
-    packsApi.getCards(state.packUserId, state.cardQuestion, state.minGrade, state.maxGrade, state.sortCards, state.page, state.pageCount,)
+    packsApi.getCards(cardsPack_id, state.cardQuestion, state.minGrade, state.maxGrade, state.sortCards, state.page, state.pageCount,)
         .then((response) => {
             // dispatch(authTC())
             dispatch(getCardAC(response.data))
@@ -90,7 +93,7 @@ export const cardsAdd = (cardsPack_id: string) => (dispatch: Dispatch<any>) => {
 
     packsApi.setCards(cardsPack_id)
         .then(() => {
-            dispatch(cardsTC())
+            dispatch(cardsTC(cardsPack_id))
         })
         .catch((error) => {
             dispatch(setAppErrorPacksAC(error.response.data.error))
@@ -103,7 +106,7 @@ export const cardsAdd = (cardsPack_id: string) => (dispatch: Dispatch<any>) => {
 export const cardsDeleteTC = (id: string, cardsPack_id: string) => (dispatch: Dispatch<any>) => {
     packsApi.deleteCards(id)
         .then(() => {
-            dispatch(cardsTC())
+            dispatch(cardsTC(cardsPack_id))
         })
         .catch((error) => {
             dispatch(setAppErrorPacksAC(error.response.data.error))
@@ -117,7 +120,22 @@ export const cardsUpdateTC = (id: string, cardsPack_id: string) => (dispatch: Di
 
     packsApi.updateCards(id)
         .then(() => {
-            dispatch(cardsTC())
+            dispatch(cardsTC(cardsPack_id))
+        })
+        .catch((error) => {
+            dispatch(setAppErrorPacksAC(error.response.data.error))
+        })
+        .finally(() => {
+
+        })
+}
+
+export const setGradeTC = (id: string, grade: number) => (dispatch: Dispatch<any>) => {
+
+    packsApi.setGradeCards(id, grade)
+        .then((res) => {
+            dispatch(setGradeAC(res.data.updatedGrade.grade))
+            debugger
         })
         .catch((error) => {
             dispatch(setAppErrorPacksAC(error.response.data.error))
@@ -128,6 +146,7 @@ export const cardsUpdateTC = (id: string, cardsPack_id: string) => (dispatch: Di
 }
 
 
+export type setGradeACType = ReturnType<typeof setGradeAC>
 export type setPackUserIdACType = ReturnType<typeof setPackUserIdAC>
 export type setPageCountOfCardsACType = ReturnType<typeof setPageCountOfCardsAC>
 export type setPageOfCardsACType = ReturnType<typeof setPageOfCardsAC>
@@ -147,4 +166,5 @@ type ActionType = getCardsTypeAC
     | setPageOfCardsACType
     | setPageCountOfCardsACType
     | setPackUserIdACType
+    | setGradeACType
 export default cardsReducer;

@@ -30,6 +30,7 @@ export function Pack(props: PropsType) {
                 onClick={() => dispatch(packsUpdateTC(props.card._id, "Hqw"))}>upd
             </button>
             <NavLink to={`cards/${props.card._id}`}> cards </NavLink>
+            <NavLink to={`learn/${props.card._id}`}> Learn </NavLink>
         </div>
     </div>
 
