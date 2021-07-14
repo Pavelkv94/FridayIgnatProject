@@ -13,7 +13,8 @@ export function Profile() {
     const data = useSelector<AppStateType, ResponseLoginType>(state => state.loginPage.userData)
 
     useEffect(() => {
-        if (!isAuth) dispatch(authTC())
+        if (!isAuth)
+            dispatch(authTC())
     }, [])
 
     const logout = () => {

@@ -40,12 +40,12 @@ export const packsApi = {
             {
                 params: {
                     cardsPack_id,
+                    cardQuestion,
                     min,
                     max,
+                    sortCards,
                     page,
                     pageCount,
-                    cardQuestion,
-                    sortCards,
                 }
             })
     },
@@ -58,6 +58,9 @@ export const packsApi = {
     updateCards(_id: string) {
         return instance.put("cards/card", { card: { _id } })
     },
+    setGradeCards(card_id: string, grade: number) {
+        return instance.put("cards/grade", { card_id, grade })
+    }
 
 }
 
@@ -73,7 +76,8 @@ export type responseCardType = {
     error?: string,
     isInitialized: boolean
     sortCards: string
-    cardQuestion: string
+    cardQuestion: string,
+    grade: number
 }
 export type ArrCardType = {
     answer: string,
@@ -82,8 +86,8 @@ export type ArrCardType = {
     grade: number,
     shots: number,
     user_id: string,
-    created: number,
-    updated: number,
+    created: string,
+    updated: string,
     _id: string
 }
 
@@ -98,6 +102,15 @@ export type getCardParams = {
     pageCount?: number
 }
 
+export type responsegGradeType = {
+
+    _id: string
+    cardsPack_id: string
+    card_id: string
+    user_id: string
+    grade: number
+    shots: number
+}
 
 // type setCardParams = {
 //     cardsPack_id: string,
@@ -114,6 +127,8 @@ export type getCardParams = {
 export type responsePacksType = {
     cardPacks: Array<cardsType>,
     cardPacksTotalCount: number,
+    minCardsCount: number,
+    maxCardsCount: number,
     max: number,
     min: number,
     page: number,
