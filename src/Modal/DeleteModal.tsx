@@ -6,13 +6,22 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-export function DeleteItem(props: any) {
+type DeleteModalType = {
+    disabled: boolean,
+    callback: () => void
+}
+
+export function DeleteItem(props: DeleteModalType) {
     let [open, setOpen] = useState(false);
 
     const handleClickOpen = () => {
         setOpen(true);
     };
+    const buttonCallback = () => {
+        props.callback()
+        setOpen(false)
 
+    }
     const handleClose = () => {
         setOpen(false);
     };
@@ -41,7 +50,7 @@ export function DeleteItem(props: any) {
                     <Button onClick={handleClose} color="primary">
                         Quit
                     </Button>
-                    <Button onClick={props.callback} color="primary" autoFocus>
+                    <Button onClick={buttonCallback} color="primary" autoFocus>
                         Delete
                     </Button>
                 </DialogActions>

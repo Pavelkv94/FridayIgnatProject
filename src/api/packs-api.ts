@@ -1,5 +1,5 @@
-import { instance } from "./fridayProject-api";
-import { cardsType, RequestStatusType } from "../Redux/packs-reducer";
+import {instance} from "./fridayProject-api";
+import {cardsType, RequestStatusType} from "../Redux/packs-reducer";
 
 
 //api
@@ -15,16 +15,16 @@ export const packsApi = {
         sortPacks?: string
     ) {
         return instance.get<responsePacksType>(`/cards/pack`,
-            { params: { min, max, page, pageCount, packName, sortPacks } })
+            {params: {min, max, page, pageCount, packName, sortPacks}})
     },
     setPacks(name: string) {
-        return instance.post("cards/pack", { cardsPack: { name } })
+        return instance.post("cards/pack", {cardsPack: {name}})
     },
     deletePacks(id: string) {
-        return instance.delete("cards/pack", { params: { id } })
+        return instance.delete("cards/pack", {params: {id}})
     },
     updatePacks(_id: string, name: string) {
-        return instance.put("cards/pack", { cardsPack: { _id, name } })
+        return instance.put("cards/pack", {cardsPack: {_id, name}})
     },
 
     getCards(
@@ -49,17 +49,21 @@ export const packsApi = {
                 }
             })
     },
-    setCards(cardsPack_id: string) {
-        return instance.post("cards/card", { card: { cardsPack_id } })
+    setCards(
+        cardsPack_id: string,
+        question?: string,
+        answer?: string
+    ) {
+        return instance.post("cards/card", {card: {cardsPack_id, question, answer}})
     },
     deleteCards(id: string) {
-        return instance.delete("cards/card", { params: { id } })
+        return instance.delete("cards/card", {params: {id}})
     },
-    updateCards(_id: string) {
-        return instance.put("cards/card", { card: { _id } })
+    updateCards(_id: string, question?: string) {
+        return instance.put("cards/card", {card: {_id, question}})
     },
     setGradeCards(card_id: string, grade: number) {
-        return instance.put("cards/grade", { card_id, grade })
+        return instance.put("cards/grade", {card_id, grade})
     }
 
 }

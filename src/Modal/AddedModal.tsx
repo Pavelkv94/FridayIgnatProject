@@ -6,22 +6,26 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-type UpdateItemPT = {
-    callback: (title: string) => void
+type AddItemPT = {
+    callback: (title: string, title2?: string) => void
     disabled?: boolean
 }
 
-export function AddedItem(props: UpdateItemPT) {
+export function AddedItem(props: AddItemPT) {
     const [open, setOpen] = React.useState(false);
     let [title, setTitle] = React.useState("");
+    let [title2, setTitle2] = React.useState("");
     const changeTitle = (e: ChangeEvent<HTMLInputElement>) => {
         setTitle(e.currentTarget.value)
+    }
+    const changeTitle2 = (e: ChangeEvent<HTMLInputElement>) => {
+        setTitle2(e.currentTarget.value)
     }
     const handleClickOpen = () => {
         setOpen(true);
     };
     const handleClickUPD = () => {
-        props.callback(title)
+        props.callback(title, title2)
         setOpen(false)
     };
 
@@ -40,13 +44,22 @@ export function AddedItem(props: UpdateItemPT) {
             <Dialog open={open} onClose={handleClickUPD} aria-labelledby="form-dialog-title">
                 <DialogTitle id="form-dialog-title">add</DialogTitle>
                 <DialogContent>
-
+                    Question
                     <TextField
                         value={title}
                         onChange={changeTitle}
                         autoFocus
                         margin="dense"
                         id="name"
+                        fullWidth
+                    />
+                    Answer
+                    <TextField
+                        value={title2}
+                        onChange={changeTitle2}
+                        autoFocus
+                        margin="dense"
+                        id="name2"
                         fullWidth
                     />
                 </DialogContent>

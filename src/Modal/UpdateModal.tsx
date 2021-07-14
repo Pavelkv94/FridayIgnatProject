@@ -7,17 +7,22 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
 type UpdateItemPT = {
-    callback: (title: string) => void
+    callback: (title: string, title2?: string) => void
     value: string
+    // value2?: string
     disabled: boolean
 }
 
 export function UpdateItem(props: UpdateItemPT) {
     const [open, setOpen] = React.useState(false);
     let [title, setTitle] = React.useState(props.value);
+    // let [title2, setTitle2] = React.useState(props.value2);
     const changeTitle = (e: ChangeEvent<HTMLInputElement>) => {
         setTitle(e.currentTarget.value)
     }
+    // const changeTitle2 = (e: ChangeEvent<HTMLInputElement>) => {
+    //     setTitle2(e.currentTarget.value)
+    // }
     const handleClickOpen = () => {
         setOpen(true);
     };
@@ -50,6 +55,14 @@ export function UpdateItem(props: UpdateItemPT) {
                         id="name"
                         fullWidth
                     />
+                    {/*{props.value2 && <TextField*/}
+                    {/*    value={title2}*/}
+                    {/*    onChange={changeTitle2}*/}
+                    {/*    autoFocus*/}
+                    {/*    margin="dense"*/}
+                    {/*    id="name2"*/}
+                    {/*    fullWidth*/}
+                    {/*/>}*/}
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose} color="primary">

@@ -89,9 +89,9 @@ export const cardsTC = (cardsPack_id: string) => (dispatch: Dispatch<any>, getSt
         })
 }
 
-export const cardsAdd = (cardsPack_id: string) => (dispatch: Dispatch<any>) => {
+export const cardsAdd = (cardsPack_id: string, question?: string, answer?:string) => (dispatch: Dispatch<any>) => {
 
-    packsApi.setCards(cardsPack_id)
+    packsApi.setCards(cardsPack_id, question, answer)
         .then(() => {
             dispatch(cardsTC(cardsPack_id))
         })
@@ -116,9 +116,9 @@ export const cardsDeleteTC = (id: string, cardsPack_id: string) => (dispatch: Di
         })
 }
 
-export const cardsUpdateTC = (id: string, cardsPack_id: string) => (dispatch: Dispatch<any>) => {
+export const cardsUpdateTC = (id: string, cardsPack_id: string, question?:string) => (dispatch: Dispatch<any>) => {
 
-    packsApi.updateCards(id)
+    packsApi.updateCards(id, question)
         .then(() => {
             dispatch(cardsTC(cardsPack_id))
         })
