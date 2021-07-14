@@ -1,7 +1,6 @@
-import React from 'react'
-import { Dispatch } from 'redux'
-import { packsApi, responsePacksType } from "../api/packs-api";
-import { AppStateType } from './store';
+import {Dispatch} from 'redux'
+import {packsApi, responsePacksType} from "../api/packs-api";
+import {AppStateType} from './store';
 
 
 const initialState: initialStateType = {
@@ -48,39 +47,40 @@ const packsReducer = (state = initialState, action: ActionType): initialStateTyp
                 pageCount: action.packs.pageCount,
             }
         case "PACKS/SET-ERROR":
-            return { ...state, error: action.error }
+            return {...state, error: action.error}
         case "PACKS/SET-IS-INITIALIZED":
-            return { ...state, isInitialized: action.isInitialized }
+            return {...state, isInitialized: action.isInitialized}
         case 'PACKS/SET-SEARCH-VALUE':
-            return { ...state, packName: action.value }
+            return {...state, packName: action.value}
         case "PACKS/SET-STATUS":
-            return { ...state, status: action.status }
+            return {...state, status: action.status}
         case 'PACKS/SORT':
-            return { ...state, sortPacks: `${action.n}${action.sortValue}` }
+            return {...state, sortPacks: `${action.n}${action.sortValue}`}
         case 'PACKS/SET-RANGE':
-            return { ...state, min: action.min, max: action.max }
+            return {...state, min: action.min, max: action.max}
         case 'PACKS/SET-PAGE':
-            return { ...state, page: action.page }
+            return {...state, page: action.page}
         case 'PACKS/SET-PAGECOUNT':
-            return { ...state, pageCount: action.value }
-        default: return state
+            return {...state, pageCount: action.value}
+        default:
+            return state
     }
 
 }
 
-export const setPageCountOfPacksAC = (value: number) => ({ type: 'PACKS/SET-PAGECOUNT', value } as const)
-export const setPageOfPacksAC = (page: number) => ({ type: 'PACKS/SET-PAGE', page } as const)
-export const setRangePacksAC = (min: number, max: number) => ({ type: 'PACKS/SET-RANGE', min, max } as const)
-export const sortPackAC = (n: 1 | 0, sortValue: string) => ({ type: 'PACKS/SORT', n, sortValue } as const)
-export const setAppStatusAC = (status: RequestStatusType) => ({ type: 'PACKS/SET-STATUS', status } as const)
-export const getPacksAC = (packs: initialStateType) => ({ type: 'PACKS/GET-PACKS', packs } as const)
-export const setAppErrorPacksAC = (error: string | undefined) => ({ type: 'PACKS/SET-ERROR', error } as const)
+export const setPageCountOfPacksAC = (value: number) => ({type: 'PACKS/SET-PAGECOUNT', value} as const)
+export const setPageOfPacksAC = (page: number) => ({type: 'PACKS/SET-PAGE', page} as const)
+export const setRangePacksAC = (min: number, max: number) => ({type: 'PACKS/SET-RANGE', min, max} as const)
+export const sortPackAC = (n: 1 | 0, sortValue: string) => ({type: 'PACKS/SORT', n, sortValue} as const)
+export const setAppStatusAC = (status: RequestStatusType) => ({type: 'PACKS/SET-STATUS', status} as const)
+export const getPacksAC = (packs: initialStateType) => ({type: 'PACKS/GET-PACKS', packs} as const)
+export const setAppErrorPacksAC = (error: string | undefined) => ({type: 'PACKS/SET-ERROR', error} as const)
 export const setIsInitializedPackAC = (isInitialized: boolean) => ({
     type: 'PACKS/SET-IS-INITIALIZED',
     isInitialized
 } as const)
 
-export const setSearchValuePackAC = (value: string) => ({ type: 'PACKS/SET-SEARCH-VALUE', value })
+export const setSearchValuePackAC = (value: string) => ({type: 'PACKS/SET-SEARCH-VALUE', value})
 
 export const packsTC = () => (dispatch: Dispatch<any>, getState: () => AppStateType) => {
     let state = getState().packs;
@@ -100,9 +100,9 @@ export const packsTC = () => (dispatch: Dispatch<any>, getState: () => AppStateT
         })
 }
 
-export const packsAddTC = () => (dispatch: Dispatch<any>) => {
+export const packsAddTC = (namePack: string) => (dispatch: Dispatch<any>) => {
 
-    packsApi.setPacks("privet")
+    packsApi.setPacks(namePack)
         .then(() => {
             dispatch(packsTC())
         })

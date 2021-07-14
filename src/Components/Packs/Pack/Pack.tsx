@@ -1,13 +1,15 @@
 import React from 'react';
-import { useDispatch, useSelector } from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {
     cardsType,
     packsDeleteTC,
     packsUpdateTC,
 } from "../../../Redux/packs-reducer";
-import { AppStateType } from '../../../Redux/store';
+import {AppStateType} from '../../../Redux/store';
 import s from "./Pack.module.css"
-import { NavLink } from "react-router-dom";
+import {NavLink} from "react-router-dom";
+import {DeleteItem} from "../../../Modal/DeleteModal";
+import {UpdateItem} from "../../../Modal/UpdateModal";
 
 type PropsType = {
     card: cardsType
@@ -15,6 +17,14 @@ type PropsType = {
 
 export function Pack(props: PropsType) {
     const dispatch = useDispatch()
+
+    const deleteCallback = () => {
+        dispatch(packsDeleteTC(props.card._id))
+    }
+    const updateCallback = (name: string) => {
+        dispatch(packsUpdateTC(props.card._id, name))
+    }
+
     const userID = useSelector<AppStateType, string>(state => state.loginPage.userData._id)
 
     return <div className={s.packsBodyContainer} key={props.card._id}>
@@ -23,12 +33,9 @@ export function Pack(props: PropsType) {
         <div className={s.packsChild2}>{props.card.updated}</div>
         <div className={s.packsChild2}>{props.card.created}</div>
         <div className={s.packsChild2}>
-            <button disabled={userID !== props.card.user_id}
-                onClick={() => dispatch(packsDeleteTC(props.card._id))}>del
-            </button>
-            <button disabled={userID !== props.card.user_id}
-                onClick={() => dispatch(packsUpdateTC(props.card._id, "Hqw"))}>upd
-            </button>
+            <DeleteItem callback={deleteCallback} disabled={userID !== props.card.user_id}/>
+            <UpdateItem value={props.card.name} callback={updateCallback} disabled={userID !== props.card.user_id}/>
+
             <NavLink to={`cards/${props.card._id}`}> cards </NavLink>
             <NavLink to={`learn/${props.card._id}`}> Learn </NavLink>
         </div>
