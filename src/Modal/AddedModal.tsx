@@ -9,6 +9,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 type AddItemPT = {
     callback: (title: string, title2?: string) => void
     disabled?: boolean
+    id?: number
 }
 
 export function AddedItem(props: AddItemPT) {
@@ -54,14 +55,14 @@ export function AddedItem(props: AddItemPT) {
                         fullWidth
                     />
                     Answer
-                    <TextField
+                    {props.id && < TextField
                         value={title2}
                         onChange={changeTitle2}
                         autoFocus
                         margin="dense"
                         id="name2"
                         fullWidth
-                    />
+                        />}
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose} color="primary">

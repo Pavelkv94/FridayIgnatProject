@@ -86,7 +86,7 @@ export function Cards() {
                                                              sortCallback={sortingCard}/></div>
             <div className={s.packsChild}>created<SortButton sortValue="created" sortPacks={sortCards}
                                                              sortCallback={sortingCard}/></div>
-            <AddedItem callback={addCallback}/>
+            <AddedItem callback={addCallback} id={2}/>
             {/*<div className={s.packsChild}>*/}
             {/*    <button onClick={addCallback}>add</button>*/}
 
