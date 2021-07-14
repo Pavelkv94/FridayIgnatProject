@@ -42,7 +42,6 @@ export function Cards() {
     //сортировка 
     const sortingCard = (n: 1 | 0, sortValue: string) => {
         dispatch(sortCardAC(n, sortValue))
-        // dispatch(cardsTC(packId, cardQuestion, minGrade, maxGrade, `${n}${sortValue}`, page, pageCount))
     }
 
     return <div>

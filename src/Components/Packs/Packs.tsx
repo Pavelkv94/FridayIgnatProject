@@ -51,7 +51,6 @@ export function Packs() {
     const sortingPack = (n: 1 | 0, sortValue: string) => {
 
         dispatch(sortPackAC(n, sortValue))
-        //dispatch(packsTC(min, max, page, pageCount, packName, `${n}${sortValue}`))
     }
     if (isAuth === "") { return <Redirect to={"/login"} />; }
 
