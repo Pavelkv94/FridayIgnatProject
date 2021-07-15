@@ -89,7 +89,7 @@ export const cardsTC = (cardsPack_id: string) => (dispatch: Dispatch<any>, getSt
         })
 }
 
-export const cardsAdd = (cardsPack_id: string, question?: string, answer?:string) => (dispatch: Dispatch<any>) => {
+export const cardsAdd = (cardsPack_id: string, question?: string, answer?: string) => (dispatch: Dispatch<any>) => {
 
     packsApi.setCards(cardsPack_id, question, answer)
         .then(() => {
@@ -116,7 +116,7 @@ export const cardsDeleteTC = (id: string, cardsPack_id: string) => (dispatch: Di
         })
 }
 
-export const cardsUpdateTC = (id: string, cardsPack_id: string, question?:string) => (dispatch: Dispatch<any>) => {
+export const cardsUpdateTC = (id: string, cardsPack_id: string, question?: string) => (dispatch: Dispatch<any>) => {
 
     packsApi.updateCards(id, question)
         .then(() => {
@@ -135,7 +135,6 @@ export const setGradeTC = (id: string, grade: number) => (dispatch: Dispatch<any
     packsApi.setGradeCards(id, grade)
         .then((res) => {
             dispatch(setGradeAC(res.data.updatedGrade.grade))
-            debugger
         })
         .catch((error) => {
             dispatch(setAppErrorPacksAC(error.response.data.error))

@@ -1,5 +1,5 @@
-import {instance} from "./fridayProject-api";
-import {cardsType, RequestStatusType} from "../Redux/packs-reducer";
+import { instance } from "./fridayProject-api";
+import { cardsType, RequestStatusType } from "../Redux/packs-reducer";
 
 
 //api
@@ -12,19 +12,20 @@ export const packsApi = {
         page?: number,
         pageCount?: number,
         packName?: string,
-        sortPacks?: string
+        sortPacks?: string,
+        user_id?: string
     ) {
         return instance.get<responsePacksType>(`/cards/pack`,
-            {params: {min, max, page, pageCount, packName, sortPacks}})
+            { params: { min, max, page, pageCount, packName, sortPacks, user_id } })
     },
     setPacks(name: string) {
-        return instance.post("cards/pack", {cardsPack: {name}})
+        return instance.post("cards/pack", { cardsPack: { name } })
     },
     deletePacks(id: string) {
-        return instance.delete("cards/pack", {params: {id}})
+        return instance.delete("cards/pack", { params: { id } })
     },
     updatePacks(_id: string, name: string) {
-        return instance.put("cards/pack", {cardsPack: {_id, name}})
+        return instance.put("cards/pack", { cardsPack: { _id, name } })
     },
 
     getCards(
@@ -54,16 +55,16 @@ export const packsApi = {
         question?: string,
         answer?: string
     ) {
-        return instance.post("cards/card", {card: {cardsPack_id, question, answer}})
+        return instance.post("cards/card", { card: { cardsPack_id, question, answer } })
     },
     deleteCards(id: string) {
-        return instance.delete("cards/card", {params: {id}})
+        return instance.delete("cards/card", { params: { id } })
     },
     updateCards(_id: string, question?: string) {
-        return instance.put("cards/card", {card: {_id, question}})
+        return instance.put("cards/card", { card: { _id, question } })
     },
     setGradeCards(card_id: string, grade: number) {
-        return instance.put("cards/grade", {card_id, grade})
+        return instance.put("cards/grade", { card_id, grade })
     }
 
 }
@@ -142,6 +143,7 @@ export type responsePacksType = {
     sortPacks: string,
     status: RequestStatusType,
     packName: string
+    user_id: string
 }
 
 export type cardType = {
