@@ -20,9 +20,9 @@ export function NewPassword() {
     const isInitialized = useSelector<AppStateType, boolean>((state) => state.newPassPage.isInitialized)
     const isAuth = useSelector<AppStateType, string>(state => state.loginPage.isAuth)
 
-    if (isAuth) {
-        return <Redirect to='/profile'/>
-    }
+    // if (isAuth) {
+    //     return <Redirect to='/profile'/>
+    // }
     if (isInitialized) {
         return <Redirect to='/login'/>
     }
