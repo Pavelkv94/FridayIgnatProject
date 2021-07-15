@@ -25,21 +25,22 @@ export function Packs() {
 
     const dispatch = useDispatch()
     const isAuth = useSelector<AppStateType, string>(state => state.loginPage.isAuth)
-    //const isAuthError = useSelector<AppStateType, string | null>(state => state.loginPage.error)
+    const isAuthError = useSelector<AppStateType, string | null>(state => state.loginPage.error)
     const { min, max, page, pageCount, packName, sortPacks, error, cardPacks, cardPacksTotalCount, user_id } = useSelector<AppStateType, responsePacksType>(state => state.packs)
     const status = useSelector<AppStateType, string>((state) => state.reg.status)
     const isOwner = useSelector<AppStateType, string>(state => state.loginPage.userData._id)
 
-    //! ошибка с me
+
     useEffect(() => {
         if (!isAuth)
             dispatch(authTC())
-    }, [])
-    //!---
+    }, [isAuth])
+
 
     useEffect(() => {
-        dispatch(packsTC())
-    }, [page, pageCount, sortPacks, user_id])
+        if (isAuth)
+            dispatch(packsTC())
+    }, [isAuth, page, pageCount, sortPacks, user_id])
 
     const addedCallback = (name: string) => {
         dispatch(packsAddTC(name))
@@ -67,7 +68,8 @@ export function Packs() {
 
         dispatch(sortPackAC(n, sortValue))
     }
-    if (isAuth === "") { return <Redirect to={"/login"} />; }
+
+    if (isAuthError) { return <Redirect to={"/login"} />; }
 
     return <div className={s.container}>
         PACKS

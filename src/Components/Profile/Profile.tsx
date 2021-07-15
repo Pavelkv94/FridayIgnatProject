@@ -9,7 +9,7 @@ export function Profile() {
 
     const dispatch = useDispatch();
     const isAuth = useSelector<AppStateType, string>(state => state.loginPage.isAuth)
-    //const isAuthErr = useSelector<AppStateType, string | null>(state => state.loginPage.error)
+    const isAuthError = useSelector<AppStateType, string | null>(state => state.loginPage.error)
     const data = useSelector<AppStateType, ResponseLoginType>(state => state.loginPage.userData)
 
     useEffect(() => {
@@ -20,7 +20,7 @@ export function Profile() {
     const logout = () => {
         dispatch(logoutTC());
     }
-    if (isAuth === "") { return <Redirect to={"/login"} />; }
+    if (isAuthError) { return <Redirect to={"/login"} />; }
 
     //при успешной логинизации отрисовываем данные пользователя
     return (
