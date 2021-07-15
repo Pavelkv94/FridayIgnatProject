@@ -9,20 +9,7 @@ let initialState = {
     status: "idle",
     error: "" as string | null,
 }
-type PayloadType = {
-    _id: string;
-    email: string;
-    name: string;
-    avatar?: string;
-    publicCardPacksCount: number; // количество колод
-    created: Date;
-    updated: Date;
-    isAdmin: boolean;
-    verified: boolean; // подтвердил ли почту
-    rememberMe: boolean;
-    error?: string;
-    info?: string
-}
+
 
 export type InitialAuthType = typeof initialState;
 export type LoginActionType = SetUserDataACType | SetErrorACType | IsLoggedInACType | LogAppASatusACType
@@ -64,7 +51,7 @@ export const setAppStatusAC = (status: RequestStatusType) => ({
     status
 } as const)
 
-export const getUserDataAC = (profileData: PayloadType) => ({
+export const getUserDataAC = (profileData: ResponseLoginType) => ({
     type: 'LOGIN/SET-USER-DATA',
     profileData,
 } as const)

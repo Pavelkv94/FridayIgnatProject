@@ -34,7 +34,7 @@ export function Paginator(props: PaginatorType) {
         {portionNumber > 1 &&
             <button onClick={() => { setPortionNumber(portionNumber - 1) }}>PREV</button>}
         {pages.filter(p => p >= leftPortionPageNumber && p <= rightPortionPageNumber).map(p => {
-            return <span
+            return <span key={Math.random()}
                 className={props.currentPage === p ? s.selected : s.paginat}
                 onClick={() => props.onPageChanged(p)}
             >{p}</span>

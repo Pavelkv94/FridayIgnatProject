@@ -100,7 +100,7 @@ export function Cards() {
             const updateCallback = (question: string) => {
                 dispatch(cardsUpdateTC(m._id, m.cardsPack_id, question))
             }
-            return <div className={s.packsBodyContainer}>
+            return <div className={s.packsBodyContainer} key={Math.random()}>
                 <div className={s.packsChild2}>{m.question}</div>
                 <div className={s.packsChild2}>{m.answer}</div>
                 <div className={s.packsChild2}>{m.grade}</div>

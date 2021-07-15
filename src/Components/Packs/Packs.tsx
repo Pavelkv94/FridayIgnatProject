@@ -19,20 +19,23 @@ import { SortButton } from '../../Common/SortButton/SortButton';
 import { responsePacksType } from '../../api/packs-api';
 import { Redirect } from 'react-router-dom';
 import { AddedItem } from "../../Modal/AddedModal";
-import { useState } from 'react';
+import { authTC } from '../../Redux/login-reducer';
 
 export function Packs() {
 
     const dispatch = useDispatch()
     const isAuth = useSelector<AppStateType, string>(state => state.loginPage.isAuth)
+    //const isAuthError = useSelector<AppStateType, string | null>(state => state.loginPage.error)
     const { min, max, page, pageCount, packName, sortPacks, error, cardPacks, cardPacksTotalCount, user_id } = useSelector<AppStateType, responsePacksType>(state => state.packs)
     const status = useSelector<AppStateType, string>((state) => state.reg.status)
     const isOwner = useSelector<AppStateType, string>(state => state.loginPage.userData._id)
 
-    // let [show, setShow] = useState("")
-    // const callback = () => {
-    //     setShow(isOwner)
-    // }
+    //! ошибка с me
+    useEffect(() => {
+        if (!isAuth)
+            dispatch(authTC())
+    }, [])
+    //!---
 
     useEffect(() => {
         dispatch(packsTC())
@@ -64,15 +67,13 @@ export function Packs() {
 
         dispatch(sortPackAC(n, sortValue))
     }
-    if (isAuth === "") {
-        return <Redirect to={"/login"} />;
-    }
+    if (isAuth === "") { return <Redirect to={"/login"} />; }
 
     return <div className={s.container}>
         PACKS
         {status !== 'idle' ? <Preloader /> : null}
         <br />
-        {error && <div>{error}</div>}
+        {!error && <div>{error}</div>}
         <br />
         <Search
             packName={packName}
@@ -87,7 +88,7 @@ export function Packs() {
 
         <button onClick={() => { dispatch(setUserIdforPacksAC(isOwner)) }}>Мои колоды</button>
         <button onClick={() => { dispatch(setUserIdforPacksAC("")) }}>Все колоды</button>
-     <hr />
+        <hr />
         <div className={s.packsHeaderContainer}>
             <div className={s.packsChild}>Name <SortButton sortValue="name" sortPacks={sortPacks}
                 sortCallback={sortingPack} /></div>
