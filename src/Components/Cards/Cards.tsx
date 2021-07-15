@@ -21,11 +21,13 @@ import {SortButton} from '../../Common/SortButton/SortButton';
 import {DeleteItem} from "../../Modal/DeleteModal";
 import {UpdateItem} from "../../Modal/UpdateModal";
 import {AddedItem} from "../../Modal/AddedModal";
+import {authTC} from "../../Redux/login-reducer";
 
 export function Cards() {
 
     const dispatch = useDispatch()
     const {packId} = useParams<{ packId: string }>()
+    const isAuth = useSelector<AppStateType, string>(state => state.loginPage.isAuth)
     //const cardsPackId = useSelector<AppStateType, string>(state => state.cards.packUserId)
     const cards = useSelector<AppStateType, Array<ArrCardType>>(state => state.cards.cards)
     const cardsPackID = useSelector<AppStateType, string>(state => state.cards.packUserId)
@@ -34,9 +36,16 @@ export function Cards() {
     const {cardsTotalCount, page, pageCount, minGrade, maxGrade, sortCards, cardQuestion} = useSelector<AppStateType, responseCardType>(state => state.cards)
 
     useEffect(() => {
-        dispatch(setPackUserIdAC(packId))
-        dispatch(cardsTC(packId))
-    }, [page, pageCount, sortCards])
+        if (!isAuth)
+            dispatch(authTC())
+    }, [isAuth])
+
+    useEffect(() => {
+        if (isAuth) {
+            dispatch(setPackUserIdAC(packId))
+            dispatch(cardsTC(packId))
+        }
+    }, [isAuth, page, pageCount, sortCards])
 
     const addCallback = (question?: string, answer?: string) => {
         dispatch(cardsAdd(packId, question, answer))

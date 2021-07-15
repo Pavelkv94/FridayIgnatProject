@@ -1,15 +1,10 @@
 import React, { useEffect, useState } from "react";
-// import {DEV_VERSION} from "../../../config";
-// import ButtonNya from "../../../cnf-0-common/c-1-ui/button/ButtonNya";
 import { useDispatch, useSelector } from "react-redux";
-// import {AppStoreType} from "../../../cnf-1-main/m-2-bll/store";
 import { Redirect, useParams } from "react-router-dom";
 import { ArrCardType } from "../../api/packs-api";
 import { cardsTC, setGradeTC } from "../../Redux/cards-reducer";
 import { AppStateType } from "../../Redux/store";
 import SuperButton from "../../SuperComponents/c2-SuperButton/SuperButton";
-// import {getCards} from "../../f-2-cards/c-2-cards/c-2-bll/getCardsThunk";
-// import {CardType} from "../../f-2-cards/c-2-cards/c-2-bll/CardsInitState";
 
 const grades = ['не знал', 'забыл', 'долго думал', 'перепутал', 'знал'];
 

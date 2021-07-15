@@ -80,7 +80,7 @@ export function Packs() {
         <Search
             packName={packName}
             min={min}
-            max={max}
+            max={max? max : 10}
             target="packs"
             inputCallback={setSearchResult}
             btnCallback={searchPackCallback}

@@ -82,7 +82,7 @@ export type responseCardType = {
     isInitialized: boolean
     sortCards: string
     cardQuestion: string,
-    grade: number
+    grade?: number
 }
 export type ArrCardType = {
     answer: string,
@@ -134,7 +134,7 @@ export type responsePacksType = {
     cardPacksTotalCount: number,
     minCardsCount: number,
     maxCardsCount: number,
-    max: number,
+    max?: number,
     min: number,
     page: number,
     pageCount: number,

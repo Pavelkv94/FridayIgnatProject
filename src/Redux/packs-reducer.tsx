@@ -9,7 +9,7 @@ const initialState: initialStateType = {
     minCardsCount: 0,
     maxCardsCount: 4,
     min: 0,
-    max: 20,
+    max: undefined,
     page: 1,
     pageCount: 4,
     error: undefined,

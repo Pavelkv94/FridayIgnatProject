@@ -1,6 +1,6 @@
 import { Dispatch } from 'redux'
 import { packsApi, responseCardType } from "../api/packs-api";
-import { authTC } from './login-reducer';
+
 import { AppStateType } from './store';
 
 
