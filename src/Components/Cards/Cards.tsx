@@ -28,6 +28,7 @@ export function Cards() {
     const {packId} = useParams<{ packId: string }>()
     //const cardsPackId = useSelector<AppStateType, string>(state => state.cards.packUserId)
     const cards = useSelector<AppStateType, Array<ArrCardType>>(state => state.cards.cards)
+    const cardsPackID = useSelector<AppStateType, string>(state => state.cards.packUserId)
     const error = useSelector<AppStateType, string | undefined>(state => state.packs.error)
     const userID = useSelector<AppStateType, string>(state => state.loginPage.userData._id)
     const {cardsTotalCount, page, pageCount, minGrade, maxGrade, sortCards, cardQuestion} = useSelector<AppStateType, responseCardType>(state => state.cards)
@@ -86,7 +87,7 @@ export function Cards() {
                                                              sortCallback={sortingCard}/></div>
             <div className={s.packsChild}>created<SortButton sortValue="created" sortPacks={sortCards}
                                                              sortCallback={sortingCard}/></div>
-            <AddedItem callback={addCallback} id={2}/>
+            <AddedItem disabled={cardsPackID!==userID} callback={addCallback} id={2}/>
             {/*<div className={s.packsChild}>*/}
             {/*    <button onClick={addCallback}>add</button>*/}
 

@@ -45,7 +45,7 @@ export function AddedItem(props: AddItemPT) {
             <Dialog open={open} onClose={handleClickUPD} aria-labelledby="form-dialog-title">
                 <DialogTitle id="form-dialog-title">add</DialogTitle>
                 <DialogContent>
-                    Question
+                    {props.id? "Question" : "PackName"}
                     <TextField
                         value={title}
                         onChange={changeTitle}
@@ -54,16 +54,19 @@ export function AddedItem(props: AddItemPT) {
                         id="name"
                         fullWidth
                     />
+                </DialogContent>
+                {props.id && <DialogContent>
                     Answer
-                    {props.id && < TextField
+                    < TextField
                         value={title2}
                         onChange={changeTitle2}
                         autoFocus
                         margin="dense"
                         id="name2"
                         fullWidth
-                        />}
-                </DialogContent>
+                    />
+                </DialogContent>}
+
                 <DialogActions>
                     <Button onClick={handleClose} color="primary">
                         Cancel
