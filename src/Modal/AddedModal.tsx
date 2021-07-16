@@ -28,6 +28,8 @@ export function AddedItem(props: AddItemPT) {
     const handleClickUPD = () => {
         props.callback(title, title2)
         setOpen(false)
+        setTitle("")
+        setTitle2("")
     };
 
     const handleClose = () => {
@@ -42,7 +44,7 @@ export function AddedItem(props: AddItemPT) {
                 </Button> : <Button size="small" variant="outlined" color="primary" onClick={handleClickOpen}>
                     Add
                 </Button>}
-            <Dialog open={open} onClose={handleClickUPD} aria-labelledby="form-dialog-title">
+            <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
                 <DialogTitle id="form-dialog-title">add</DialogTitle>
                 <DialogContent>
                     {props.id? "Question" : "PackName"}

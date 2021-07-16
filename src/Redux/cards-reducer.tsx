@@ -7,8 +7,8 @@ import { AppStateType } from './store';
 const initialState: initialStateType = {
     cards: [],
     cardsTotalCount: 3,
-    maxGrade: 0,
-    minGrade: 5,
+    maxGrade: 5,
+    minGrade: 0,
     page: 1,
     pageCount: 4,
     packUserId: "" as string,
