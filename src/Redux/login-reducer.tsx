@@ -1,7 +1,7 @@
 import React from 'react'
 import {Dispatch} from 'redux';
 import {authApi, ResponseLoginType} from '../api/fridayProject-api';
-import {RequestStatusType} from './reg-reducer';
+import { AppStatusActionType, setAppStatusAC } from './app-reducer';
 
 let initialState = {
     userData: {} as ResponseLoginType,
@@ -12,7 +12,7 @@ let initialState = {
 
 
 export type InitialAuthType = typeof initialState;
-export type LoginActionType = SetUserDataACType | SetErrorACType | IsLoggedInACType | LogAppASatusACType
+export type LoginActionType = SetUserDataACType | SetErrorACType | IsLoggedInACType | AppStatusActionType
 
 const loginReducer = (state: InitialAuthType = initialState, action: LoginActionType):InitialAuthType => {
     switch (action.type) {
@@ -31,9 +31,6 @@ const loginReducer = (state: InitialAuthType = initialState, action: LoginAction
                 ...state,
                 isAuth: action._id
             }
-        case 'LOGIN/SET-STATUS':
-            return {...state, status: action.status}
-
         default:
             return state;
     }
@@ -44,12 +41,6 @@ const loginReducer = (state: InitialAuthType = initialState, action: LoginAction
 type SetUserDataACType = ReturnType<typeof getUserDataAC>
 type SetErrorACType = ReturnType<typeof setErrorAC>
 type IsLoggedInACType = ReturnType<typeof isLoggedInAC>
-type LogAppASatusACType = ReturnType<typeof setAppStatusAC>
-
-export const setAppStatusAC = (status: RequestStatusType) => ({
-    type: 'LOGIN/SET-STATUS',
-    status
-} as const)
 
 export const getUserDataAC = (profileData: ResponseLoginType) => ({
     type: 'LOGIN/SET-USER-DATA',

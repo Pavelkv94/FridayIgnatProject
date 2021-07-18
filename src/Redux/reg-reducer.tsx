@@ -1,23 +1,20 @@
 import React from 'react'
 import { Dispatch } from 'redux'
 import { authApi } from "../api/fridayProject-api";
+import { AppStatusActionType, setAppStatusAC } from './app-reducer';
 
 
 const initialState: InitialStateType = {
-    status: 'idle',
     error: null,
     isInitialized: false
 }
 
 export type InitialStateType = {
-    // происходит ли сейчас взаимодействие с сервером
-    status: RequestStatusType
     // если ошибка какая-то глобальная произойдёт - мы запишем текст ошибки сюда
     error: string | null
     isInitialized: boolean
 }
 
-export type RequestStatusType = 'idle' | 'loading' | 'succeeded' | 'failed'
 
 
 const registrationReducer = (state: InitialStateType = initialState, action: ActionsType) => {
@@ -26,13 +23,10 @@ const registrationReducer = (state: InitialStateType = initialState, action: Act
             return { ...state, error: action.error }
         case "REG/SET-IS-INITIALIZED":
             return { ...state, isInitialized: action.isInitialized }
-        case "REG/SET-STATUS":
-            return { ...state, status: action.status }
         default: return { ...state };
     }
 }
 export const setAppErrorAC = (error: string | null) => ({ type: 'REG/SET-ERROR', error } as const)
-export const setAppStatusAC = (status: RequestStatusType) => ({ type: 'REG/SET-STATUS', status } as const)
 export const setIsInitializedAC = (isInitialized: boolean) => ({ type: 'REG/SET-IS-INITIALIZED', isInitialized } as const)
 
 
@@ -53,10 +47,9 @@ export const registerTC = (email: string, password: string) => (dispatch: Dispat
 }
 
 export type setErrorActionType = ReturnType<typeof setAppErrorAC>;
-export type setStatusActionType = ReturnType<typeof setAppStatusAC>;
 export type setIsInitializedActionType = ReturnType<typeof setIsInitializedAC>;
 
-type ActionsType = setErrorActionType | setStatusActionType | setIsInitializedActionType
+type ActionsType = setErrorActionType | setIsInitializedActionType | AppStatusActionType
 
 
 export default registrationReducer;

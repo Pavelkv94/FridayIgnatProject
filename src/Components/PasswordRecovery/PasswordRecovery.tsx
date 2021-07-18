@@ -14,7 +14,7 @@ export function PasswordRecovery() {
 
 //useSelectors
     const isInitialized = useSelector<AppStateType, boolean>((state) => state.recovPass.isInitialized)
-    const status = useSelector<AppStateType, string>((state) => state.recovPass.status)
+    const status = useSelector<AppStateType, string>((state) => state.app.status)
     const isAuth = useSelector<AppStateType, string>(state => state.loginPage.isAuth)
     const error = useSelector<AppStateType, string | null>((state) => state.recovPass.error)
 

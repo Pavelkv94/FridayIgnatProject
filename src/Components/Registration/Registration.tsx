@@ -15,7 +15,7 @@ export function Registration() {
     const [passwordConf, setPasswordConf] = useState<string>("")
 //useSelectors
     const isInitialized = useSelector<AppStateType, boolean>((state) => state.reg.isInitialized)
-    const status = useSelector<AppStateType, string>((state) => state.reg.status)
+    const status = useSelector<AppStateType, string>((state) => state.app.status)
     const error = useSelector<AppStateType, string | null>((state) => state.reg.error)
     const isAuth = useSelector<AppStateType, string>(state => state.loginPage.isAuth)
 

@@ -15,7 +15,7 @@ export function NewPassword() {
     const dispatch = useDispatch()
     const {token} = useParams<{ token: string }>()
 
-    const status = useSelector<AppStateType, string>((state) => state.newPassPage.status)
+    const status = useSelector<AppStateType, string>((state) => state.app.status)
     const error = useSelector<AppStateType, string | null>((state) => state.newPassPage.error)
     const isInitialized = useSelector<AppStateType, boolean>((state) => state.newPassPage.isInitialized)
     const isAuth = useSelector<AppStateType, string>(state => state.loginPage.isAuth)

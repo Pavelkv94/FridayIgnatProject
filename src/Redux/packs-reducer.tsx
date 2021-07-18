@@ -1,5 +1,6 @@
 import { Dispatch } from 'redux'
 import { packsApi, responsePacksType } from "../api/packs-api";
+import { AppStatusActionType, setAppStatusAC } from './app-reducer';
 import { AppStateType } from './store';
 
 
@@ -8,14 +9,13 @@ const initialState: initialStateType = {
     cardPacksTotalCount: 10,
     minCardsCount: 0,
     maxCardsCount: 4,
-    min: 0,
     max: undefined,
+    min: 0,
     page: 1,
     pageCount: 4,
     error: undefined,
     isInitialized: false,
     sortPacks: "1update",
-    status: 'idle',
     packName: "",
     user_id: ""
 }
@@ -31,8 +31,6 @@ export type cardsType = {
     url: string
 }
 
-
-export type RequestStatusType = 'idle' | 'loading' | 'succeeded' | 'failed'
 
 
 const packsReducer = (state = initialState, action: ActionType): initialStateType => {
@@ -53,8 +51,6 @@ const packsReducer = (state = initialState, action: ActionType): initialStateTyp
             return { ...state, isInitialized: action.isInitialized }
         case 'PACKS/SET-SEARCH-VALUE':
             return { ...state, packName: action.value }
-        case "PACKS/SET-STATUS":
-            return { ...state, status: action.status }
         case 'PACKS/SORT':
             return { ...state, sortPacks: `${action.n}${action.sortValue}` }
         case 'PACKS/SET-RANGE':
@@ -76,7 +72,6 @@ export const setPageCountOfPacksAC = (value: number) => ({ type: 'PACKS/SET-PAGE
 export const setPageOfPacksAC = (page: number) => ({ type: 'PACKS/SET-PAGE', page } as const)
 export const setRangePacksAC = (min: number, max: number) => ({ type: 'PACKS/SET-RANGE', min, max } as const)
 export const sortPackAC = (n: 1 | 0, sortValue: string) => ({ type: 'PACKS/SORT', n, sortValue } as const)
-export const setAppStatusAC = (status: RequestStatusType) => ({ type: 'PACKS/SET-STATUS', status } as const)
 export const getPacksAC = (packs: initialStateType) => ({ type: 'PACKS/GET-PACKS', packs } as const)
 export const setAppErrorPacksAC = (error: string | undefined) => ({ type: 'PACKS/SET-ERROR', error } as const)
 export const setIsInitializedPackAC = (isInitialized: boolean) => ({
@@ -150,7 +145,6 @@ export type setPageCountOfPacksACType = ReturnType<typeof setPageCountOfPacksAC>
 export type setPageOfPacksACType = ReturnType<typeof setPageOfPacksAC>
 export type setRangePacksACType = ReturnType<typeof setRangePacksAC>;
 export type sortPackACType = ReturnType<typeof sortPackAC>;
-export type setAppStatusTypeAC = ReturnType<typeof setAppStatusAC>;
 export type getPacksTypeAC = ReturnType<typeof getPacksAC>;
 export type setAppErrorPacksTypeAC = ReturnType<typeof setAppErrorPacksAC>;
 export type setIsInitializedPackTypeAC = ReturnType<typeof setIsInitializedPackAC>;
@@ -159,10 +153,10 @@ type ActionType = getPacksTypeAC
     | setAppErrorPacksTypeAC
     | setIsInitializedPackTypeAC
     | setSearchValuePackTypeAC
-    | setAppStatusTypeAC
     | sortPackACType
     | setRangePacksACType
     | setPageOfPacksACType
     | setPageCountOfPacksACType
     | setUserIdforPacksACType
+    | AppStatusActionType
 export default packsReducer;

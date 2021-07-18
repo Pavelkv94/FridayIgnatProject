@@ -1,5 +1,5 @@
 import { instance } from "./fridayProject-api";
-import { cardsType, RequestStatusType } from "../Redux/packs-reducer";
+import { cardsType } from "../Redux/packs-reducer";
 
 
 //api
@@ -141,7 +141,6 @@ export type responsePacksType = {
     error?: string,
     isInitialized: boolean,
     sortPacks: string,
-    status: RequestStatusType,
     packName: string
     user_id: string
 }

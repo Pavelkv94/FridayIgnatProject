@@ -1,16 +1,13 @@
 import React from 'react'
-import {Dispatch} from "redux";
-import {authApi} from "../api/fridayProject-api";
+import { Dispatch } from "redux";
+import { authApi } from "../api/fridayProject-api";
+import { AppStatusActionType, setAppStatusAC } from './app-reducer';
 
 const initialState: InitialStateType = {
-    status: 'idle',
     error: null,
     isInitialized: false
 }
-export type RequestStatusType = 'idle' | 'loading' | 'succeeded' | 'failed'
 export type InitialStateType = {
-    // происходит ли сейчас взаимодействие с сервером
-    status: RequestStatusType
     // если ошибка какая-то глобальная произойдёт - мы запишем текст ошибки сюда
     error: string | null
     isInitialized: boolean
@@ -25,16 +22,14 @@ link</a></div>`
 const PasswordRecoveryReducer = (state = initialState, action: ActionsType) => {
     switch (action.type) {
         case "FORGOT/SET-ERROR":
-            return {...state, error: action.error}
+            return { ...state, error: action.error }
         case "FORGOT/SET-IS-INITIALIZED":
-            return {...state, isInitialized: action.isInitialized}
-        case "FORGOT/SET-STATUS":
-            return {...state, status: action.status}
+            return { ...state, isInitialized: action.isInitialized }
+        default: return { ...state };
     }
-    return {...state};
+
 }
-export const setAppErrorAC = (error: string | null) => ({type: 'FORGOT/SET-ERROR', error} as const)
-export const setAppStatusAC = (status: RequestStatusType) => ({type: 'FORGOT/SET-STATUS', status} as const)
+export const setAppErrorAC = (error: string | null) => ({ type: 'FORGOT/SET-ERROR', error } as const)
 export const setIsInitializedAC = (isInitialized: boolean) => ({
     type: 'FORGOT/SET-IS-INITIALIZED',
     isInitialized
@@ -57,10 +52,9 @@ export const sendTokenTC = (email: string) => (dispatch: Dispatch) => {
 }
 
 export type setErrorActionType = ReturnType<typeof setAppErrorAC>;
-export type setStatusActionType = ReturnType<typeof setAppStatusAC>;
 export type setIsInitializedActionType = ReturnType<typeof setIsInitializedAC>;
 
-type ActionsType = setErrorActionType | setStatusActionType | setIsInitializedActionType
+type ActionsType = setErrorActionType | setIsInitializedActionType | AppStatusActionType
 
 
 export default PasswordRecoveryReducer;

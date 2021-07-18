@@ -1,5 +1,6 @@
 import { Dispatch } from 'redux'
 import { packsApi, responseCardType } from "../api/packs-api";
+import { AppStatusActionType, setAppStatusAC } from './app-reducer';
 
 import { AppStateType } from './store';
 
@@ -21,7 +22,6 @@ const initialState: initialStateType = {
 }
 type initialStateType = responseCardType
 
-export type RequestStatusType = 'idle' | 'loading' | 'succeeded' | 'failed'
 
 const cardsReducer = (state = initialState, action: ActionType): initialStateType => {
     switch (action.type) {
@@ -74,74 +74,77 @@ export const setIsInitializedPackAC = (isInitialized: boolean) => ({
 
 export const cardsTC = (cardsPack_id: string) => (dispatch: Dispatch<any>, getState: () => AppStateType) => {
     let state = getState().cards;
-
+    dispatch(setAppStatusAC("loading"))
     packsApi.getCards(cardsPack_id, state.cardQuestion, state.minGrade, state.maxGrade, state.sortCards, state.page, state.pageCount,)
+
         .then((response) => {
-            // dispatch(authTC())
             dispatch(getCardAC(response.data))
             dispatch(setIsInitializedPackAC(true))
+            dispatch(setAppStatusAC("succeeded"))
         })
         .catch((error) => {
             dispatch(setAppErrorPacksAC(error.response.data.error))
+            dispatch(setAppStatusAC("failed"))
         })
         .finally(() => {
-
+            dispatch(setAppStatusAC("idle"))
         })
 }
 
 export const cardsAdd = (cardsPack_id: string, question?: string, answer?: string) => (dispatch: Dispatch<any>) => {
-
+    dispatch(setAppStatusAC("loading"))
     packsApi.setCards(cardsPack_id, question, answer)
         .then(() => {
             dispatch(cardsTC(cardsPack_id))
+            dispatch(setAppStatusAC("loading"))
         })
         .catch((error) => {
             dispatch(setAppErrorPacksAC(error.response.data.error))
+            dispatch(setAppStatusAC("loading"))
         })
-        .finally(() => {
-
-        })
+    dispatch(setAppStatusAC("loading"))
 }
 
 export const cardsDeleteTC = (id: string, cardsPack_id: string) => (dispatch: Dispatch<any>) => {
+    dispatch(setAppStatusAC("loading"))
     packsApi.deleteCards(id)
         .then(() => {
             dispatch(cardsTC(cardsPack_id))
+            dispatch(setAppStatusAC("loading"))
         })
         .catch((error) => {
             dispatch(setAppErrorPacksAC(error.response.data.error))
+            dispatch(setAppStatusAC("loading"))
         })
-        .finally(() => {
-
-        })
+    dispatch(setAppStatusAC("loading"))
 }
 
 export const cardsUpdateTC = (id: string, cardsPack_id: string, question?: string) => (dispatch: Dispatch<any>) => {
-
+    dispatch(setAppStatusAC("loading"))
     packsApi.updateCards(id, question)
         .then(() => {
             dispatch(cardsTC(cardsPack_id))
+            dispatch(setAppStatusAC("loading"))
         })
         .catch((error) => {
             dispatch(setAppErrorPacksAC(error.response.data.error))
+            dispatch(setAppStatusAC("loading"))
         })
-        .finally(() => {
-
-        })
+    dispatch(setAppStatusAC("loading"))
 }
 
 export const setGradeTC = (id: string, grade: number) => (dispatch: Dispatch<any>) => {
-
+    dispatch(setAppStatusAC("loading"))
     packsApi.setGradeCards(id, grade)
         .then((res) => {
             dispatch(setGradeAC(res.data.updatedGrade.grade))
+            dispatch(setAppStatusAC("loading"))
         })
         .catch((error) => {
             dispatch(setAppErrorPacksAC(error.response.data.error))
+            dispatch(setAppStatusAC("loading"))
         })
-        .finally(() => {
-
-        })
+    dispatch(setAppStatusAC("loading"))
 }
 
 
@@ -166,4 +169,5 @@ type ActionType = getCardsTypeAC
     | setPageCountOfCardsACType
     | setPackUserIdACType
     | setGradeACType
+    | AppStatusActionType
 export default cardsReducer;

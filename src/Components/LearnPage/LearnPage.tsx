@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useParams } from "react-router-dom";
 import { ArrCardType } from "../../api/packs-api";
 import { cardsTC, setGradeTC } from "../../Redux/cards-reducer";
+import { authTC } from "../../Redux/login-reducer";
 import { AppStateType } from "../../Redux/store";
 import SuperButton from "../../SuperComponents/c2-SuperButton/SuperButton";
 
@@ -27,7 +28,6 @@ const LearnPage = () => {
     const [first, setFirst] = useState<boolean>(true);
     // const [first, setFirst] = useState<boolean>(0);
     const { cards } = useSelector((state: AppStateType) => state.cards);
-    // const { id } = useParams();
     const { id } = useParams<{ id: string }>()
 
     const [card, setCard] = useState<ArrCardType>({
@@ -44,7 +44,7 @@ const LearnPage = () => {
 
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(cardsTC(id))
+        //dispatch(cardsTC(id))
 
         if (first) {
             dispatch(cardsTC(id));
@@ -60,6 +60,11 @@ const LearnPage = () => {
     }, [dispatch, id,
         // dispatch, id, cards, first
     ]);
+
+    useEffect(() => {
+        if (!isAuth)
+            dispatch(authTC())
+    }, [isAuth])
 
     const onNext = () => {
         setIsChecked(false);

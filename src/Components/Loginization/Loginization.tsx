@@ -15,7 +15,7 @@ export function Loginization() {
     const [password, setPassword] = useState<string>("")
     const [rememberMe, setRememberMe] = useState<boolean>(false)
     const isAuth = useSelector<AppStateType, string>(state => state.loginPage.isAuth)
-    const status = useSelector<AppStateType, string>((state) => state.loginPage.status)
+    const status = useSelector<AppStateType, string>((state) => state.app.status)
     const error = useSelector<AppStateType, string | null>((state) => state.loginPage.error)
 
     const onCLickHandler = () => {

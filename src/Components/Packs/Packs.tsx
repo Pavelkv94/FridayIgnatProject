@@ -27,7 +27,7 @@ export function Packs() {
     const isAuth = useSelector<AppStateType, string>(state => state.loginPage.isAuth)
     const isAuthError = useSelector<AppStateType, string | null>(state => state.loginPage.error)
     const { min, max, page, pageCount, packName, sortPacks, error, cardPacks, cardPacksTotalCount, user_id } = useSelector<AppStateType, responsePacksType>(state => state.packs)
-    const status = useSelector<AppStateType, string>((state) => state.reg.status)
+    const status = useSelector<AppStateType, string>((state) => state.app.status)
     const isOwner = useSelector<AppStateType, string>(state => state.loginPage.userData._id)
 
 
