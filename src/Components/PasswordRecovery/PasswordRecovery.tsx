@@ -9,6 +9,7 @@ import { NavLink, Redirect } from "react-router-dom";
 import Preloader from "../../Common/Preloader/Preloader";
 import s from './PasswordRecovery.module.css'
 import { PATH } from '../../Routes';
+import { CheckEmail } from './CheckEmail/CheckEmail';
 
 export function PasswordRecovery() {
     //useState
@@ -27,7 +28,7 @@ export function PasswordRecovery() {
     }
 
     if (isInitialized) {
-        return <div>OOOkay, check email</div>
+        return <CheckEmail /> 
     }
     if (isAuth) {
         return <Redirect to='/profile' />
@@ -42,7 +43,7 @@ export function PasswordRecovery() {
                 {error && <div className={style.formSummaryError}>
                     {error}
                 </div>}
-                <SuperInputText value={email} onChangeText={setEmail} isType="email" />
+                <SuperInputText value={email} onChangeText={setEmail} isType="email" error={error ? true : false} errorMessage={error}/>
                 <div className={s.info}>
                     <p>Enter your email address and we will send you further instructions </p>
                 </div>

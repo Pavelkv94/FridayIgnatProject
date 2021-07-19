@@ -1,10 +1,9 @@
 import React from 'react';
-
+import s from './Page404.module.css'
 export function Page404() {
     return (
 
-        <div>
-            <h1>404</h1>
+        <div className={s.container}>
         </div>
     );
 }

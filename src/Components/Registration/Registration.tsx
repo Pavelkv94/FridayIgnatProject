@@ -53,9 +53,9 @@ export function Registration() {
                     {error}
                 </div>}
                 <div className={s.inputs}>
-                    <SuperInputText value={email} onChangeText={setEmail} isType="email" />
-                    <SuperInputText value={password} onChangeText={setPassword} isType="password" />
-                    <SuperInputText value={passwordConf} onChangeText={setPasswordConf} isType="confirm password" />
+                    <SuperInputText value={email} onChangeText={setEmail} isType="email" error={error ? true : false} errorMessage={error}/>
+                    <SuperInputText value={password} onChangeText={setPassword} isType="password" error={error ? true : false} errorMessage={error}/>
+                    <SuperInputText value={passwordConf} onChangeText={setPasswordConf} isType="confirm password" error={error ? true : false} errorMessage={error}/>
                 </div>
                 <div className={s.control}>
                     <NavLink to={PATH.LOGIN}> <SuperButton className={s.cancelBtn} disabled={status !== 'idle'} onClick={()=>{}}>Cancel</SuperButton></NavLink>
