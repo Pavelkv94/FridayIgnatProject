@@ -1,4 +1,5 @@
-import React, {ChangeEvent, DetailedHTMLProps, InputHTMLAttributes} from 'react'
+import { Checkbox } from '@material-ui/core'
+import React, { ChangeEvent, DetailedHTMLProps, InputHTMLAttributes } from 'react'
 import s from './SuperCheckbox.module.css'
 
 // тип пропсов обычного инпута
@@ -20,20 +21,22 @@ const SuperCheckbox: React.FC<SuperCheckboxPropsType> = (
     }) => {
     const onChangeCallback = (e: ChangeEvent<HTMLInputElement>) => {
         onChangeChecked && onChangeChecked(e.currentTarget.checked)
-         onChange && onChange(e)}
+        onChange && onChange(e)
+    }
     // if (onChangeChecked) {onChangeChecked(e.currentTarget.checked)}
     // if (onChange) {onChange(e)}
-        // onChangeChecked && onChangeChecked(e.currentTarget.checked)
-        // onChange && onChange(e)}
-     // сделайте так чтоб работал onChange и onChangeChecked
+    // onChangeChecked && onChangeChecked(e.currentTarget.checked)
+    // onChange && onChange(e)}
+    // сделайте так чтоб работал onChange и onChangeChecked
 
 
     const finalInputClassName = `${s.checkbox} ${className ? className : ''}`
 
     return (
         <label>
-            <input
-                type={'checkbox'}
+            <Checkbox
+            //@ts-ignore
+                color={"primary"}
                 onChange={onChangeCallback}
                 className={finalInputClassName}
 

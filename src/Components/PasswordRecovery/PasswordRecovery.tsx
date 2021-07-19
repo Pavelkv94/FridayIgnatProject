@@ -39,7 +39,7 @@ export function PasswordRecovery() {
                 {error}
             </div>}
             <div>Email:</div>
-            <SuperInputText value={email} onChangeText={setEmail}/>
+            <SuperInputText value={email} onChangeText={setEmail} isType="password"/>
             <div>
                 <SuperButton disabled={status !== "idle"} onClick={buttonCallback}>SEND</SuperButton>
             </div>

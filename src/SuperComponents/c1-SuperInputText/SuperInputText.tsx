@@ -1,4 +1,5 @@
-import React, {ChangeEvent, DetailedHTMLProps, InputHTMLAttributes, KeyboardEvent} from 'react'
+import { TextField } from '@material-ui/core'
+import React, { ChangeEvent, DetailedHTMLProps, InputHTMLAttributes, KeyboardEvent } from 'react'
 import s from './SuperInputText.module.css'
 
 // тип пропсов обычного инпута
@@ -9,8 +10,11 @@ type DefaultInputPropsType = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElem
 type SuperInputTextPropsType = DefaultInputPropsType & { // и + ещё пропсы которых нет в стандартном инпуте
     onChangeText?: (value: string) => void
     onEnter?: () => void
-    error?: string
+    error?: boolean
+    errorMessage?: string | null
     spanClassName?: string
+    isType: string
+
 }
 
 const SuperInputText: React.FC<SuperInputTextPropsType> = (
@@ -19,6 +23,8 @@ const SuperInputText: React.FC<SuperInputTextPropsType> = (
         onChange, onChangeText,
         onKeyPress, onEnter,
         error,
+        errorMessage,
+        isType,
         className, spanClassName,
 
         ...restProps// все остальные пропсы попадут в объект restProps
@@ -30,27 +36,31 @@ const SuperInputText: React.FC<SuperInputTextPropsType> = (
         //onChange && onChange(e) // то передать ему е (поскольку onChange не обязателен)
 
 
-        onChangeText  && onChangeText(e.currentTarget.value.trim())
+        onChangeText && onChangeText(e.currentTarget.value.trim())
         //onChangeText &&  onChangeText(e.currentTarget.value)
     }
     const onKeyPressCallback = (e: KeyboardEvent<HTMLInputElement>) => {
         onKeyPress && onKeyPress(e);
 
         onEnter // если есть пропс onEnter
-        && e.key === 'Enter' // и если нажата кнопка Enter
-        && onEnter() // то вызвать его
+            && e.key === 'Enter' // и если нажата кнопка Enter
+            && onEnter() // то вызвать его
     }
 
     const finalSpanClassName = `${s.error} ${spanClassName ? spanClassName : ''}`
-    const finalInputClassName = `${error ? s.errorInput : s.superInput} ${className ? className : ''}` // need to fix with (?:) and s.superInput
+    //const finalInputClassName = `${error ? s.errorInput : s.superInput} ${className ? className : ''}` // need to fix with (?:) and s.superInput
 
     return (
         <>
-            <input
-                type={'text'}
+            <TextField
+                //@ts-ignore
+                color="primary"
+                error={error}
+                label={isType}F
+                type={isType}
                 onChange={onChangeCallback}
                 onKeyPress={onKeyPressCallback}
-                className={finalInputClassName}
+                className={s.superInput}
                 {...restProps}// отдаём инпуту остальные пропсы если они есть (value например там внутри)
 
             />

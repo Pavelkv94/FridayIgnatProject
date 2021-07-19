@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { isLoggedInAC, loginTC } from '../../Redux/login-reducer';
+import { loginTC } from '../../Redux/login-reducer';
 import { AppStateType } from '../../Redux/store';
 import SuperInputText from "../../SuperComponents/c1-SuperInputText/SuperInputText";
 import SuperButton from "../../SuperComponents/c2-SuperButton/SuperButton";
-import { Redirect } from 'react-router-dom';
+import { NavLink, Redirect } from 'react-router-dom';
 import s from './Loginization.module.css'
 import SuperCheckbox from '../../SuperComponents/c3-SuperCheckbox/SuperCheckbox';
 import Preloader from "../../Common/Preloader/Preloader";
+import { FilledInput } from '@material-ui/core';
+import { PATH } from '../../Routes';
 
 export function Loginization() {
     const dispatch = useDispatch();
@@ -29,26 +31,32 @@ export function Loginization() {
         setRememberMe(!rememberMe)
     }
     return (
+        <div className={s.container}>
+            <div className={s.loginContainer}>
+            
+                <h2 className={s.title}>It-incubator</h2>
+                <p className={s.subTitle}>Sign In</p>
+                {status !== 'idle' ? <Preloader /> : null}
+                <div className={s.info}>
+                    <p>Use common test account credentials:</p>
+                    <p>Email: <span className={s.bold}>pavlik.gerasim@yandex.by</span> </p>
+                    <p>Password: <span className={s.bold}> 123456789</span></p>
+                </div>
+                {error && <div className={s.formSummaryError}>
+                    {error}
+                </div>}
+                <div className={s.inputs}>
+                    <SuperInputText value={email} onChangeText={setEmail} placeholder="email" isType="email" error={error ? true : false} errorMessage={error} />
+                    <SuperInputText value={password} onChangeText={setPassword} placeholder="password" isType="password" error={error ? true : false} errorMessage={error} />
+                </div>
 
-        <div>
-            {status !== 'idle' ? <Preloader /> : null}
-            <h1>Loginization</h1>
-            {error && <div className={s.formSummaryError}>
-                {error}
-            </div>}
-            <span style={{ color: 'green', margin: "10px" }}>pavlik.gerasim@yandex.by <br />
-                123456789</span>
-            <hr />
-
-            <div>Email:</div>
-            <SuperInputText value={email} onChangeText={setEmail} />
-            <div>Password:</div>
-            <SuperInputText value={password} onChangeText={setPassword} />
-            <br />
-
-            <span><SuperCheckbox checked={rememberMe} onChange={checkboxChange} /> Remember Me</span>
-            <div>
-                <SuperButton onClick={onCLickHandler}>Sign In</SuperButton>
+                <span className={s.remember}><SuperCheckbox checked={rememberMe} onChange={checkboxChange} /> Remember Me</span>
+                <div className={s.forgot}> <NavLink to={PATH.RECOVERY_PASS}> Forgot Password?</NavLink></div>
+                <div><SuperButton onClick={onCLickHandler}>Login</SuperButton></div>
+                <div className={s.regBlock}>
+                    <p className={s.info}>Don’t have an account?</p>
+                    <div> <NavLink to={PATH.REGISTRATION}> Sign Up</NavLink></div>
+                </div>
             </div>
         </div>
     );

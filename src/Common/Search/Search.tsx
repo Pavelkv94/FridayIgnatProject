@@ -18,7 +18,7 @@ export const Search: React.FC<PropsType> = (props) => {
     return (
         <div className={s.container}>
             Search:
-            <SuperInputText value={props.packName} onChangeText={props.inputCallback} />
+            <SuperInputText value={props.packName} onChangeText={props.inputCallback} isType="text"/>
             <RangeSlider min={props.min} max={props.max} target={props.target} />
             <SuperButton onClick={props.btnCallback}>Search</SuperButton>
         </div>

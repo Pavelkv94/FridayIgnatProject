@@ -50,11 +50,11 @@ export function Registration() {
                 {error}
             </div>}
             <div>Email:</div>
-            <SuperInputText value={email} onChangeText={setEmail}/>
+            <SuperInputText value={email} onChangeText={setEmail} isType="password"/>
             <div>password:</div>
-            <SuperInputText value={password} onChangeText={setPassword}/>
+            <SuperInputText value={password} onChangeText={setPassword} isType="password"/>
             <div>confirm password:</div>
-            <SuperInputText value={passwordConf} onChangeText={setPasswordConf}/>
+            <SuperInputText value={passwordConf} onChangeText={setPasswordConf} isType="password"/>
             <div>
                 <SuperButton disabled={status !== 'idle'} onClick={buttonCallback}>Sign Up</SuperButton>
             </div>

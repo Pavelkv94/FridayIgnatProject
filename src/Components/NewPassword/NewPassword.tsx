@@ -43,9 +43,9 @@ export function NewPassword() {
                 {error}
             </div>}
             <div>password:</div>
-            <SuperInputText value={password} onChangeText={setPassword}/>
+            <SuperInputText value={password} onChangeText={setPassword} isType="password"/>
             <div>Repeat password:</div>
-            <SuperInputText value={passwordConf} onChangeText={setPasswordConf}/>
+            <SuperInputText value={passwordConf} onChangeText={setPasswordConf} isType="password"/>
             <div>
                 <SuperButton disabled={status !== "idle"} onClick={buttonCallback}>Cover</SuperButton>
             </div>
