@@ -8,7 +8,6 @@ import { NavLink, Redirect } from 'react-router-dom';
 import s from './Loginization.module.css'
 import SuperCheckbox from '../../SuperComponents/c3-SuperCheckbox/SuperCheckbox';
 import Preloader from "../../Common/Preloader/Preloader";
-import { FilledInput } from '@material-ui/core';
 import { PATH } from '../../Routes';
 
 export function Loginization() {
@@ -52,7 +51,7 @@ export function Loginization() {
 
                 <span className={s.remember}><SuperCheckbox checked={rememberMe} onChange={checkboxChange} /> Remember Me</span>
                 <div className={s.forgot}> <NavLink to={PATH.RECOVERY_PASS}> Forgot Password?</NavLink></div>
-                <div><SuperButton onClick={onCLickHandler}>Login</SuperButton></div>
+                <div><SuperButton onClick={onCLickHandler} style={{width:"266px"}}>Login</SuperButton></div>
                 <div className={s.regBlock}>
                     <p className={s.info}>Don’t have an account?</p>
                     <div> <NavLink to={PATH.REGISTRATION}> Sign Up</NavLink></div>

@@ -1,13 +1,74 @@
-.formControl.error input,
-.formControl.error textarea {
-    border: solid red 2px;
-}
-.formControl.error span {
+.formSummaryError {
     color: red;
+    margin: 5px;
 }
 
-.formSummaryError {
-    border: red 1px solid;
-    padding: 5px;
-    color: red;
+.container {
+    min-width: 1280px;
+    min-height: 720px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.regContainer {
+    min-width: 413px;
+    min-height: 540px;
+    background: #F9F9FE;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 20px;
+}
+
+.title {
+    width: 163px;
+    height: 39px;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 26px;
+    line-height: 39px;
+    /* identical to box height */
+    color: #2D2E46;
+}
+
+.subTitle {
+    width: 75px;
+    height: 33px;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 33px;
+    /* identical to box height */
+    text-align: right;
+    color: #2D2E46;
+}
+
+.inputs {
+    display: flex;
+    flex-direction: column;
+    height: 150px;
+    justify-content: space-between;
+}
+
+.control {
+    margin-top: 60px;
+    display: flex;
+    width: 340px;
+    justify-content: space-around;
+}
+
+.cancelBtn {
+    width: 124px;
+    background: #D7D8EF;
+    color: #21268F
+}
+
+.cancelBtn:hover {
+    background: #7f7f80;
+    color: white;
 }
