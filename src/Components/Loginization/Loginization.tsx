@@ -45,8 +45,8 @@ export function Loginization() {
                     {error}
                 </div>}
                 <div className={s.inputs}>
-                    <SuperInputText value={email} onChangeText={setEmail} placeholder="email" isType="email" error={error ? true : false} errorMessage={error} />
-                    <SuperInputText value={password} onChangeText={setPassword} placeholder="password" isType="password" error={error ? true : false} errorMessage={error} />
+                    <SuperInputText value={email} onChangeText={setEmail} placeholder="email" isType="email" error={!!error} errorMessage={error} />
+                    <SuperInputText value={password} onChangeText={setPassword} placeholder="password" isType="password" error={!!error} errorMessage={error} />
                 </div>
 
                 <span className={s.remember}><SuperCheckbox checked={rememberMe} onChange={checkboxChange} /> Remember Me</span>
