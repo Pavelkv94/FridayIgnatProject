@@ -1,0 +1,48 @@
+.rootProfile {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.container {
+    width: 1008px;
+    height: 636px;
+    border: 1px solid red;
+    background: #FEFEFF;
+    border-radius: 8px;
+    -webkit-order: 0;
+    -ms-flex-order: 0;
+    order: 0;
+    -webkit-align-self: center;
+    -ms-flex-item-align: center;
+    align-self: center;
+}
+
+.leftBox {
+    width: 243px;
+    height: 636px;
+    background: #ECECF9;
+    border: 1px solid red;
+    border-radius: 8px;
+    display: flex;
+}
+
+.avatarName {
+    width: 243px;
+    height: 216px;
+    background: #D9D9F1;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+
+}
+.avatarName img {
+    width: 100px;
+    height: 100px;
+    margin: 20px;
+}
