@@ -5,9 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppStateType } from "../../Redux/store";
 import { logoutTC } from "../../Redux/login-reducer";
 import React, { useState } from "react";
-import NavItem from "./NavItem/NavItem";
 import logoutLogo from './icon-logout.png'
-import { LinearProgress } from "@material-ui/core";
 import Preloader from "../../Common/Preloader/Preloader";
 import packsImg from './NavItem/Group.png'
 import profile from './NavItem/Union.png'
