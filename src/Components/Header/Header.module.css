@@ -1,5 +1,50 @@
 .header {
-    height: 60px;
+    width: 100vw;
     background: #EBE0E9;
-    margin-bottom: 20px;
+    margin-bottom: 24px;
+}
+
+.container {
+    width: 1008px;
+    height: 60px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+}
+
+.title {
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 26px;
+    line-height: 39px;
+    /* identical to box height */
+    color: #2D2E46;
+    cursor: default;
+}
+
+.fake {
+    width: 168px;
+}
+
+.nav {
+    display: flex;
+}
+
+.logout {
+    width: 140px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logout:hover {
+    background: #DCCCDB;
+    border-bottom: #21268F 3px solid;
+    cursor: pointer;
+}
+
+.logoutLogo {
+    width: 40px;
 }
