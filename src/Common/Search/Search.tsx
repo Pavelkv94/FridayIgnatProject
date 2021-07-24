@@ -17,10 +17,13 @@ export const Search: React.FC<PropsType> = (props) => {
 
     return (
         <div className={s.container}>
-            Search:
-            <SuperInputText value={props.packName} onChangeText={props.inputCallback} isType="text"/>
-            <RangeSlider min={props.min} max={props.max} target={props.target} />
-            <SuperButton onClick={props.btnCallback}>Search</SuperButton>
+            <div> <RangeSlider min={props.min} max={props.max} target={props.target} /></div>
+            <div className={s.searchBar}>
+                <SuperInputText value={props.packName} onChangeText={props.inputCallback} isType="Search..." />
+                <div className={s.fake}></div>
+                <SuperButton style={{ width: "174px" }} onClick={props.btnCallback}>Search</SuperButton>
+            </div>
+
         </div>
     )
 };

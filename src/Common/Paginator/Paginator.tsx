@@ -24,13 +24,14 @@ export function Paginator(props: PaginatorType) {
     let rightPortionPageNumber = portionNumber * portionSize;
 
     return (<div className={s.container}>
+        <span className={s.pagTitle}>Show</span>
         <select value={props.pageCount} onChange={(e) => props.onChangeHandler(e)} >
             <option value={4}>4</option>
             <option value={7}>7</option>
             <option value={10}>10</option>
-            <option value={20}>20</option>
-            <option value={50}>50</option>
+            <option value={20}>25</option>
         </select>
+        <span className={s.pagTitle}>Cards per Page   </span>
         {portionNumber > 1 &&
             <button onClick={() => { setPortionNumber(portionNumber - 1) }}>PREV</button>}
         {pages.filter(p => p >= leftPortionPageNumber && p <= rightPortionPageNumber).map(p => {

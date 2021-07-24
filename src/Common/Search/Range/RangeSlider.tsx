@@ -8,7 +8,7 @@ import { setRangePacksAC } from '../../../Redux/packs-reducer';
 
 const useStyles = makeStyles({
   root: {
-    width: 600,
+    width: 500,
     marginLeft: 30,
     marginRight: 30,
   },
@@ -39,9 +39,7 @@ export default function RangeSlider(props: PropsRangeType) {
 
   return (
     <div className={classes.root}>
-      <Typography id="range-slider" gutterBottom>
-        Range
-      </Typography>
+
       <Slider
         value={values}
         onChange={handleChange}

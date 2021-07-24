@@ -29,6 +29,7 @@ export type cardsType = {
     created: string
     updated: string
     url: string
+    user_name: string
 }
 
 

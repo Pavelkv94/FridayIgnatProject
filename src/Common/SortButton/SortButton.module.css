@@ -1,0 +1,13 @@
+.container {
+    display: flex;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container:hover {
+    cursor: pointer;
+    background: rgb(180, 180, 180);
+}

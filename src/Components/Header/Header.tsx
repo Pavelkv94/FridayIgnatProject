@@ -7,14 +7,17 @@ import { logoutTC } from "../../Redux/login-reducer";
 import React from "react";
 import NavItem from "./NavItem/NavItem";
 import logoutLogo from './icon-logout.png'
+import { LinearProgress } from "@material-ui/core";
+import Preloader from "../../Common/Preloader/Preloader";
 
 function Header() {
+
     const dispatch = useDispatch()
     const logout = () => {
         dispatch(logoutTC());
     }
     const isAuthError = useSelector<AppStateType, string | null>(state => state.loginPage.error)
-    const isAuth = useSelector<AppStateType, string>(state => state.loginPage.isAuth)
+    const status = useSelector<AppStateType, string>((state) => state.app.status)
 
     if (isAuthError) {
         return <Redirect to={"/login"} />;
@@ -36,6 +39,7 @@ function Header() {
                     <div onClick={logout} className={s.logout}><img src={logoutLogo} alt="logoutLogo" className={s.logoutLogo} /></div>
                 </div>
             </div>
+            {status !== 'idle' ? <Preloader /> : null}
         </div >
     )
 }

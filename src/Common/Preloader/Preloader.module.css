@@ -1,6 +1,9 @@
-.container {
+.screen {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100vw;
     height: 100vh;
-    background: rgba(0, 0, 0, 0.411);
+    background: rgba(0, 0, 0, 0.171);
     z-index: 20;
 }

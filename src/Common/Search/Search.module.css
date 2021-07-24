@@ -1,6 +1,16 @@
 .container {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 730px;
+    height: 80px;
+}
+
+.searchBar {
+    display: flex;
+    justify-content: space-between;
+}
+.fake {
+    width: 40px;
 }

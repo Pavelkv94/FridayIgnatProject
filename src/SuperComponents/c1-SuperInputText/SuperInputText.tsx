@@ -54,9 +54,10 @@ const SuperInputText: React.FC<SuperInputTextPropsType> = (
         <>
             <TextField
                 //@ts-ignore
-                color="primary"
+                size="small"
+                variant="outlined"
                 error={error}
-                label={isType}F
+                label={isType}
                 type={isType}
                 onChange={onChangeCallback}
                 onKeyPress={onKeyPressCallback}

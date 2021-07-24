@@ -5,6 +5,7 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import SuperButton from '../SuperComponents/c2-SuperButton/SuperButton';
 
 type AddItemPT = {
     callback: (title: string, title2?: string) => void
@@ -38,12 +39,8 @@ export function AddedItem(props: AddItemPT) {
 
     return (
         <div>
-            {props.disabled ?
-                <Button size="small" variant="outlined" color="primary" onClick={handleClickOpen} disabled>
-                    Add
-                </Button> : <Button size="small" variant="outlined" color="primary" onClick={handleClickOpen}>
-                    Add
-                </Button>}
+             <SuperButton style={{ width: "174px" }} onClick={handleClickOpen} disabled={props.disabled}>Add new pack</SuperButton>
+            
             <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
                 <DialogTitle id="form-dialog-title">add</DialogTitle>
                 <DialogContent>

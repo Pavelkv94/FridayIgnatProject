@@ -1,56 +1,133 @@
-.packsHeaderContainer {
-    border: red 1px solid;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    -webkit-flex-direction: row;
-    -ms-flex-direction: row;
-    flex-direction: row;
-    -webkit-flex-wrap: nowrap;
-    -ms-flex-wrap: nowrap;
-    flex-wrap: nowrap;
-    -webkit-justify-content: space-around;
-    -ms-flex-pack: distribute;
-    justify-content: space-between;
-    -webkit-align-content: flex-end;
-    -ms-flex-line-pack: end;
-    align-content: flex-end;
-    -webkit-align-items: flex-start;
-    -ms-flex-align: start;
-    align-items: flex-start;
-}
-.packsChild {
-    border: dodgerblue 1px solid;
-    width: 200px;
-    display: flex;
-}
-
-.packsBodyContainer {
-    border: gold 1px solid;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    -webkit-flex-direction: row;
-    -ms-flex-direction: row;
-    flex-direction: row;
-    -webkit-flex-wrap: nowrap;
-    -ms-flex-wrap: nowrap;
-    flex-wrap: nowrap;
-    -webkit-justify-content: space-between;
-    -ms-flex-pack: distribute;
-    justify-content: space-between;
-    -webkit-align-content: flex-end;
-    -ms-flex-line-pack: end;
-    align-content: flex-end;
-    -webkit-align-items: flex-start;
-    -ms-flex-align: start;
-    align-items: flex-start;
-}
-.packsChild2 {
-    border: dodgerblue 1px solid;
-    width: 200px
-}
-
 .container {
+    width: 1008px;
+    background: #FEFEFF;
+    border-radius: 8px;
+    margin: 0 auto;
+    display: flex;
     position: relative;
+}
+
+.leftBlock {
+    width: 230px;
+    background: #ECECF9;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.btnBlock {
+    width: 196px;
+    height: 36px;
+    background: #FFFFFF;
+    border-radius: 2px;
+    display: flex;
+}
+
+.btnOfLeftMenu {
+    width: 98px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btnOfLeftMenu:hover {
+    background: #9A91C8;
+    cursor: pointer;
+    color: white;
+}
+
+.titleOfLeftMenu {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 19px;
+    /* identical to box height */
+    color: #2D2E46;
+}
+
+.mainBlock {
+    width: 800px;
+    position: relative;
+}
+
+.ten {
+    min-height: 750px;
+}
+
+.twenty {
+    min-height: 1230px;
+}
+
+.mainTitle {
+    position: absolute;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 33px;
+    /* identical to box height */
+    color: #2D2E46;
+    top: 10px;
+    left: 30px;
+}
+
+.searchBar {
+    position: absolute;
+    top: 62px;
+    left: 30px;
+    background: #ECECF9;
+    border-radius: 8px;
+}
+
+.packsTitles {
+    position: absolute;
+    top: 152px;
+    left: 30px;
+    display: flex;
+    width: 730px;
+    height: 48px;
+    background: #ECECF9;
+    align-items: center;
+}
+
+.packs {
+    position: absolute;
+    top: 200px;
+    left: 30px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: grey 0 5px 10px;
+}
+
+.paginator {
+    position: absolute;
+    width: 730px;
+    min-height: 50px;
+    bottom: 10px;
+    left: 30px;
+}
+
+.headerItem {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 13px;
+    line-height: 16px;
+    /* identical to box height */
+    color: #2D2E46;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.addBtn {
+    margin: 50px;
+}
+
+.active {
+    background: #9A91C8;
+    color: white;
 }
