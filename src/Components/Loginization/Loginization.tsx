@@ -16,7 +16,7 @@ export function Loginization() {
     const [password, setPassword] = useState<string>("")
     const [rememberMe, setRememberMe] = useState<boolean>(false)
     const isAuth = useSelector<AppStateType, string>(state => state.loginPage.isAuth)
-    const status = useSelector<AppStateType, string>((state) => state.app.status)
+    
     const error = useSelector<AppStateType, string | null>((state) => state.loginPage.error)
 
     const onCLickHandler = () => {
@@ -35,7 +35,7 @@ export function Loginization() {
             
                 <h2 className={s.title}>It-incubator</h2>
                 <p className={s.subTitle}>Sign In</p>
-                {status !== 'idle' ? <Preloader /> : null}
+               
                 <div className={s.info}>
                     <p>Use common test account credentials:</p>
                     <p>Email: <span className={s.bold}>pavlik.gerasim@yandex.by</span> </p>
