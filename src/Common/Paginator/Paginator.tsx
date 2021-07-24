@@ -1,5 +1,8 @@
 import { ChangeEvent, useState } from 'react';
 import s from './Paginator.module.css'
+import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import { IconButton } from '@material-ui/core';
 
 type PaginatorType = {
     totalItemsCount: number
@@ -33,7 +36,11 @@ export function Paginator(props: PaginatorType) {
         </select>
         <span className={s.pagTitle}>Cards per Page   </span>
         {portionNumber > 1 &&
-            <button onClick={() => { setPortionNumber(portionNumber - 1) }}>PREV</button>}
+                 <IconButton onClick={() => { setPortionNumber(portionNumber - 1) }} >
+                 <ArrowBackIcon color="secondary" fontSize="medium"/>
+             </IconButton>
+           
+        }
         {pages.filter(p => p >= leftPortionPageNumber && p <= rightPortionPageNumber).map(p => {
             return <span key={Math.random()}
                 className={props.currentPage === p ? s.selected : s.paginat}
@@ -41,7 +48,11 @@ export function Paginator(props: PaginatorType) {
             >{p}</span>
         })}
         {portionCount > portionNumber &&
-            <button onClick={() => { setPortionNumber(portionNumber + 1) }}>NEXT</button>}
+            <IconButton onClick={() => { setPortionNumber(portionNumber + 1) }} >
+                <ArrowForwardIcon color="secondary" fontSize="medium" />
+            </IconButton>
+        }
+
 
     </div>)
 }
