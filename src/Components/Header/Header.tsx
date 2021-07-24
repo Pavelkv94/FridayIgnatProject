@@ -4,11 +4,13 @@ import s from "./Header.module.css"
 import { useDispatch, useSelector } from "react-redux";
 import { AppStateType } from "../../Redux/store";
 import { logoutTC } from "../../Redux/login-reducer";
-import React from "react";
+import React, { useState } from "react";
 import NavItem from "./NavItem/NavItem";
 import logoutLogo from './icon-logout.png'
 import { LinearProgress } from "@material-ui/core";
 import Preloader from "../../Common/Preloader/Preloader";
+import packsImg from './NavItem/Group.png'
+import profile from './NavItem/Union.png'
 
 function Header() {
 
@@ -16,20 +18,37 @@ function Header() {
     const logout = () => {
         dispatch(logoutTC());
     }
+    let [profilePage, setProfilePage] = useState(false);
+
     const isAuthError = useSelector<AppStateType, string | null>(state => state.loginPage.error)
     const status = useSelector<AppStateType, string>((state) => state.app.status)
 
     if (isAuthError) {
         return <Redirect to={"/login"} />;
     }
+
+
     return (
         <div className={s.header}>
             <div className={s.container}>
                 <h2 className={s.title}>It-incubator</h2>
                 <div className={s.fake}></div>
                 <div className={s.nav}>
-                    <NavItem title="Pack list" />
-                    <NavItem title="Profile" />
+                    <NavLink to={PATH.PACKS_PAGE} className={s.link}>
+                        <div className={`${s.navItem} ${profilePage && s.active}`} onClick={() => setProfilePage(true)}>
+                            <img src={packsImg} alt="icon" />
+                            Pack list
+                        </div>
+                    </NavLink>
+                    <NavLink to={PATH.PROFILE} className={s.link}>
+                        <div className={`${s.navItem} ${!profilePage && s.active}`} onClick={() => setProfilePage(false)}>
+                            <img src={profile} alt="icon" />
+                            Profile
+                        </div>
+                    </NavLink>
+
+                    {/* <NavItem title="Pack list" status={true} />
+                    <NavItem title="Profile" status={true} /> */}
                     {/*                     
                     <NavLink to={PATH.NEW_PASS}> NewPassword |</NavLink>
                     <NavLink to={PATH.PROFILE}> Profile |</NavLink>

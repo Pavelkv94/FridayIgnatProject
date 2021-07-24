@@ -10,6 +10,10 @@
     background: #DCCCDB;
     border-bottom: #21268F 3px solid;
 }
+.active {
+    background: #DCCCDB;
+    border-bottom: #21268F 3px solid;
+}
 
 img {
     margin: 5px;
