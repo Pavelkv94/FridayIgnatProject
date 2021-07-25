@@ -12,7 +12,7 @@ import { UpdateItem } from "../../../Modal/UpdateModal";
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import { IconButton } from '@material-ui/core';
 import TocTwoToneIcon from '@material-ui/icons/TocTwoTone';
-import ShopRoundedIcon from '@material-ui/icons/ShopRounded';
+import PlayCircleOutlineIcon from '@material-ui/icons/PlayCircleOutline';
 
 type PropsType = {
     card: cardsType
@@ -50,7 +50,7 @@ export function Pack(props: PropsType) {
             </div>
             <NavLink to={`learn/${props.card._id}`}>
                 <IconButton >
-                    <ShopRoundedIcon color="secondary" titleAccess="Go to Learn" />
+                    <PlayCircleOutlineIcon color="secondary" titleAccess="Go to Learn" />
                 </IconButton> </NavLink>
         </div>
     </div>

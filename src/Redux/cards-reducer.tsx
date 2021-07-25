@@ -96,13 +96,15 @@ export const cardsAdd = (cardsPack_id: string, question?: string, answer?: strin
     packsApi.setCards(cardsPack_id, question, answer)
         .then(() => {
             dispatch(cardsTC(cardsPack_id))
-            dispatch(setAppStatusAC("loading"))
+           dispatch(setAppStatusAC("succeeded"))
         })
         .catch((error) => {
             dispatch(setAppErrorPacksAC(error.response.data.error))
-            dispatch(setAppStatusAC("loading"))
+         dispatch(setAppStatusAC("failed"))
         })
-    dispatch(setAppStatusAC("loading"))
+     .finally(() => {
+            dispatch(setAppStatusAC("idle"))
+        })
 }
 
 export const cardsDeleteTC = (id: string, cardsPack_id: string) => (dispatch: Dispatch<any>) => {
@@ -110,13 +112,15 @@ export const cardsDeleteTC = (id: string, cardsPack_id: string) => (dispatch: Di
     packsApi.deleteCards(id)
         .then(() => {
             dispatch(cardsTC(cardsPack_id))
-            dispatch(setAppStatusAC("loading"))
+            dispatch(setAppStatusAC("succeeded"))
         })
         .catch((error) => {
             dispatch(setAppErrorPacksAC(error.response.data.error))
-            dispatch(setAppStatusAC("loading"))
+           dispatch(setAppStatusAC("failed"))
         })
-    dispatch(setAppStatusAC("loading"))
+     .finally(() => {
+            dispatch(setAppStatusAC("idle"))
+        })
 }
 
 export const cardsUpdateTC = (id: string, cardsPack_id: string, question?: string) => (dispatch: Dispatch<any>) => {
@@ -124,13 +128,15 @@ export const cardsUpdateTC = (id: string, cardsPack_id: string, question?: strin
     packsApi.updateCards(id, question)
         .then(() => {
             dispatch(cardsTC(cardsPack_id))
-            dispatch(setAppStatusAC("loading"))
+            dispatch(setAppStatusAC("succeeded"))
         })
         .catch((error) => {
             dispatch(setAppErrorPacksAC(error.response.data.error))
-            dispatch(setAppStatusAC("loading"))
+           dispatch(setAppStatusAC("failed"))
         })
-    dispatch(setAppStatusAC("loading"))
+      .finally(() => {
+            dispatch(setAppStatusAC("idle"))
+        })
 }
 
 export const setGradeTC = (id: string, grade: number) => (dispatch: Dispatch<any>) => {
@@ -138,13 +144,15 @@ export const setGradeTC = (id: string, grade: number) => (dispatch: Dispatch<any
     packsApi.setGradeCards(id, grade)
         .then((res) => {
             dispatch(setGradeAC(res.data.updatedGrade.grade))
-            dispatch(setAppStatusAC("loading"))
+           dispatch(setAppStatusAC("succeeded"))
         })
         .catch((error) => {
             dispatch(setAppErrorPacksAC(error.response.data.error))
-            dispatch(setAppStatusAC("loading"))
+         dispatch(setAppStatusAC("failed"))
         })
-    dispatch(setAppStatusAC("loading"))
+    .finally(() => {
+            dispatch(setAppStatusAC("idle"))
+        })
 }
 
 
