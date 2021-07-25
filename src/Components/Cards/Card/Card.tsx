@@ -32,7 +32,7 @@ export function Card(props: PropsType) {
 
         <div className={s.packsChild2} style={{ width: "100px" }}>{props.card.updated.slice(0, 10)}</div>
         <div className={s.packsChild2} style={{ width: "100px" }}>{props.card.created.slice(0, 10)}</div>
-        <div className={s.packsChild2} style={{ width: "100px" }}>{props.card.grade}</div>
+        <div className={s.packsChild2} style={{ width: "100px" }}>{Math.round(props.card.grade)}</div>
         <div className={s.packsChild2} style={{ width: "140px" }}>
             <DeleteItem disabled={userID !== props.card.user_id} callback={deleteCallback} />
             <UpdateItem callback={updateCallback}

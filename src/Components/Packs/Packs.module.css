@@ -103,11 +103,8 @@
 }
 
 .paginator {
-    position: absolute;
-    width: 730px;
     min-height: 50px;
-    bottom: 10px;
-    left: 30px;
+    margin: 5px;
 }
 
 .headerItem {

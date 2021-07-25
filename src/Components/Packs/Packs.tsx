@@ -83,7 +83,7 @@ export function Packs() {
                 <div className={`${s.btnOfLeftMenu} ${!my && s.active}`} onClick={() => { dispatch(setUserIdforPacksAC("")); setMy(false) }}>All</div>
             </div>
             {my && <div className={s.addBtn}>
-                <AddedItem callback={addedCallback}  title="Add New Pack"/>
+                <AddedItem callback={addedCallback} title="Add New Pack" />
             </div>}
 
         </div>
@@ -119,11 +119,12 @@ export function Packs() {
                     return <Pack card={m} key={m._id} />
 
                 })}
+                <div className={s.paginator}>
+                    <Paginator totalItemsCount={cardPacksTotalCount} pageSize={pageCount} currentPage={page} pageCount={pageCount}
+                        onPageChanged={onPageChanged} onChangeHandler={onChangeHandler} />
+                </div>
             </div>
-            <div className={s.paginator}>
-                <Paginator totalItemsCount={cardPacksTotalCount} pageSize={pageCount} currentPage={page} pageCount={pageCount}
-                    onPageChanged={onPageChanged} onChangeHandler={onChangeHandler} />
-            </div>
+
 
         </div>
 

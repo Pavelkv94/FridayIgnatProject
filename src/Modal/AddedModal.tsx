@@ -15,6 +15,7 @@ type AddItemPT = {
 }
 
 export function AddedItem(props: AddItemPT) {
+    
     const [open, setOpen] = React.useState(false);
     let [title, setTitle] = React.useState("");
     let [title2, setTitle2] = React.useState("");

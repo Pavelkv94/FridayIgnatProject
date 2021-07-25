@@ -80,11 +80,12 @@ export function Cards() {
             <div className={s.titleContainer} >
                 <div className={s.title}>
                     <NavLink to={PATH.PACKS_PAGE}>  <IconButton >
-                        <ReplyIcon titleAccess="Back to Packs" color="primary" />
+                        <ReplyIcon titleAccess="Back to Packs" color="secondary" />
                     </IconButton> </NavLink>
 
-                    <h2 className={s.mainTitle}>Packs Name</h2></div>
-                <AddedItem disabled={cardsPackID !== userID} callback={addCallback} title="Add New Card" />
+                    <h2 className={s.mainTitle}>Cards</h2></div>
+                {cardsPackID === userID && <AddedItem disabled={cardsPackID !== userID} callback={addCallback} title="Add New Card" />}
+
             </div>
             {error && <div>{error}</div>}
             <div className={s.searchBar}>
