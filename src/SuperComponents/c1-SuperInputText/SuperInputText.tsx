@@ -14,6 +14,7 @@ type SuperInputTextPropsType = DefaultInputPropsType & { // и + ещё проп
     errorMessage?: string | null
     spanClassName?: string
     isType: string
+    target: "packs" | "cards"
 
 }
 
@@ -53,6 +54,7 @@ const SuperInputText: React.FC<SuperInputTextPropsType> = (
     return (
         <>
             <TextField
+                style={restProps.target === "cards" ? { width: "700px" } : { width: "400px" }}
                 //@ts-ignore
                 size="small"
                 variant="outlined"

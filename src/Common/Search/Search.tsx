@@ -16,10 +16,10 @@ type PropsType = {
 export const Search: React.FC<PropsType> = (props) => {
 
     return (
-        <div className={s.container}>
-            <div> <RangeSlider min={props.min} max={props.max} target={props.target} /></div>
+        <div className={s.container} style={props.target === "cards" ? { width: "960px" } : { width: "730px" }}>
+            {props.target === "packs" && <div> <RangeSlider min={props.min} max={props.max} target={props.target} /></div>}
             <div className={s.searchBar}>
-                <SuperInputText value={props.packName} onChangeText={props.inputCallback} isType="Search..." />
+                <SuperInputText value={props.packName} onChangeText={props.inputCallback} isType="Search..." target={props.target} />
                 <div className={s.fake}></div>
                 <SuperButton style={{ width: "174px" }} onClick={props.btnCallback}>Search</SuperButton>
             </div>

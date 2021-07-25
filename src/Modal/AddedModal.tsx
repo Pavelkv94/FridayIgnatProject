@@ -1,4 +1,4 @@
-import React, {ChangeEvent} from 'react';
+import React, { ChangeEvent } from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
@@ -8,6 +8,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import SuperButton from '../SuperComponents/c2-SuperButton/SuperButton';
 
 type AddItemPT = {
+    title: string
     callback: (title: string, title2?: string) => void
     disabled?: boolean
     id?: number
@@ -39,12 +40,12 @@ export function AddedItem(props: AddItemPT) {
 
     return (
         <div>
-             <SuperButton style={{ width: "174px" }} onClick={handleClickOpen} disabled={props.disabled}>Add new pack</SuperButton>
-            
+            <SuperButton style={{ width: "174px" }} onClick={handleClickOpen} disabled={props.disabled}>{props.title}</SuperButton>
+
             <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
                 <DialogTitle id="form-dialog-title">add</DialogTitle>
                 <DialogContent>
-                    {props.id? "Question" : "PackName"}
+                    {props.id ? "Question" : "PackName"}
                     <TextField
                         value={title}
                         onChange={changeTitle}

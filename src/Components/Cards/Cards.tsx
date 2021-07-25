@@ -1,8 +1,8 @@
-import React, {ChangeEvent, useEffect} from 'react';
-import {useDispatch, useSelector} from "react-redux";
-import {Search} from '../../Common/Search/Search';
+import React, { ChangeEvent, useEffect } from 'react';
+import { useDispatch, useSelector } from "react-redux";
+import { Search } from '../../Common/Search/Search';
 import s from "./Cards.module.css"
-import {AppStateType} from "../../Redux/store";
+import { AppStateType } from "../../Redux/store";
 import {
     cardsAdd,
     cardsDeleteTC,
@@ -14,26 +14,30 @@ import {
     setSearchValueCardAC,
     sortCardAC
 } from "../../Redux/cards-reducer";
-import {ArrCardType, responseCardType} from "../../api/packs-api";
-import {useParams} from 'react-router-dom';
-import {Paginator} from './../../Common/Paginator/Paginator'
-import {SortButton} from '../../Common/SortButton/SortButton';
-import {DeleteItem} from "../../Modal/DeleteModal";
-import {UpdateItem} from "../../Modal/UpdateModal";
-import {AddedItem} from "../../Modal/AddedModal";
-import {authTC} from "../../Redux/login-reducer";
+import { ArrCardType, responseCardType } from "../../api/packs-api";
+import { NavLink, useParams } from 'react-router-dom';
+import { Paginator } from './../../Common/Paginator/Paginator'
+import { SortButton } from '../../Common/SortButton/SortButton';
+import { DeleteItem } from "../../Modal/DeleteModal";
+import { UpdateItem } from "../../Modal/UpdateModal";
+import { AddedItem } from "../../Modal/AddedModal";
+import { authTC } from "../../Redux/login-reducer";
+import { Card } from './Card/Card';
+import ReplyIcon from '@material-ui/icons/Reply';
+import { IconButton } from '@material-ui/core';
+import { PATH } from '../../Routes';
 
 export function Cards() {
 
     const dispatch = useDispatch()
-    const {packId} = useParams<{ packId: string }>()
+    const { packId } = useParams<{ packId: string }>()
     const isAuth = useSelector<AppStateType, string>(state => state.loginPage.isAuth)
     //const cardsPackId = useSelector<AppStateType, string>(state => state.cards.packUserId)
     const cards = useSelector<AppStateType, Array<ArrCardType>>(state => state.cards.cards)
     const cardsPackID = useSelector<AppStateType, string>(state => state.cards.packUserId)
     const error = useSelector<AppStateType, string | undefined>(state => state.packs.error)
     const userID = useSelector<AppStateType, string>(state => state.loginPage.userData._id)
-    const {cardsTotalCount, page, pageCount, minGrade, maxGrade, sortCards, cardQuestion} = useSelector<AppStateType, responseCardType>(state => state.cards)
+    const { cardsTotalCount, page, pageCount, minGrade, maxGrade, sortCards, cardQuestion } = useSelector<AppStateType, responseCardType>(state => state.cards)
 
     useEffect(() => {
         if (!isAuth)
@@ -71,65 +75,54 @@ export function Cards() {
         dispatch(sortCardAC(n, sortValue))
     }
 
-    return <div>
-        Cards
-        {error && <div>{error}</div>}
-        <br/>
-        <Search
-            packName={cardQuestion}
-            min={minGrade}
-            max={maxGrade}
-            target="cards"
-            inputCallback={setSearchResult}
-            btnCallback={searchCardCallback}
+    return <div className={s.container}>
+        <div className={s.subContainer}>
+            <div className={s.titleContainer} >
+                <div className={s.title}>
+                    <NavLink to={PATH.PACKS_PAGE}>  <IconButton >
+                        <ReplyIcon titleAccess="Back to Packs" color="primary" />
+                    </IconButton> </NavLink>
 
-        />
-        <br/>
-        <div className={s.packsHeaderContainer}>
-            <div className={s.packsChild}>question<SortButton sortValue="question" sortPacks={sortCards}
-                                                              sortCallback={sortingCard}/></div>
-            <div className={s.packsChild}>answer<SortButton sortValue="answer" sortPacks={sortCards}
-                                                            sortCallback={sortingCard}/></div>
-            <div className={s.packsChild}>Grade<SortButton sortValue="grade" sortPacks={sortCards}
-                                                           sortCallback={sortingCard}/></div>
-            <div className={s.packsChild}>updated<SortButton sortValue="updated" sortPacks={sortCards}
-                                                             sortCallback={sortingCard}/></div>
-            <div className={s.packsChild}>created<SortButton sortValue="created" sortPacks={sortCards}
-                                                             sortCallback={sortingCard}/></div>
-            <AddedItem disabled={cardsPackID!==userID} callback={addCallback} id={2}/>
-            {/*<div className={s.packsChild}>*/}
-            {/*    <button onClick={addCallback}>add</button>*/}
+                    <h2 className={s.mainTitle}>Packs Name</h2></div>
+                <AddedItem disabled={cardsPackID !== userID} callback={addCallback} title="Add New Card" />
+            </div>
+            {error && <div>{error}</div>}
+            <div className={s.searchBar}>
+                <Search
+                    packName={cardQuestion}
+                    min={minGrade}
+                    max={maxGrade}
+                    target="cards"
+                    inputCallback={setSearchResult}
+                    btnCallback={searchCardCallback}
 
-            {/*</div>*/}
+                /></div>
+            <div className={s.cardsTitles}>
+                <div className={s.headerItem} style={{ width: "250px" }}>question<SortButton sortValue="question" sortPacks={sortCards}
+                    sortCallback={sortingCard} /></div>
+                <div className={s.headerItem} style={{ width: "250px" }}>answer<SortButton sortValue="answer" sortPacks={sortCards}
+                    sortCallback={sortingCard} /></div>
+
+                <div className={s.headerItem} style={{ width: "100px" }}>updated<SortButton sortValue="updated" sortPacks={sortCards}
+                    sortCallback={sortingCard} /></div>
+                <div className={s.headerItem} style={{ width: "100px" }}>created<SortButton sortValue="created" sortPacks={sortCards}
+                    sortCallback={sortingCard} /></div>
+                <div className={s.headerItem} style={{ width: "100px" }}>Grade<SortButton sortValue="grade" sortPacks={sortCards}
+                    sortCallback={sortingCard} /></div>
+                <div className={s.headerItem} style={{ width: "140px" }}>Actions</div>
+
+            </div>
+
+            {cards.map(m => {
+                return <Card card={m} key={m._id} />
+            })}
+
+            <div className={s.paginator}>
+                <Paginator totalItemsCount={cardsTotalCount} pageSize={pageCount} currentPage={page} pageCount={pageCount}
+                    onPageChanged={onPageChanged} onChangeHandler={onChangeHandler} />
+            </div>
         </div>
 
-        {cards.map(m => {
-            const deleteCallback = () => {
-                dispatch(cardsDeleteTC(m._id, m.cardsPack_id))
-            }
-            const updateCallback = (question: string) => {
-                dispatch(cardsUpdateTC(m._id, m.cardsPack_id, question))
-            }
-            return <div className={s.packsBodyContainer} key={Math.random()}>
-                <div className={s.packsChild2}>{m.question}</div>
-                <div className={s.packsChild2}>{m.answer}</div>
-                <div className={s.packsChild2}>{m.grade}</div>
-                <div className={s.packsChild2}>{m.updated}</div>
-                <div className={s.packsChild2}>{m.created}</div>
-                <div className={s.packsChild2}>
-                    <DeleteItem disabled={userID !== m.user_id} callback={deleteCallback}/>
-                    <UpdateItem callback={updateCallback}
-                                value={m.question}
-                        // value2 = {m.answer}
-                                disabled={userID !== m.user_id}/>
-                    {/*<button disabled={userID !== m.user_id}*/}
-                    {/*    onClick={updateCallback()}>upd)*/}
-                    {/*</button>*/}
-                </div>
-            </div>
-        })}
-        <Paginator totalItemsCount={cardsTotalCount} pageSize={pageCount} currentPage={page} pageCount={pageCount}
-                   onPageChanged={onPageChanged} onChangeHandler={onChangeHandler}/>
-    </div>
+    </div >
 
 }

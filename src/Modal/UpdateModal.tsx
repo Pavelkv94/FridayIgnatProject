@@ -40,7 +40,7 @@ export function UpdateItem(props: UpdateItemPT) {
     return (
         <div>
             <IconButton onClick={handleClickOpen} disabled={props.disabled}>
-                <EditIcon />
+                <EditIcon titleAccess="Edit pack"/>
             </IconButton>
 
             <Dialog open={open} onClose={handleClickUPD} aria-labelledby="form-dialog-title">

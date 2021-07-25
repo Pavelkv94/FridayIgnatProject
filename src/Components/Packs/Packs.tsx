@@ -83,7 +83,7 @@ export function Packs() {
                 <div className={`${s.btnOfLeftMenu} ${!my && s.active}`} onClick={() => { dispatch(setUserIdforPacksAC("")); setMy(false) }}>All</div>
             </div>
             {my && <div className={s.addBtn}>
-                <AddedItem callback={addedCallback} />
+                <AddedItem callback={addedCallback}  title="Add New Pack"/>
             </div>}
 
         </div>

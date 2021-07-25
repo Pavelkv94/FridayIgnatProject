@@ -1,51 +1,68 @@
-.packsHeaderContainer {
-    border: red 1px solid;
-    display: -ms-flexbox;
-    display: -webkit-flex;
+.container {
+    width: 1008px;
+    background: #FEFEFF;
+    border-radius: 8px;
+    margin: 0 auto;
     display: flex;
-    -webkit-flex-direction: row;
-    -ms-flex-direction: row;
-    flex-direction: row;
-    -webkit-flex-wrap: nowrap;
-    -ms-flex-wrap: nowrap;
-    flex-wrap: nowrap;
-    -webkit-justify-content: space-around;
-    -ms-flex-pack: distribute;
-    justify-content: space-between;
-    -webkit-align-content: flex-end;
-    -ms-flex-line-pack: end;
-    align-content: flex-end;
-    -webkit-align-items: flex-start;
-    -ms-flex-align: start;
-    align-items: flex-start;
-}
-.packsChild {
-    border: dodgerblue 1px solid;
-    width: 200px
+    align-items: center;
+    justify-content: center;
 }
 
-.packsBodyContainer {
-    border: gold 1px solid;
-    display: -ms-flexbox;
-    display: -webkit-flex;
+.subContainer {
     display: flex;
-    -webkit-flex-direction: row;
-    -ms-flex-direction: row;
-    flex-direction: row;
-    -webkit-flex-wrap: nowrap;
-    -ms-flex-wrap: nowrap;
-    flex-wrap: nowrap;
-    -webkit-justify-content: space-between;
-    -ms-flex-pack: distribute;
-    justify-content: space-between;
-    -webkit-align-content: flex-end;
-    -ms-flex-line-pack: end;
-    align-content: flex-end;
-    -webkit-align-items: flex-start;
-    -ms-flex-align: start;
-    align-items: flex-start;
+    flex-direction: column;
+    width: 960px;
+    position: relative;
 }
-.packsChild2 {
-    border: dodgerblue 1px solid;
-    width: 200px
+
+.mainTitle {
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 33px;
+    /* identical to box height */
+    color: #2D2E46;
+}
+
+.cardsTitles {
+    display: flex;
+    width: 100%;
+    height: 48px;
+    background: #ECECF9;
+    align-items: center;
+}
+
+.headerItem {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 13px;
+    line-height: 16px;
+    /* identical to box height */
+    color: #2D2E46;
+    margin: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.title {
+    display: flex;
+    align-items: center;
+}
+
+.titleContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.searchBar {
+    width: 900px;
+}
+
+.paginator {
+margin: 10px;
+    min-height: 50px;
 }

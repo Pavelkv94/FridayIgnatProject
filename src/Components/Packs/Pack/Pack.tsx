@@ -37,20 +37,20 @@ export function Pack(props: PropsType) {
         <div className={s.packsChild2} style={{ width: "180px" }}>{props.card.user_name}</div>
         <div className={s.packsActions} style={{ width: "100px" }}>
             <IconButton onClick={deleteCallback} disabled={userID !== props.card.user_id}>
-                <DeleteForeverIcon />
+                <DeleteForeverIcon titleAccess="Delete pack" />
             </IconButton>
             {/* <DeleteIcon callback={deleteCallback} disabled={userID !== props.card.user_id} /> */}
             <UpdateItem value={props.card.name} callback={updateCallback} disabled={userID !== props.card.user_id} />
             <div>
                 <NavLink to={`cards/${props.card._id}`}>
                     <IconButton >
-                        <TocTwoToneIcon color="primary" />
+                        <TocTwoToneIcon color="primary" titleAccess="Show cards" />
                     </IconButton>
                 </NavLink>
             </div>
             <NavLink to={`learn/${props.card._id}`}>
                 <IconButton >
-                    <ShopRoundedIcon color="secondary" />
+                    <ShopRoundedIcon color="secondary" titleAccess="Go to Learn" />
                 </IconButton> </NavLink>
         </div>
     </div>

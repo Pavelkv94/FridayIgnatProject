@@ -17,9 +17,8 @@
 
 .container {
     position: absolute;
-    right: 0;
+    right: 20px;
     margin: 15px;
-
 }
 
 .pagTitle {
@@ -32,3 +31,4 @@
     color: #2D2E46;
     margin: 10px;
 }
+
