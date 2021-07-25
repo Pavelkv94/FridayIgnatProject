@@ -1,24 +1,24 @@
 {
   "files": {
-    "main.css": "/FridayIgnatProject/static/css/main.86df6527.chunk.css",
-    "main.js": "/FridayIgnatProject/static/js/main.f4e109f9.chunk.js",
-    "main.js.map": "/FridayIgnatProject/static/js/main.f4e109f9.chunk.js.map",
-    "runtime-main.js": "/FridayIgnatProject/static/js/runtime-main.8aa79f9c.js",
-    "runtime-main.js.map": "/FridayIgnatProject/static/js/runtime-main.8aa79f9c.js.map",
-    "static/js/2.f77a594e.chunk.js": "/FridayIgnatProject/static/js/2.f77a594e.chunk.js",
-    "static/js/2.f77a594e.chunk.js.map": "/FridayIgnatProject/static/js/2.f77a594e.chunk.js.map",
-    "static/js/3.627e63bb.chunk.js": "/FridayIgnatProject/static/js/3.627e63bb.chunk.js",
-    "static/js/3.627e63bb.chunk.js.map": "/FridayIgnatProject/static/js/3.627e63bb.chunk.js.map",
+    "main.css": "/FridayIgnatProject/static/css/main.65ba8f83.chunk.css",
+    "main.js": "/FridayIgnatProject/static/js/main.0688c85d.chunk.js",
+    "main.js.map": "/FridayIgnatProject/static/js/main.0688c85d.chunk.js.map",
+    "runtime-main.js": "/FridayIgnatProject/static/js/runtime-main.a547553e.js",
+    "runtime-main.js.map": "/FridayIgnatProject/static/js/runtime-main.a547553e.js.map",
+    "static/js/2.f6139088.chunk.js": "/FridayIgnatProject/static/js/2.f6139088.chunk.js",
+    "static/js/2.f6139088.chunk.js.map": "/FridayIgnatProject/static/js/2.f6139088.chunk.js.map",
+    "static/js/3.00f5ede2.chunk.js": "/FridayIgnatProject/static/js/3.00f5ede2.chunk.js",
+    "static/js/3.00f5ede2.chunk.js.map": "/FridayIgnatProject/static/js/3.00f5ede2.chunk.js.map",
     "index.html": "/FridayIgnatProject/index.html",
-    "static/css/main.86df6527.chunk.css.map": "/FridayIgnatProject/static/css/main.86df6527.chunk.css.map",
-    "static/js/2.f77a594e.chunk.js.LICENSE.txt": "/FridayIgnatProject/static/js/2.f77a594e.chunk.js.LICENSE.txt",
+    "static/css/main.65ba8f83.chunk.css.map": "/FridayIgnatProject/static/css/main.65ba8f83.chunk.css.map",
+    "static/js/2.f6139088.chunk.js.LICENSE.txt": "/FridayIgnatProject/static/js/2.f6139088.chunk.js.LICENSE.txt",
     "static/media/Page404.module.css": "/FridayIgnatProject/static/media/Error404.ada9301f.png",
     "static/media/iconemail.c6176a0a.png": "/FridayIgnatProject/static/media/iconemail.c6176a0a.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.8aa79f9c.js",
-    "static/js/2.f77a594e.chunk.js",
-    "static/css/main.86df6527.chunk.css",
-    "static/js/main.f4e109f9.chunk.js"
+    "static/js/runtime-main.a547553e.js",
+    "static/js/2.f6139088.chunk.js",
+    "static/css/main.65ba8f83.chunk.css",
+    "static/js/main.0688c85d.chunk.js"
   ]
 }
