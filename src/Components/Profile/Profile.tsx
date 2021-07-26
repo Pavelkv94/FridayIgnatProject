@@ -37,7 +37,7 @@ export function Profile() {
     // const logout = () => {
     //     dispatch(logoutTC());
     // }
-    if (isAuthError) {
+    if (isAuthError || !isAuth) {
         return <Redirect to={"/login"} />;
     }
     //пагинация
