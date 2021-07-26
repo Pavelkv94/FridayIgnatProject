@@ -87,7 +87,7 @@ export function Cards() {
                 {cardsPackID === userID && <AddedItem disabled={cardsPackID !== userID} callback={addCallback} title="Add New Card" />}
 
             </div>
-            {error && <div>{error}</div>}
+            {!error && <div>{error}</div>}
             <div className={s.searchBar}>
                 <Search
                     packName={cardQuestion}
