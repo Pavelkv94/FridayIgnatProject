@@ -9,7 +9,7 @@ import { PATH } from "../../Routes";
 import SuperButton from "../../SuperComponents/c2-SuperButton/SuperButton";
 import s from './LearnPage.module.css'
 
-const grades = ['dont know', "i'm forgot", 'I thought', 'almost correct', 'I know'];
+const grades = ['dont know', "I forgot", 'I thought', 'almost correct', 'I know'];
 
 const getCard = (cards: ArrCardType[]) => {
     const sum = cards.reduce((acc, card) => acc + (6 - card.grade) * (6 - card.grade), 0);
@@ -25,6 +25,9 @@ const getCard = (cards: ArrCardType[]) => {
 }
 
 const LearnPage = () => {
+
+    let [learnStatus, setLearnStatus] = useState(true)
+
     const isAuth = useSelector<AppStateType, string>(state => state.loginPage.isAuth)
     const [isChecked, setIsChecked] = useState<boolean>(false);
     const [first, setFirst] = useState<boolean>(true);
@@ -70,7 +73,7 @@ const LearnPage = () => {
 
     const onNext = () => {
         setIsChecked(false);
-
+        setLearnStatus(true)
         if (cards.length > 0) {
             // dispatch
             setCard(getCard(cards));
@@ -79,17 +82,22 @@ const LearnPage = () => {
         }
     }
     if (isAuth === "") { return <Redirect to={"/login"} />; }
+
+
+
+
     return (
         <div className={s.container}>
             <div className={s.title}>Go To Learn!!</div>
             <br />
             <div className={s.question}> <b>Question:</b> {card.question}</div>
             <br />
-            <div className={s.control}>
-                <NavLink to={PATH.PACKS_PAGE}>   <SuperButton onClick={() => { }} className={s.cancelBtn}>Cancel</SuperButton> </NavLink>
 
-                <SuperButton onClick={() => setIsChecked(true)} style={{ width: "188px" }}>Check</SuperButton>
-            </div>
+            {learnStatus && <div className={s.control}>
+                <NavLink to={PATH.PACKS_PAGE}>   <SuperButton onClick={() => { }} className={s.cancelBtn}>Cancel</SuperButton> </NavLink>
+                <SuperButton onClick={() => { setIsChecked(true); setLearnStatus(false) }} style={{ width: "188px" }}>Check</SuperButton>
+            </div>}
+
 
             {isChecked && (
                 <>
@@ -101,8 +109,10 @@ const LearnPage = () => {
                             }}>{g}</SuperButton>
                         ))}
                     </div>
-                    <div>Your Grade for this question: <b>{card.grade}</b></div>
+                    <div>Your Grade for this question: <b>{Math.round(card.grade)}</b></div>
                     <div>Your attempts for this question:   <b>{card.shots}</b></div>
+                    <br />
+                    <div className={s.subTitle}> to finish click "Cancel"</div>
                     <div className={s.control}>
                         <NavLink to={PATH.PACKS_PAGE}>   <SuperButton onClick={() => { }} className={s.cancelBtn}>Cancel</SuperButton> </NavLink>
                         <SuperButton onClick={onNext} style={{ width: "188px" }}>next</SuperButton>

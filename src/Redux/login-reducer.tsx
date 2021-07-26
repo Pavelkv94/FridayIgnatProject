@@ -1,6 +1,6 @@
 import React from 'react'
-import {Dispatch} from 'redux';
-import {authApi, ResponseLoginType} from '../api/fridayProject-api';
+import { Dispatch } from 'redux';
+import { authApi, ResponseLoginType } from '../api/fridayProject-api';
 import { AppStatusActionType, setAppStatusAC } from './app-reducer';
 
 let initialState = {
@@ -14,7 +14,7 @@ let initialState = {
 export type InitialAuthType = typeof initialState;
 export type LoginActionType = SetUserDataACType | SetErrorACType | IsLoggedInACType | AppStatusActionType
 
-const loginReducer = (state: InitialAuthType = initialState, action: LoginActionType):InitialAuthType => {
+const loginReducer = (state: InitialAuthType = initialState, action: LoginActionType): InitialAuthType => {
     switch (action.type) {
         case 'LOGIN/SET-USER-DATA':
             return {
@@ -69,7 +69,8 @@ export const loginTC = (email: string, password: string, rememberMe: boolean) =>
             }
         )
         .catch(err => {
-            dispatch(setErrorAC(err.response.data.error))
+            
+            dispatch(setErrorAC(err.response.data.error ? err.response.data.error : "error")) //need fix
             dispatch(setAppStatusAC("failed"))
         })
         .finally(() => {
@@ -85,9 +86,9 @@ export const logoutTC = () => (dispatch: Dispatch) => {
             dispatch(isLoggedInAC(""))
             dispatch(setAppStatusAC("succeeded"))
         }).catch(err => {
-        dispatch(setErrorAC(err.response.data.error))
-        dispatch(setAppStatusAC("failed"))
-    })
+            dispatch(setErrorAC(err.response.data.error ? err.response.data.error : "error")) //need fix
+            dispatch(setAppStatusAC("failed"))
+        })
         .finally(() => {
             dispatch(setAppStatusAC("idle"))
         })
@@ -102,9 +103,9 @@ export const authTC = () => (dispatch: Dispatch) => {
             dispatch(setAppStatusAC("succeeded"))
 
         }).catch(err => {
-        dispatch(setErrorAC(err.response.data.error))
-        dispatch(setAppStatusAC("failed"))
-    })
+            dispatch(setErrorAC(err.response.data.error ? err.response.data.error : "error")) //need fix
+            dispatch(setAppStatusAC("failed"))
+        })
         .finally(() => {
             dispatch(setAppStatusAC("idle"))
         })

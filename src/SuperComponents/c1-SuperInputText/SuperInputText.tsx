@@ -14,7 +14,7 @@ type SuperInputTextPropsType = DefaultInputPropsType & { // и + ещё проп
     errorMessage?: string | null
     spanClassName?: string
     isType: string
-    target: "packs" | "cards"
+    target?: "packs" | "cards"
 
 }
 

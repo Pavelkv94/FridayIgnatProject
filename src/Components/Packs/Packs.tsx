@@ -22,6 +22,7 @@ import { authTC } from '../../Redux/login-reducer';
 import { useState } from 'react';
 
 export function Packs() {
+    let [my, setMy] = useState<boolean>();
 
     const dispatch = useDispatch()
     const isAuth = useSelector<AppStateType, string>(state => state.loginPage.isAuth)
@@ -29,8 +30,10 @@ export function Packs() {
     const { min, max, page, pageCount, packName, sortPacks, error, cardPacks, cardPacksTotalCount, user_id } = useSelector<AppStateType, responsePacksType>(state => state.packs)
     const status = useSelector<AppStateType, string>((state) => state.app.status)
     const isOwner = useSelector<AppStateType, string>(state => state.loginPage.userData._id)
-
-
+    const own = useSelector<AppStateType, string>(state => state.packs.user_id)
+useEffect(()=>{
+    setMy(isOwner === own)
+},[])
     useEffect(() => {
         if (!isAuth)
             dispatch(authTC())
@@ -70,7 +73,7 @@ export function Packs() {
     }
 
 
-    let [my, setMy] = useState(false);
+ 
 
     if (isAuthError) { return <Redirect to={"/login"} />; }
 
