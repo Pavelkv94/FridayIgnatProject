@@ -1,7 +1,5 @@
-import React, { Dispatch } from 'react'
-import { authApi, ResponseLoginType } from '../api/fridayProject-api';
-import { setAppStatusAC } from './app-reducer';
-import { setErrorAC } from './login-reducer';
+import React from 'react'
+import { ResponseLoginType } from '../api/fridayProject-api';
 
 
 export const FakeUser = {
@@ -29,77 +27,72 @@ export const ProfileInitState = {
 };
 
 
-export type ProfileActionsType = ReturnType<typeof getUserAC>
+//export type ProfileActionsType = ReturnType<typeof getUserAC>
 
-const profileReducer = (state = ProfileInitState, action: ProfileActionsType): ProfileStateType => {
+const profileReducer = (state = ProfileInitState, action: any) => {
 
     switch (action.type) {
-        case "profile/SET_USER": {
-            return {
-                ...state,
-                userData: action.user,
-            }
-        }
+
         default: return state
     }
 }
 
-const getUserAC = (user: ResponseLoginType) => ({
-    type: "profile/SET_USER",
-    user,
-} as const)
-
-// const updateUserAC = (name: string, avatar: string) => ({
+// const getUserAC = (user: ResponseLoginType) => ({
 //     type: "profile/SET_USER",
-//     name, avatar
+//     user,
 // } as const)
 
+// // const updateUserAC = (name: string, avatar: string) => ({
+// //     type: "profile/SET_USER",
+// //     name, avatar
+// // } as const)
 
-export const getUserTC = () => (dispatch: Dispatch<any>) => {
-    dispatch(setAppStatusAC("loading"))
-    authApi.me()
-        .then(res => {
-            console.log(res)
-            dispatch(getUserAC(res.data));
-            //dispatch(isLoggedInAC(res.data._id))
-            dispatch(setAppStatusAC("succeeded"))
-        })
-        .catch(err => {
-            const error = err.response
-            dispatch(setErrorAC(error
-                ? err.response.data.error
-                : (err.message + ', more details in the console')))
-            dispatch(setAppStatusAC("failed"))
-        })
-        .finally(() => {
-            dispatch(setAppStatusAC("idle"))
-        })
 
-};
+// export const getUserTC = () => (dispatch: Dispatch<any>) => {
+//     dispatch(setAppStatusAC("loading"))
+//     authApi.me()
+//         .then(res => {
+//             console.log(res)
+//             dispatch(getUserAC(res.data));
+//             //dispatch(isLoggedInAC(res.data._id))
+//             dispatch(setAppStatusAC("succeeded"))
+//         })
+//         .catch(err => {
+//             const error = err.response
+//             dispatch(setErrorAC(error
+//                 ? err.response.data.error
+//                 : (err.message + ', more details in the console')))
+//             dispatch(setAppStatusAC("failed"))
+//         })
+//         .finally(() => {
+//             dispatch(setAppStatusAC("idle"))
+//         })
 
-export const updateUser = (name: string, avatar: string) => (dispatch: Dispatch<any>) => {
-    {
-        dispatch(setAppStatusAC("loading"))
+// };
 
-        authApi.updateUser(name, avatar)
-            .then(res => {
-                dispatch(getUserAC(res.data));
-                //dispatch(isLoggedInAC(res.data._id))
-                dispatch(setAppStatusAC("succeeded"))
-            })
-            .catch(err => {
-                const error = err.response
-                dispatch(setErrorAC(error
-                    ? err.response.data.error
-                    : (err.message + ', more details in the console')))
-                dispatch(setAppStatusAC("failed"))
-            })
-            .finally(() => {
-                dispatch(setAppStatusAC("idle"))
-            })
+// export const updateUser = (name: string, avatar: string) => (dispatch: Dispatch<any>) => {
+//     {
+//         dispatch(setAppStatusAC("loading"))
 
-    }
-};
+//         authApi.updateUser(name, avatar)
+//             .then(res => {
+//                 dispatch(getUserAC(res.data));
+//                 //dispatch(isLoggedInAC(res.data._id))
+//                 dispatch(setAppStatusAC("succeeded"))
+//             })
+//             .catch(err => {
+//                 const error = err.response
+//                 dispatch(setErrorAC(error
+//                     ? err.response.data.error
+//                     : (err.message + ', more details in the console')))
+//                 dispatch(setAppStatusAC("failed"))
+//             })
+//             .finally(() => {
+//                 dispatch(setAppStatusAC("idle"))
+//             })
+
+//     }
+// };
 
 export default profileReducer;
 
