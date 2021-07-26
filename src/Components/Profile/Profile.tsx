@@ -105,7 +105,7 @@ export function Profile() {
                             ? <div className={s.verified} style={{ background: "green" }}></div>
                             : <div className={s.verified} style={{ background: "red" }}></div>}</div>
                             <br />
-                        <AddedItem callback={addedCallback} title="Add New Pack" />
+                        <AddedItem callback={addedCallback} title="Add New Pack"/>
                     </div>
                 </div>
 

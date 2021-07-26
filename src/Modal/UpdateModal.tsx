@@ -8,6 +8,8 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import EditIcon from '@material-ui/icons/Edit';
 import { IconButton } from '@material-ui/core';
 import s from './../Components/Profile/Profile.module.css'
+import { NavLink } from 'react-router-dom';
+import { PATH } from '../Routes';
 
 type UpdateItemPT = {
     callback: (title: string, title2?: string) => void
@@ -51,7 +53,7 @@ export function UpdateItem(props: UpdateItemPT) {
 
 
             <Dialog open={open} onClose={handleClickUPD} aria-labelledby="form-dialog-title">
-                <DialogTitle id="form-dialog-title">{props.point === "profile" ? "New Name" : "Update Please"}</DialogTitle>
+                <DialogTitle id="form-dialog-title">{props.point === "profile" ? "Edit profile" : "Update Please"}</DialogTitle>
                 <DialogContent>
 
                     <TextField
@@ -62,7 +64,7 @@ export function UpdateItem(props: UpdateItemPT) {
                         id="name"
                         fullWidth
                     />
-
+                    {props.point === "profile" && <NavLink to={PATH.NEW_PASS}> New Password</NavLink>}
                     {/* {props.value2 && <TextField
                         value={title2}
                         onChange={changeTitle2}
