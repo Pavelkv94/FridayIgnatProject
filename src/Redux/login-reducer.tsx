@@ -69,8 +69,11 @@ export const loginTC = (email: string, password: string, rememberMe: boolean) =>
             }
         )
         .catch(err => {
-            
-            dispatch(setErrorAC(err.response.data.error ? err.response.data.error : "error")) //need fix
+
+            const error = err.response
+            dispatch(setErrorAC(error
+                ? err.response.data.error
+                : (err.message + ', more details in the console')))
             dispatch(setAppStatusAC("failed"))
         })
         .finally(() => {
@@ -86,7 +89,10 @@ export const logoutTC = () => (dispatch: Dispatch) => {
             dispatch(isLoggedInAC(""))
             dispatch(setAppStatusAC("succeeded"))
         }).catch(err => {
-            dispatch(setErrorAC(err.response.data.error ? err.response.data.error : "error")) //need fix
+            const error = err.response
+            dispatch(setErrorAC(error
+                ? err.response.data.error
+                : (err.message + ', more details in the console')))
             dispatch(setAppStatusAC("failed"))
         })
         .finally(() => {
@@ -103,7 +109,10 @@ export const authTC = () => (dispatch: Dispatch) => {
             dispatch(setAppStatusAC("succeeded"))
 
         }).catch(err => {
-            dispatch(setErrorAC(err.response.data.error ? err.response.data.error : "error")) //need fix
+            const error = err.response
+            dispatch(setErrorAC(error
+                ? err.response.data.error
+                : (err.message + ', more details in the console')))
             dispatch(setAppStatusAC("failed"))
         })
         .finally(() => {
@@ -111,3 +120,5 @@ export const authTC = () => (dispatch: Dispatch) => {
         })
 }
 export default loginReducer;
+
+

@@ -9,6 +9,7 @@ type PaginatorType = {
     pageSize: number
     currentPage: number
     pageCount: number
+    profileView?: boolean
     onPageChanged: (pageNumber: number) => void
     onChangeHandler: (e: ChangeEvent<HTMLSelectElement>) => void
 }
@@ -31,15 +32,15 @@ export function Paginator(props: PaginatorType) {
         <select value={props.pageCount} onChange={(e) => props.onChangeHandler(e)} >
             <option value={4}>4</option>
             <option value={7}>7</option>
-            <option value={10}>10</option>
-            <option value={20}>25</option>
+            {!props.profileView && <option value={10}>10</option>}
+            {!props.profileView && <option value={25}>25</option>}
         </select>
         <span className={s.pagTitle}>Cards per Page   </span>
         {portionNumber > 1 &&
-                 <IconButton onClick={() => { setPortionNumber(portionNumber - 1) }} >
-                 <ArrowBackIcon color="secondary" fontSize="medium"/>
-             </IconButton>
-           
+            <IconButton onClick={() => { setPortionNumber(portionNumber - 1) }} >
+                <ArrowBackIcon color="secondary" fontSize="medium" />
+            </IconButton>
+
         }
         {pages.filter(p => p >= leftPortionPageNumber && p <= rightPortionPageNumber).map(p => {
             return <span key={Math.random()}
@@ -52,7 +53,6 @@ export function Paginator(props: PaginatorType) {
                 <ArrowForwardIcon color="secondary" fontSize="medium" />
             </IconButton>
         }
-
 
     </div>)
 }
