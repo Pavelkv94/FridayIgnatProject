@@ -16,24 +16,31 @@ export const authApi = {
         return instance.post<ResponseLoginType>("/auth/me", {})
     },
     login(email: string, password: string, rememberMe: boolean) {
-        return instance.post<ResponseLoginType>("/auth/login", {email, password, rememberMe})
+        return instance.post<ResponseLoginType>("/auth/login", { email, password, rememberMe })
     },
     logout() {
         return instance.delete("/auth/me")
     },
     register(email: string, password: string) {
-        return instance.post<ResponseRegisterType>("/auth/register", {email, password})
+        return instance.post<ResponseRegisterType>("/auth/register", { email, password })
     },
     forgot(email: string, from: string, message: string) {
-        return instance.post<ResponseForgotType>("/auth/forgot", {email, from, message})
+        return instance.post<ResponseForgotType>("/auth/forgot", { email, from, message })
     },
     newPassword(password: string, resetPasswordToken: string) {
-        return instance.post("/auth/set-new-password", {password, resetPasswordToken})
+        return instance.post("/auth/set-new-password", { password, resetPasswordToken })
+    },
+    updateUser(name: string, avatar: string) {
+        return instance.put<UpdateUserDataType>("/auth/me", {name, avatar});
     }
 }
 
 //types
 
+export type UpdateUserDataType = {
+    updatedUser: ResponseLoginType;
+    error: string;
+};
 
 export type ResponseLoginType = {
     _id: string;

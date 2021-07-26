@@ -119,6 +119,30 @@ export const authTC = () => (dispatch: Dispatch) => {
             dispatch(setAppStatusAC("idle"))
         })
 }
+
+export const updateUserTC = (name: string, avatar?: string) => (dispatch: Dispatch<any>) => {
+    {
+        dispatch(setAppStatusAC("loading"))
+//@ts-ignore
+        authApi.updateUser(name, avatar)
+            .then(res => {
+                dispatch(getUserDataAC(res.data.updatedUser));
+                dispatch(isLoggedInAC(res.data.updatedUser._id))
+                dispatch(setAppStatusAC("succeeded"))
+            })
+            .catch(err => {
+                const error = err.response
+                dispatch(setErrorAC(error
+                    ? err.response.data.error
+                    : (err.message + ', more details in the console')))
+                dispatch(setAppStatusAC("failed"))
+            })
+            .finally(() => {
+                dispatch(setAppStatusAC("idle"))
+            })
+
+    }
+};
 export default loginReducer;
 
 

@@ -15,7 +15,7 @@ const initialState: initialStateType = {
     pageCount: 4,
     error: undefined,
     isInitialized: false,
-    sortPacks: "1update",
+    sortPacks: "0update",
     packName: "",
     user_id: ""
 }
