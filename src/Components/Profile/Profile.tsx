@@ -68,7 +68,11 @@ export function Profile() {
         dispatch(updateUserTC(title, title2))
     }
     const onMainPhotoSelected = (e: any) => { setValue(e.currentTarget.value) }
-    const photoCallBack = () => { dispatch(updateUserTC(data.name, value)); setValue("") }
+
+    const photoCallBack = () => {
+        if (value === "") { value = "https://image.flaticon.com/icons/png/512/21/21104.png"}
+        else dispatch(updateUserTC(data.name, value)); setValue("")
+    }
     const addedCallback = (name: string) => {
         dispatch(packsAddTC(name))
     }
@@ -104,8 +108,8 @@ export function Profile() {
                         <div className={`${s.infoItem} ${s.verifiedBlock}`}><b> Account verified:</b> {data.verified
                             ? <div className={s.verified} style={{ background: "green" }}></div>
                             : <div className={s.verified} style={{ background: "red" }}></div>}</div>
-                            <br />
-                        <AddedItem callback={addedCallback} title="Add New Pack"/>
+                        <br />
+                        <AddedItem callback={addedCallback} title="Add New Pack" />
                     </div>
                 </div>
 
