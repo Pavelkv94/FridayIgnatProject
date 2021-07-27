@@ -19,15 +19,14 @@ type PropsType = {
 }
 
 export const Pack = React.memo((props: PropsType) => {
-    console.log("render pack")
     const dispatch = useDispatch()
 
     const deleteCallback = useCallback(() => {
         dispatch(packsDeleteTC(props.card._id))
-    }, [props.card._id])
+    }, [props.card._id, dispatch])
     const updateCallback = useCallback((name: string) => {
         dispatch(packsUpdateTC(props.card._id, name))
-    }, [props.card._id])
+    }, [props.card._id, dispatch])
 
     const userID = useSelector<AppStateType, string>(state => state.loginPage.userData._id)
 

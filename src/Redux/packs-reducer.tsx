@@ -61,14 +61,14 @@ const packsReducer = (state = initialState, action: ActionType): initialStateTyp
         case 'PACKS/SET-PAGECOUNT':
             return { ...state, pageCount: action.value }
         case 'PACKS/SET-USERID-FOR-PACKS':
-            return { ...state, user_id: action.value }
+            return { ...state, user_id: action.id }
         default:
             return state
     }
 
 }
 
-export const setUserIdforPacksAC = (value: string) => ({ type: 'PACKS/SET-USERID-FOR-PACKS', value } as const)
+export const setUserIdforPacksAC = (id: string) => ({ type: 'PACKS/SET-USERID-FOR-PACKS',id } as const)
 export const setPageCountOfPacksAC = (value: number) => ({ type: 'PACKS/SET-PAGECOUNT', value } as const)
 export const setPageOfPacksAC = (page: number) => ({ type: 'PACKS/SET-PAGE', page } as const)
 export const setRangePacksAC = (min: number, max: number) => ({ type: 'PACKS/SET-RANGE', min, max } as const)

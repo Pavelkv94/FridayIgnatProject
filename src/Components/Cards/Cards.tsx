@@ -39,38 +39,38 @@ export const Cards = React.memo(() => {
     useEffect(() => {
         if (!isAuth)
             dispatch(authTC())
-    }, [isAuth])
+    }, [isAuth, dispatch])
 
     useEffect(() => {
         if (isAuth) {
             dispatch(setPackUserIdAC(packId))
             dispatch(cardsTC(packId))
         }
-    }, [isAuth, page, pageCount, sortCards])
+    }, [isAuth, page, pageCount, sortCards, packId, dispatch])
 
     const addCallback = useCallback((question?: string, answer?: string) => {
         dispatch(cardsAdd(packId, question, answer))
-    }, [packId])
+    }, [packId, dispatch])
 
     //пагинация
     const onPageChanged = useCallback((newPage: number) => {
         dispatch(setPageOfCardsAC(newPage))
-    }, [])
+    }, [dispatch])
     const onChangeHandler = useCallback((e: ChangeEvent<HTMLSelectElement>) => {
         dispatch(setPageCountOfCardsAC(Number(e.currentTarget.value)))
-    }, [])
+    }, [dispatch])
     //поиск
     const setSearchResult = useCallback((value: string) => {
         dispatch(setSearchValueCardAC(value))
-    }, [])
+    }, [dispatch])
     const searchCardCallback = useCallback(() => {
         dispatch(cardsTC(packId))
-    }, [])
+    }, [dispatch, packId])
 
     //сортировка 
     const sortingCard = useCallback((n: 1 | 0, sortValue: string) => {
         dispatch(sortCardAC(n, sortValue))
-    }, [])
+    }, [dispatch])
 
     return <div className={s.container}>
         <div className={s.subContainer}>

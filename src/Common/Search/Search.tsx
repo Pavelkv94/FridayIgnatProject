@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import s from './Search.module.css'
 import SuperInputText from "../../SuperComponents/c1-SuperInputText/SuperInputText";
 import SuperButton from "../../SuperComponents/c2-SuperButton/SuperButton";

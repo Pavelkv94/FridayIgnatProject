@@ -1,7 +1,7 @@
 import React, { ChangeEvent, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ResponseLoginType } from '../../api/fridayProject-api';
-import { authTC, logoutTC, updateUserTC } from '../../Redux/login-reducer';
+import { authTC, updateUserTC } from '../../Redux/login-reducer';
 import { AppStateType } from '../../Redux/store';
 import { Redirect } from 'react-router-dom';
 import s from './Profile.module.css'
@@ -21,23 +21,21 @@ export const Profile = React.memo(() => {
     const isAuth = useSelector<AppStateType, string>(state => state.loginPage.isAuth)
     const isAuthError = useSelector<AppStateType, string | null>(state => state.loginPage.error)
     const data = useSelector<AppStateType, ResponseLoginType>(state => state.loginPage.userData)
-    const { min, max, page, pageCount, packName, sortPacks, error, cardPacks, cardPacksTotalCount, user_id } = useSelector<AppStateType, responsePacksType>(state => state.packs)
+    const { min, max, page, pageCount, packName, sortPacks, cardPacks, cardPacksTotalCount, user_id } = useSelector<AppStateType, responsePacksType>(state => state.packs)
     let [value, setValue] = useState("")
+    
     useEffect(() => {
         dispatch(setUserIdforPacksAC(data._id));
         if (!isAuth)
             dispatch(authTC())
-    }, [])
+    }, [data._id, dispatch, isAuth])
 
     useEffect(() => {
         if (isAuth)
             dispatch(packsTC())
-    }, [isAuth, page, pageCount, sortPacks, user_id])
+    }, [isAuth, page, pageCount, sortPacks, user_id, dispatch])
 
-    // const logout = () => {
-    //     dispatch(logoutTC());
-    // }
-    if (isAuthError || !isAuth) {
+     if (isAuthError || !isAuth) {
         return <Redirect to={"/login"} />;
     }
     //пагинация

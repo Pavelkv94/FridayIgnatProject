@@ -1,4 +1,3 @@
-import React from 'react'
 import { Dispatch } from "redux";
 import { authApi } from "../api/fridayProject-api";
 import { AppStatusActionType, setAppStatusAC } from './app-reducer';

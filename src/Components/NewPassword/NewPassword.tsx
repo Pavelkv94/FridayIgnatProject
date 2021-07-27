@@ -18,14 +18,11 @@ export const NewPassword = React.memo(() => {
 
     const status = useSelector<AppStateType, string>((state) => state.app.status)
     const error = useSelector<AppStateType, string | null>((state) => state.newPassPage.error)
-    const isInitialized = useSelector<AppStateType, boolean>((state) => state.newPassPage.isInitialized)
     const isAuth = useSelector<AppStateType, string>(state => state.loginPage.isAuth)
+    const isAuthError = useSelector<AppStateType, string | null>(state => state.loginPage.error)
 
-    // if (isAuth) {
-    //     return <Redirect to='/profile'/>
-    // }
-    if (isInitialized) {
-        return <Redirect to='/login' />
+    if (isAuthError || !isAuth) {
+        return <Redirect to={"/login"} />;
     }
     const buttonCallback = () => {
         if (password === passwordConf) {

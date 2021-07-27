@@ -34,7 +34,7 @@ export const Registration =React.memo( () => {
     useEffect(() => {
         dispatch(setIsInitializedAC(false))
         dispatch(setAppErrorAC(null))
-    }, [isInitialized])
+    }, [isInitialized, dispatch])
 
     if (isInitialized) {
         return <Redirect to='/login' />

@@ -17,10 +17,10 @@ export const Card = React.memo((props: PropsType) => {
     const deleteCallback = useCallback(() => {
 
         dispatch(cardsDeleteTC(props.card._id, props.card.cardsPack_id))
-    }, [])
+    }, [dispatch, props.card._id, props.card.cardsPack_id])
     const updateCallback = useCallback((question: string) => {
         dispatch(cardsUpdateTC(props.card._id, props.card.cardsPack_id, question))
-    }, [])
+    }, [dispatch, props.card._id, props.card.cardsPack_id,])
 
     const userID = useSelector<AppStateType, string>(state => state.loginPage.userData._id)
 

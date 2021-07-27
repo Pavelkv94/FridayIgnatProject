@@ -62,14 +62,14 @@ const LearnPage = React.memo(() => {
         return () => {
             console.log('LearnContainer useEffect off');
         }
-    }, [dispatch, id,
+    }, [dispatch, id, cards, first
         // dispatch, id, cards, first
     ]);
 
     useEffect(() => {
         if (!isAuth)
             dispatch(authTC())
-    }, [isAuth])
+    }, [isAuth, dispatch])
 
     const onNext = () => {
         setIsChecked(false);
@@ -103,9 +103,9 @@ const LearnPage = React.memo(() => {
                 <>
                     <div className={s.question}> <b>Answer: </b>{card.answer}</div>
                     <div className={s.checkBlock}>
-                        {learnStatus == 2 && <div className={s.great}><b> Thank for you grade, go next!</b></div>}
+                        {learnStatus === 2 && <div className={s.great}><b> Thank for you grade, go next!</b></div>}
                         {grades.map((g, i) => (
-                            <SuperButton key={'grade-' + i} className={s.answerBtn} style={learnStatus != 2 ? { opacity: `${i / 10 + 0.6}` } : { display: "none" }} onClick={() => {
+                            <SuperButton key={'grade-' + i} className={s.answerBtn} style={learnStatus !== 2 ? { opacity: `${i / 10 + 0.6}` } : { display: "none" }} onClick={() => {
                                 dispatch(setGradeTC(card._id, i + 1)); setLearnStatus(2)
                             }}>{g}</SuperButton>
                         ))}

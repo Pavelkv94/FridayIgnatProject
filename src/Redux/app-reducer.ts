@@ -1,5 +1,3 @@
-import React from 'react'
-
 let initialState = {
     status: "idle"
 }

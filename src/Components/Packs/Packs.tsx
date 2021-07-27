@@ -28,49 +28,47 @@ export const Packs = React.memo(() => {
     const isAuth = useSelector<AppStateType, string>(state => state.loginPage.isAuth)
     const isAuthError = useSelector<AppStateType, string | null>(state => state.loginPage.error)
     const { min, max, page, pageCount, packName, sortPacks, error, cardPacks, cardPacksTotalCount, user_id } = useSelector<AppStateType, responsePacksType>(state => state.packs)
-    const status = useSelector<AppStateType, string>((state) => state.app.status)
     const isOwner = useSelector<AppStateType, string>(state => state.loginPage.userData._id)
     const own = useSelector<AppStateType, string>(state => state.packs.user_id)
+
     useEffect(() => {
         setMy(isOwner === own)
-    }, [])
+    }, [isOwner, own])
     useEffect(() => {
         if (!isAuth)
             dispatch(authTC())
-    }, [isAuth])
-
+    }, [isAuth, dispatch])
 
     useEffect(() => {
         if (isAuth)
             dispatch(packsTC())
-    }, [isAuth, page, pageCount, sortPacks, user_id])
+    }, [isAuth, page, pageCount, sortPacks, user_id, dispatch])
 
     const addedCallback = useCallback((name: string) => {
         dispatch(packsAddTC(name))
-    }, [])
+    }, [dispatch])
 
     //пагинация
     const onPageChanged = useCallback((page: number) => {
         dispatch(setPageOfPacksAC(page))
-    }, [])
+    }, [dispatch])
     const onChangeHandler = useCallback((e: ChangeEvent<HTMLSelectElement>) => {
         dispatch(setPageCountOfPacksAC(Number(e.currentTarget.value)))
-    }, [])
+    }, [dispatch])
 
     //поисковая строка
     const setSearchResult = useCallback((value: string) => {
         dispatch(setSearchValuePackAC(value))
-
-    }, [])
+    }, [dispatch])
     const searchPackCallback = useCallback(() => {
         dispatch(packsTC())
-    }, [])
+    }, [dispatch])
 
     //сортировка 
     const sortingPack = useCallback((n: 1 | 0, sortValue: string) => {
 
         dispatch(sortPackAC(n, sortValue))
-    }, [])
+    }, [dispatch])
 
 
 
