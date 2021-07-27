@@ -96,13 +96,13 @@ export const cardsAdd = (cardsPack_id: string, question?: string, answer?: strin
     packsApi.setCards(cardsPack_id, question, answer)
         .then(() => {
             dispatch(cardsTC(cardsPack_id))
-           dispatch(setAppStatusAC("succeeded"))
+            dispatch(setAppStatusAC("succeeded"))
         })
         .catch((error) => {
             dispatch(setAppErrorPacksAC(error.response.data.error))
-         dispatch(setAppStatusAC("failed"))
+            dispatch(setAppStatusAC("failed"))
         })
-     .finally(() => {
+        .finally(() => {
             dispatch(setAppStatusAC("idle"))
         })
 }
@@ -116,25 +116,25 @@ export const cardsDeleteTC = (id: string, cardsPack_id: string) => (dispatch: Di
         })
         .catch((error) => {
             dispatch(setAppErrorPacksAC(error.response.data.error))
-           dispatch(setAppStatusAC("failed"))
+            dispatch(setAppStatusAC("failed"))
         })
-     .finally(() => {
+        .finally(() => {
             dispatch(setAppStatusAC("idle"))
         })
 }
 
-export const cardsUpdateTC = (id: string, cardsPack_id: string, question?: string) => (dispatch: Dispatch<any>) => {
+export const cardsUpdateTC = (id: string, cardsPack_id: string, question?: string, answer?: string) => (dispatch: Dispatch<any>) => {
     dispatch(setAppStatusAC("loading"))
-    packsApi.updateCards(id, question)
+    packsApi.updateCards(id, question, answer)
         .then(() => {
             dispatch(cardsTC(cardsPack_id))
             dispatch(setAppStatusAC("succeeded"))
         })
         .catch((error) => {
             dispatch(setAppErrorPacksAC(error.response.data.error))
-           dispatch(setAppStatusAC("failed"))
+            dispatch(setAppStatusAC("failed"))
         })
-      .finally(() => {
+        .finally(() => {
             dispatch(setAppStatusAC("idle"))
         })
 }
@@ -144,13 +144,13 @@ export const setGradeTC = (id: string, grade: number) => (dispatch: Dispatch<any
     packsApi.setGradeCards(id, grade)
         .then((res) => {
             dispatch(setGradeAC(res.data.updatedGrade.grade))
-           dispatch(setAppStatusAC("succeeded"))
+            dispatch(setAppStatusAC("succeeded"))
         })
         .catch((error) => {
             dispatch(setAppErrorPacksAC(error.response.data.error))
-         dispatch(setAppStatusAC("failed"))
+            dispatch(setAppStatusAC("failed"))
         })
-    .finally(() => {
+        .finally(() => {
             dispatch(setAppStatusAC("idle"))
         })
 }

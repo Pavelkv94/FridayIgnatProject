@@ -16,26 +16,27 @@ import { useState } from 'react';
 import { AddedItem } from '../../Modal/AddedModal';
 
 export const Profile = React.memo(() => {
+    console.log("profile.render")
 
     const dispatch = useDispatch();
     const isAuth = useSelector<AppStateType, string>(state => state.loginPage.isAuth)
     const isAuthError = useSelector<AppStateType, string | null>(state => state.loginPage.error)
     const data = useSelector<AppStateType, ResponseLoginType>(state => state.loginPage.userData)
     const { min, max, page, pageCount, packName, sortPacks, cardPacks, cardPacksTotalCount, user_id } = useSelector<AppStateType, responsePacksType>(state => state.packs)
-    let [value, setValue] = useState("")
-    
+    let [valueForPhoto, setValue] = useState("")
+
     useEffect(() => {
-        dispatch(setUserIdforPacksAC(data._id));
+        dispatch(setUserIdforPacksAC(data._id))
         if (!isAuth)
             dispatch(authTC())
-    }, [data._id, dispatch, isAuth])
+    }, [])
 
     useEffect(() => {
         if (isAuth)
             dispatch(packsTC())
     }, [isAuth, page, pageCount, sortPacks, user_id, dispatch])
 
-     if (isAuthError || !isAuth) {
+    if (isAuthError || !isAuth) {
         return <Redirect to={"/login"} />;
     }
     //пагинация
@@ -75,8 +76,8 @@ export const Profile = React.memo(() => {
     // }
 
     const photoCallBack = () => {
-        if (value === "") { value = "https://image.flaticon.com/icons/png/512/21/21104.png" }
-        else dispatch(updateUserTC(data.name, value)); setValue("")
+        if (valueForPhoto === "") { valueForPhoto = "https://image.flaticon.com/icons/png/512/21/21104.png" }
+        else dispatch(updateUserTC(data.name, valueForPhoto)); setValue("")
     }
     const addedCallback = (name: string) => {
         dispatch(packsAddTC(name))
@@ -99,7 +100,7 @@ export const Profile = React.memo(() => {
                         <div className={s.nameUser}>{data.name?.split("@")[0]}</div>
                         <div className={s.nameEmail}>{data.email}</div>
                         <form>
-                            <input type="text" value={value} onChange={onMainPhotoSelected} placeholder="Enter the URL of new photo" />
+                            <input type="text" value={valueForPhoto} onChange={onMainPhotoSelected} placeholder="Enter the URL of new photo" />
                             <button onClick={photoCallBack}>&#9658;</button>
                         </form>
 

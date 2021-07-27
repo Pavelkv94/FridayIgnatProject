@@ -22,7 +22,7 @@ type UpdateItemPT = {
     photoCallBack?: () => void
 }
 
-export const UpdateItem =React.memo( (props: UpdateItemPT) => {
+export const UpdateItem = React.memo((props: UpdateItemPT) => {
     const [open, setOpen] = React.useState(false);
     let [title, setTitle] = React.useState(props.value);
     let [title2, setTitle2] = React.useState(props.value2);
@@ -55,7 +55,7 @@ export const UpdateItem =React.memo( (props: UpdateItemPT) => {
             <Dialog open={open} onClose={handleClickUPD} aria-labelledby="form-dialog-title">
                 <DialogTitle id="form-dialog-title">{props.point === "profile" ? "Edit profile" : "Update Please"}</DialogTitle>
                 <DialogContent>
-
+                    {props.point !== "profile" && <div>Question</div>}
                     <TextField
                         value={title}
                         onChange={changeTitle}
@@ -64,15 +64,17 @@ export const UpdateItem =React.memo( (props: UpdateItemPT) => {
                         id="name"
                         fullWidth
                     />
+                    
                     {props.point === "profile" && <NavLink to={PATH.NEW_PASS}> New Password</NavLink>}
-                    {/* {props.value2 && <TextField
+                    {props.point === "card" && <div>Answer</div>}
+                    {props.point === "card" && <TextField
                         value={title2}
                         onChange={changeTitle2}
                         autoFocus
                         margin="dense"
                         id="name2"
                         fullWidth
-                    />} */}
+                    />}
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose} color="primary">

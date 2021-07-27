@@ -18,8 +18,8 @@ export const Card = React.memo((props: PropsType) => {
 
         dispatch(cardsDeleteTC(props.card._id, props.card.cardsPack_id))
     }, [dispatch, props.card._id, props.card.cardsPack_id])
-    const updateCallback = useCallback((question: string) => {
-        dispatch(cardsUpdateTC(props.card._id, props.card.cardsPack_id, question))
+    const updateCallback = useCallback((question: string, answer?: string) => {
+        dispatch(cardsUpdateTC(props.card._id, props.card.cardsPack_id, question, answer))
     }, [dispatch, props.card._id, props.card.cardsPack_id,])
 
     const userID = useSelector<AppStateType, string>(state => state.loginPage.userData._id)
@@ -37,7 +37,8 @@ export const Card = React.memo((props: PropsType) => {
             <DeleteItem disabled={userID !== props.card.user_id} callback={deleteCallback} />
             <UpdateItem callback={updateCallback}
                 value={props.card.question}
-                // value2 = {m.answer}
+                value2={props.card.answer}
+                point="card"
                 disabled={userID !== props.card.user_id} />
 
         </div>

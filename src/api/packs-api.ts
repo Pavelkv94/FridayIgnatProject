@@ -60,8 +60,8 @@ export const packsApi = {
     deleteCards(id: string) {
         return instance.delete("cards/card", { params: { id } })
     },
-    updateCards(_id: string, question?: string) {
-        return instance.put("cards/card", { card: { _id, question } })
+    updateCards(_id: string, question?: string, answer?: string) {
+        return instance.put("cards/card", { card: { _id, question, answer } })
     },
     setGradeCards(card_id: string, grade: number) {
         return instance.put("cards/grade", { card_id, grade })
