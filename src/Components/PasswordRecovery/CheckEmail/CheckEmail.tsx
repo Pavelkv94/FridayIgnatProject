@@ -1,6 +1,7 @@
 import React from 'react';
 import s from './CheckEmail.module.css'
 import icon from './iconemail.png'
+
 export function CheckEmail() {
 
     return (

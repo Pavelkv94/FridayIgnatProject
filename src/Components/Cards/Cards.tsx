@@ -5,9 +5,7 @@ import s from "./Cards.module.css"
 import { AppStateType } from "../../Redux/store";
 import {
     cardsAdd,
-    cardsDeleteTC,
     cardsTC,
-    cardsUpdateTC,
     setPackUserIdAC,
     setPageCountOfCardsAC,
     setPageOfCardsAC,
@@ -18,8 +16,6 @@ import { ArrCardType, responseCardType } from "../../api/packs-api";
 import { NavLink, useParams } from 'react-router-dom';
 import { Paginator } from './../../Common/Paginator/Paginator'
 import { SortButton } from '../../Common/SortButton/SortButton';
-import { DeleteItem } from "../../Modal/DeleteModal";
-import { UpdateItem } from "../../Modal/UpdateModal";
 import { AddedItem } from "../../Modal/AddedModal";
 import { authTC } from "../../Redux/login-reducer";
 import { Card } from './Card/Card';
@@ -27,7 +23,7 @@ import ReplyIcon from '@material-ui/icons/Reply';
 import { IconButton } from '@material-ui/core';
 import { PATH } from '../../Routes';
 
-export function Cards() {
+export const Cards = React.memo(() => {
 
     const dispatch = useDispatch()
     const { packId } = useParams<{ packId: string }>()
@@ -126,4 +122,4 @@ export function Cards() {
 
     </div >
 
-}
+})

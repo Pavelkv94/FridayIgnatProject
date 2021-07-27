@@ -15,7 +15,7 @@ import { UpdateItem } from '../../Modal/UpdateModal';
 import { useState } from 'react';
 import { AddedItem } from '../../Modal/AddedModal';
 
-export function Profile() {
+export const Profile = React.memo(() => {
 
     const dispatch = useDispatch();
     const isAuth = useSelector<AppStateType, string>(state => state.loginPage.isAuth)
@@ -70,7 +70,7 @@ export function Profile() {
     const onMainPhotoSelected = (e: any) => { setValue(e.currentTarget.value) }
 
     const photoCallBack = () => {
-        if (value === "") { value = "https://image.flaticon.com/icons/png/512/21/21104.png"}
+        if (value === "") { value = "https://image.flaticon.com/icons/png/512/21/21104.png" }
         else dispatch(updateUserTC(data.name, value)); setValue("")
     }
     const addedCallback = (name: string) => {
@@ -151,4 +151,4 @@ export function Profile() {
             </div>
         </div >
     );
-}
+})

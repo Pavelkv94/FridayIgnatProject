@@ -11,7 +11,7 @@ type PropsType = {
     card: ArrCardType
 }
 
-export function Card(props: PropsType) {
+export const Card = React.memo((props: PropsType) => {
     const dispatch = useDispatch()
 
     const deleteCallback = () => {
@@ -44,4 +44,4 @@ export function Card(props: PropsType) {
     </div>
 
 
-}
+})

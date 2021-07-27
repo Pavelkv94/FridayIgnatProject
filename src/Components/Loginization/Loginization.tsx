@@ -9,7 +9,7 @@ import s from './Loginization.module.css'
 import SuperCheckbox from '../../SuperComponents/c3-SuperCheckbox/SuperCheckbox';
 import { PATH } from '../../Routes';
 
-export function Loginization() {
+export const Loginization = React.memo(() => {
     const dispatch = useDispatch();
     const [email, setEmail] = useState<string>("")
     const [password, setPassword] = useState<string>("")
@@ -58,4 +58,4 @@ export function Loginization() {
             </div>
         </div>
     );
-}
+})

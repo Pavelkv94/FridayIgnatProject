@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import s from './Search.module.css'
 import SuperInputText from "../../SuperComponents/c1-SuperInputText/SuperInputText";
 import SuperButton from "../../SuperComponents/c2-SuperButton/SuperButton";
-import RangeSlider from './Range/RangeSlider'
+import { RangeSlider } from './Range/RangeSlider'
 
 type PropsType = {
     packName: string
@@ -13,7 +13,7 @@ type PropsType = {
     btnCallback: () => void
 
 }
-export const Search: React.FC<PropsType> = (props) => {
+export const Search: React.FC<PropsType> = React.memo((props) => {
 
     return (
         <div className={s.container} style={props.target === "cards" ? { width: "960px" } : { width: "730px" }}>
@@ -26,7 +26,7 @@ export const Search: React.FC<PropsType> = (props) => {
 
         </div>
     )
-};
+});
 
 
 

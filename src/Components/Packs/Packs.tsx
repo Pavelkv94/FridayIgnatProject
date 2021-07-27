@@ -21,7 +21,7 @@ import { AddedItem } from "../../Modal/AddedModal";
 import { authTC } from '../../Redux/login-reducer';
 import { useState } from 'react';
 
-export function Packs() {
+export const Packs = React.memo(() => {
     let [my, setMy] = useState<boolean>();
 
     const dispatch = useDispatch()
@@ -31,9 +31,9 @@ export function Packs() {
     const status = useSelector<AppStateType, string>((state) => state.app.status)
     const isOwner = useSelector<AppStateType, string>(state => state.loginPage.userData._id)
     const own = useSelector<AppStateType, string>(state => state.packs.user_id)
-useEffect(()=>{
-    setMy(isOwner === own)
-},[])
+    useEffect(() => {
+        setMy(isOwner === own)
+    }, [])
     useEffect(() => {
         if (!isAuth)
             dispatch(authTC())
@@ -73,7 +73,7 @@ useEffect(()=>{
     }
 
 
- 
+
 
     if (isAuthError) { return <Redirect to={"/login"} />; }
 
@@ -133,4 +133,4 @@ useEffect(()=>{
 
     </div >
 
-}
+})

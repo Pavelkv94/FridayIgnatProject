@@ -10,7 +10,7 @@ import Preloader from "../../Common/Preloader/Preloader";
 import s from './Registration.module.css'
 import { PATH } from '../../Routes';
 
-export function Registration() {
+export const Registration =React.memo( () => {
     //useState
     const [email, setEmail] = useState<string>("")
     const [password, setPassword] = useState<string>("")
@@ -53,12 +53,12 @@ export function Registration() {
                     {error}
                 </div>}
                 <div className={s.inputs}>
-                    <SuperInputText value={email} onChangeText={setEmail} isType="email" error={error ? true : false} errorMessage={error}/>
-                    <SuperInputText value={password} onChangeText={setPassword} isType="password" error={error ? true : false} errorMessage={error}/>
-                    <SuperInputText value={passwordConf} onChangeText={setPasswordConf} isType="confirm password" error={error ? true : false} errorMessage={error}/>
+                    <SuperInputText value={email} onChangeText={setEmail} isType="email" error={error ? true : false} errorMessage={error} />
+                    <SuperInputText value={password} onChangeText={setPassword} isType="password" error={error ? true : false} errorMessage={error} />
+                    <SuperInputText value={passwordConf} onChangeText={setPasswordConf} isType="confirm password" error={error ? true : false} errorMessage={error} />
                 </div>
                 <div className={s.control}>
-                    <NavLink to={PATH.LOGIN}> <SuperButton className={s.cancelBtn} disabled={status !== 'idle'} onClick={()=>{}}>Cancel</SuperButton></NavLink>
+                    <NavLink to={PATH.LOGIN}> <SuperButton className={s.cancelBtn} disabled={status !== 'idle'} onClick={() => { }}>Cancel</SuperButton></NavLink>
 
                     <SuperButton style={{ width: "187px" }} disabled={status !== 'idle'} onClick={buttonCallback}>Sign Up</SuperButton>
                 </div>
@@ -66,4 +66,4 @@ export function Registration() {
             </div>
         </div>
     );
-}
+})

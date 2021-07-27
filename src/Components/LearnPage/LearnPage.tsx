@@ -24,7 +24,7 @@ const getCard = (cards: ArrCardType[]) => {
     return cards[res.id + 1];
 }
 
-const LearnPage = () => {
+const LearnPage = React.memo(() => {
 
     let [learnStatus, setLearnStatus] = useState(true)
 
@@ -121,6 +121,6 @@ const LearnPage = () => {
             )}
         </div>
     );
-};
+});
 
 export default LearnPage;

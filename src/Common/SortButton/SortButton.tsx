@@ -8,7 +8,7 @@ type PropsSortType = {
     sortCallback: (n: 1 | 0, sortValue: string) => void
 }
 
-export const SortButton: React.FC<PropsSortType> = (props) => {
+export const SortButton: React.FC<PropsSortType> = React.memo((props) => {
     let [pointer, setPointer] = useState(false)
     return (
         <div className={s.container} onClick={() => setPointer(!pointer)}>
@@ -19,7 +19,7 @@ export const SortButton: React.FC<PropsSortType> = (props) => {
 
         </div>
     )
-};
+});
 
 
 

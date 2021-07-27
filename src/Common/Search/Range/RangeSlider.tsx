@@ -19,7 +19,7 @@ type PropsRangeType = {
   max: number
   target: "packs" | "cards"
 }
-export default function RangeSlider(props: PropsRangeType) {
+export const RangeSlider = React.memo((props: PropsRangeType) => {
   const dispatch = useDispatch()
 
   const classes = useStyles();
@@ -48,4 +48,4 @@ export default function RangeSlider(props: PropsRangeType) {
       />
     </div>
   );
-}
+})

@@ -14,8 +14,8 @@ type AddItemPT = {
     id?: number
 }
 
-export function AddedItem(props: AddItemPT) {
-    
+export const AddedItem = React.memo((props: AddItemPT) => {
+
     const [open, setOpen] = React.useState(false);
     let [title, setTitle] = React.useState("");
     let [title2, setTitle2] = React.useState("");
@@ -79,4 +79,4 @@ export function AddedItem(props: AddItemPT) {
             </Dialog>
         </div>
     );
-}
+})

@@ -10,7 +10,7 @@ import style from "../Registration/Registration.module.css";
 import Preloader from "../../Common/Preloader/Preloader";
 import s from './NewPassword.module.css'
 
-export function NewPassword() {
+export const NewPassword = React.memo(() => {
     const [password, setPassword] = useState<string>("")
     const [passwordConf, setPasswordConf] = useState<string>("")
     const dispatch = useDispatch()
@@ -45,16 +45,16 @@ export function NewPassword() {
                     {error}
                 </div>}
                 <div className={s.inputs}>
-                    <SuperInputText value={password} onChangeText={setPassword} isType="password" error={error ? true : false} errorMessage={error}/>
-                    <SuperInputText value={passwordConf} onChangeText={setPasswordConf} isType="repeate password" error={error ? true : false} errorMessage={error}/>
+                    <SuperInputText value={password} onChangeText={setPassword} isType="password" error={error ? true : false} errorMessage={error} />
+                    <SuperInputText value={passwordConf} onChangeText={setPasswordConf} isType="repeate password" error={error ? true : false} errorMessage={error} />
                 </div>
                 <div className={s.info}>
                     <p>Create new password and we will send you further instructions to email</p>
                 </div>
                 <div>
-                    <SuperButton style={{ width: "266px"}} disabled={status !== "idle"} onClick={buttonCallback}>Create new password</SuperButton>
+                    <SuperButton style={{ width: "266px" }} disabled={status !== "idle"} onClick={buttonCallback}>Create new password</SuperButton>
                 </div>
             </div>
         </div>
     );
-}
+})

@@ -11,7 +11,7 @@ import s from './PasswordRecovery.module.css'
 import { PATH } from '../../Routes';
 import { CheckEmail } from './CheckEmail/CheckEmail';
 
-export function PasswordRecovery() {
+export const PasswordRecovery = React.memo(() => {
     //useState
     const [email, setEmail] = useState<string>("")
 
@@ -28,14 +28,14 @@ export function PasswordRecovery() {
     }
 
     if (isInitialized) {
-        return <CheckEmail /> 
+        return <CheckEmail />
     }
     if (isAuth) {
         return <Redirect to='/profile' />
     }
 
     return (
-        <div className={s.container}>
+        <div className={s.container} >
             <div className={s.recoveryContainer}>
                 <h2 className={s.title}>It-incubator</h2>
                 <p className={s.subTitle}>Forgot your password?</p>
@@ -43,7 +43,7 @@ export function PasswordRecovery() {
                 {error && <div className={style.formSummaryError}>
                     {error}
                 </div>}
-                <SuperInputText value={email} onChangeText={setEmail} isType="email" error={error ? true : false} errorMessage={error}/>
+                <SuperInputText value={email} onChangeText={setEmail} isType="email" error={error ? true : false} errorMessage={error} />
                 <div className={s.info}>
                     <p>Enter your email address and we will send you further instructions </p>
                 </div>
@@ -55,6 +55,6 @@ export function PasswordRecovery() {
                 </div>
                 <div className={s.goLogin}><NavLink to={PATH.LOGIN}>Try logging in</NavLink></div>
             </div>
-        </div>
+        </div >
     );
-}
+})

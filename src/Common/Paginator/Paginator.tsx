@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import s from './Paginator.module.css'
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
@@ -14,7 +14,7 @@ type PaginatorType = {
     onChangeHandler: (e: ChangeEvent<HTMLSelectElement>) => void
 }
 
-export function Paginator(props: PaginatorType) {
+export const Paginator = React.memo((props: PaginatorType) => {
     let pagesCount = Math.ceil(props.totalItemsCount / props.pageSize);
     let pages = [];
     for (let i = 1; i <= pagesCount; i++) {
@@ -55,7 +55,7 @@ export function Paginator(props: PaginatorType) {
         }
 
     </div>)
-}
+})
 
 
 

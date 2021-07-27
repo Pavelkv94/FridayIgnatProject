@@ -10,7 +10,7 @@ import Preloader from "../../Common/Preloader/Preloader";
 import packsImg from './NavItem/Group.png'
 import profile from './NavItem/Union.png'
 
-function Header() {
+const Header = React.memo(() => {
 
     const dispatch = useDispatch()
     const logout = () => {
@@ -45,13 +45,6 @@ function Header() {
                         </div>
                     </NavLink>
 
-                    {/* <NavItem title="Pack list" status={true} />
-                    <NavItem title="Profile" status={true} /> */}
-                    {/*                     
-                    <NavLink to={PATH.NEW_PASS}> NewPassword |</NavLink>
-                    <NavLink to={PATH.PROFILE}> Profile |</NavLink>
-                    <NavLink to={PATH.PACKS_PAGE}> PACKS </NavLink> */}
-                    {/*// add NavLinks*/}
                     <div className={s.fake}></div>
                     <div onClick={logout} className={s.logout}><img src={logoutLogo} alt="logoutLogo" className={s.logoutLogo} /></div>
                 </div>
@@ -59,6 +52,6 @@ function Header() {
             {status !== 'idle' ? <Preloader /> : null}
         </div >
     )
-}
+})
 
 export default Header

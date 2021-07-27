@@ -18,7 +18,7 @@ type SuperInputTextPropsType = DefaultInputPropsType & { // и + ещё проп
 
 }
 
-const SuperInputText: React.FC<SuperInputTextPropsType> = (
+const SuperInputText: React.FC<SuperInputTextPropsType> =React.memo( (
     {
         type, // достаём и игнорируем чтоб нельзя было задать другой тип инпута
         onChange, onChangeText,
@@ -70,6 +70,6 @@ const SuperInputText: React.FC<SuperInputTextPropsType> = (
             {error && <span className={finalSpanClassName}>{error}</span>}
         </>
     )
-}
+})
 
 export default SuperInputText

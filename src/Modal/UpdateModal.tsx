@@ -22,7 +22,7 @@ type UpdateItemPT = {
     photoCallBack?: () => void
 }
 
-export function UpdateItem(props: UpdateItemPT) {
+export const UpdateItem =React.memo( (props: UpdateItemPT) => {
     const [open, setOpen] = React.useState(false);
     let [title, setTitle] = React.useState(props.value);
     let [title2, setTitle2] = React.useState(props.value2);
@@ -85,4 +85,4 @@ export function UpdateItem(props: UpdateItemPT) {
             </Dialog>
         </div>
     );
-}
+})
