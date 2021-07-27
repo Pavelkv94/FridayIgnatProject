@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import {
     cardsType,
@@ -19,14 +19,15 @@ type PropsType = {
 }
 
 export const Pack = React.memo((props: PropsType) => {
+    console.log("render pack")
     const dispatch = useDispatch()
 
-    const deleteCallback = () => {
+    const deleteCallback = useCallback(() => {
         dispatch(packsDeleteTC(props.card._id))
-    }
-    const updateCallback = (name: string) => {
+    }, [props.card._id])
+    const updateCallback = useCallback((name: string) => {
         dispatch(packsUpdateTC(props.card._id, name))
-    }
+    }, [props.card._id])
 
     const userID = useSelector<AppStateType, string>(state => state.loginPage.userData._id)
 

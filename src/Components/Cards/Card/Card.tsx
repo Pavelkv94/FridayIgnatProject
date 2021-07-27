@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ArrCardType } from '../../../api/packs-api';
 import { DeleteItem } from '../../../Modal/DeleteModal';
@@ -14,13 +14,13 @@ type PropsType = {
 export const Card = React.memo((props: PropsType) => {
     const dispatch = useDispatch()
 
-    const deleteCallback = () => {
+    const deleteCallback = useCallback(() => {
 
         dispatch(cardsDeleteTC(props.card._id, props.card.cardsPack_id))
-    }
-    const updateCallback = (question: string) => {
+    }, [])
+    const updateCallback = useCallback((question: string) => {
         dispatch(cardsUpdateTC(props.card._id, props.card.cardsPack_id, question))
-    }
+    }, [])
 
     const userID = useSelector<AppStateType, string>(state => state.loginPage.userData._id)
 

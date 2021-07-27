@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect } from 'react';
+import React, { ChangeEvent, useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import {
     sortPackAC,
@@ -45,32 +45,32 @@ export const Packs = React.memo(() => {
             dispatch(packsTC())
     }, [isAuth, page, pageCount, sortPacks, user_id])
 
-    const addedCallback = (name: string) => {
+    const addedCallback = useCallback((name: string) => {
         dispatch(packsAddTC(name))
-    }
+    }, [])
 
     //пагинация
-    const onPageChanged = (page: number) => {
+    const onPageChanged = useCallback((page: number) => {
         dispatch(setPageOfPacksAC(page))
-    }
-    const onChangeHandler = (e: ChangeEvent<HTMLSelectElement>) => {
+    }, [])
+    const onChangeHandler = useCallback((e: ChangeEvent<HTMLSelectElement>) => {
         dispatch(setPageCountOfPacksAC(Number(e.currentTarget.value)))
-    }
+    }, [])
 
     //поисковая строка
-    const setSearchResult = (value: string) => {
+    const setSearchResult = useCallback((value: string) => {
         dispatch(setSearchValuePackAC(value))
 
-    }
-    const searchPackCallback = () => {
+    }, [])
+    const searchPackCallback = useCallback(() => {
         dispatch(packsTC())
-    }
+    }, [])
 
     //сортировка 
-    const sortingPack = (n: 1 | 0, sortValue: string) => {
+    const sortingPack = useCallback((n: 1 | 0, sortValue: string) => {
 
         dispatch(sortPackAC(n, sortValue))
-    }
+    }, [])
 
 
 

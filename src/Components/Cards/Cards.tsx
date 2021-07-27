@@ -22,6 +22,7 @@ import { Card } from './Card/Card';
 import ReplyIcon from '@material-ui/icons/Reply';
 import { IconButton } from '@material-ui/core';
 import { PATH } from '../../Routes';
+import { useCallback } from 'react';
 
 export const Cards = React.memo(() => {
 
@@ -47,29 +48,29 @@ export const Cards = React.memo(() => {
         }
     }, [isAuth, page, pageCount, sortCards])
 
-    const addCallback = (question?: string, answer?: string) => {
+    const addCallback = useCallback((question?: string, answer?: string) => {
         dispatch(cardsAdd(packId, question, answer))
-    }
+    }, [packId])
 
     //пагинация
-    const onPageChanged = (newPage: number) => {
+    const onPageChanged = useCallback((newPage: number) => {
         dispatch(setPageOfCardsAC(newPage))
-    }
-    const onChangeHandler = (e: ChangeEvent<HTMLSelectElement>) => {
+    }, [])
+    const onChangeHandler = useCallback((e: ChangeEvent<HTMLSelectElement>) => {
         dispatch(setPageCountOfCardsAC(Number(e.currentTarget.value)))
-    }
+    }, [])
     //поиск
-    const setSearchResult = (value: string) => {
+    const setSearchResult = useCallback((value: string) => {
         dispatch(setSearchValueCardAC(value))
-    }
-    const searchCardCallback = () => {
+    }, [])
+    const searchCardCallback = useCallback(() => {
         dispatch(cardsTC(packId))
-    }
+    }, [])
 
     //сортировка 
-    const sortingCard = (n: 1 | 0, sortValue: string) => {
+    const sortingCard = useCallback((n: 1 | 0, sortValue: string) => {
         dispatch(sortCardAC(n, sortValue))
-    }
+    }, [])
 
     return <div className={s.container}>
         <div className={s.subContainer}>
