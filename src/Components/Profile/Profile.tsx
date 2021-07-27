@@ -69,6 +69,13 @@ export const Profile = React.memo(() => {
     }
     const onMainPhotoSelected = (e: any) => { setValue(e.currentTarget.value) }
 
+    // const onMainPhotoDownload = (e: ChangeEvent<HTMLInputElement>) => {
+    //     if (e.target.files && e.target.files.length) {
+    //         //@ts-ignore
+    //         updateUserTC(data.name, e.target.files[0])
+    //     }
+    // }
+
     const photoCallBack = () => {
         if (value === "") { value = "https://image.flaticon.com/icons/png/512/21/21104.png" }
         else dispatch(updateUserTC(data.name, value)); setValue("")
@@ -89,6 +96,8 @@ export const Profile = React.memo(() => {
                                 src={data.avatar} />
                             : <img className={s.avatar} alt={"ava"}
                                 src={"https://image.flaticon.com/icons/png/512/21/21104.png"} />}
+                        {/* <input type={"file"} onChange={onMainPhotoDownload} /> */}
+
                         <div className={s.nameUser}>{data.name?.split("@")[0]}</div>
                         <div className={s.nameEmail}>{data.email}</div>
                         <form>

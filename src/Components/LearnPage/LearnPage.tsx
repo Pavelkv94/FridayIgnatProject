@@ -26,7 +26,7 @@ const getCard = (cards: ArrCardType[]) => {
 
 const LearnPage = React.memo(() => {
 
-    let [learnStatus, setLearnStatus] = useState(true)
+    let [learnStatus, setLearnStatus] = useState<0 | 1 | 2>(0)
 
     const isAuth = useSelector<AppStateType, string>(state => state.loginPage.isAuth)
     const [isChecked, setIsChecked] = useState<boolean>(false);
@@ -36,8 +36,8 @@ const LearnPage = React.memo(() => {
     const { id } = useParams<{ id: string }>()
 
     const [card, setCard] = useState<ArrCardType>({
-        answer: 'answer fake',
-        question: 'question fake',
+        answer: 'After your answer, give yourself an grade of knowledge and click "Next" to start Learn',
+        question: 'Example. Here is question. Give you answer and click "Check"',
         cardsPack_id: '',
         grade: 0,
         shots: 0,
@@ -73,7 +73,7 @@ const LearnPage = React.memo(() => {
 
     const onNext = () => {
         setIsChecked(false);
-        setLearnStatus(true)
+        setLearnStatus(1)
         if (cards.length > 0) {
             // dispatch
             setCard(getCard(cards));
@@ -93,9 +93,9 @@ const LearnPage = React.memo(() => {
             <div className={s.question}> <b>Question:</b> {card.question}</div>
             <br />
 
-            {learnStatus && <div className={s.control}>
+            {learnStatus === 1 && <div className={s.control}>
                 <NavLink to={PATH.PACKS_PAGE}>   <SuperButton onClick={() => { }} className={s.cancelBtn}>Cancel</SuperButton> </NavLink>
-                <SuperButton onClick={() => { setIsChecked(true); setLearnStatus(false) }} style={{ width: "188px" }}>Check</SuperButton>
+                <SuperButton onClick={() => { setIsChecked(true); setLearnStatus(0) }} style={{ width: "188px" }}>Check</SuperButton>
             </div>}
 
 
@@ -103,9 +103,10 @@ const LearnPage = React.memo(() => {
                 <>
                     <div className={s.question}> <b>Answer: </b>{card.answer}</div>
                     <div className={s.checkBlock}>
+                        {learnStatus == 2 && <div className={s.great}><b> Thank for you grade, go next!</b></div>}
                         {grades.map((g, i) => (
-                            <SuperButton key={'grade-' + i} className={s.answerBtn} style={{ opacity: `${i / 10 + 0.6}` }} onClick={() => {
-                                dispatch(setGradeTC(card._id, i + 1))
+                            <SuperButton key={'grade-' + i} className={s.answerBtn} style={learnStatus != 2 ? { opacity: `${i / 10 + 0.6}` } : { display: "none" }} onClick={() => {
+                                dispatch(setGradeTC(card._id, i + 1)); setLearnStatus(2)
                             }}>{g}</SuperButton>
                         ))}
                     </div>

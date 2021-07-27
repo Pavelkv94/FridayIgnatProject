@@ -17,7 +17,7 @@ const initialState: initialStateType = {
     grade: 2 as number,
     error: undefined,
     isInitialized: true,
-    sortCards: "1update",
+    sortCards: "0created",
     cardQuestion: ""
 }
 type initialStateType = responseCardType

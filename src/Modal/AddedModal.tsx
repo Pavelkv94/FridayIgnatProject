@@ -44,9 +44,9 @@ export const AddedItem = React.memo((props: AddItemPT) => {
             <SuperButton style={{ width: "174px" }} onClick={handleClickOpen} disabled={props.disabled}>{props.title}</SuperButton>
 
             <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-                <DialogTitle id="form-dialog-title">add</DialogTitle>
+                <DialogTitle id="form-dialog-title">{props.title}</DialogTitle>
                 <DialogContent>
-                    {props.id ? "Question" : "PackName"}
+                    {props.title === "Add New Card" ? "Question" : "Pack Name"}
                     <TextField
                         value={title}
                         onChange={changeTitle}
@@ -56,7 +56,7 @@ export const AddedItem = React.memo((props: AddItemPT) => {
                         fullWidth
                     />
                 </DialogContent>
-                {props.id && <DialogContent>
+                {props.title === "Add New Card" && <DialogContent>
                     Answer
                     < TextField
                         value={title2}
@@ -69,10 +69,10 @@ export const AddedItem = React.memo((props: AddItemPT) => {
                 </DialogContent>}
 
                 <DialogActions>
-                    <Button onClick={handleClose} color="primary">
+                    <Button onClick={handleClose} color="secondary" variant="outlined">
                         Cancel
                     </Button>
-                    <Button onClick={handleClickUPD} color="primary">
+                    <Button onClick={handleClickUPD} color="primary" variant="outlined">
                         Add
                     </Button>
                 </DialogActions>
