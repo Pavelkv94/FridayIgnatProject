@@ -4,7 +4,7 @@ import thunkMiddleware from "redux-thunk";
 import loginReducer from "./login-reducer";
 import profileReducer from "./profile-reducer";
 import registrationReducer from "./reg-reducer";
-import PasswordRecoveryReducer from "./password-recovery-reducer";
+import passwordRecoveryReducer from "./password-recovery-reducer";
 import packsReducer from "./packs-reducer";
 import cardsReducer from "./cards-reducer";
 import appReducer from "./app-reducer";
@@ -15,7 +15,7 @@ export const rootReducer = combineReducers({
     loginPage: loginReducer,
     profile: profileReducer,
     newPassPage: newPasswordReducer,
-    recovPass: PasswordRecoveryReducer,
+    recovPass: passwordRecoveryReducer,
     reg: registrationReducer,
     packs: packsReducer,
     cards: cardsReducer,

@@ -18,7 +18,7 @@ password recovery link(bla bla):
 <a href='http://sozdatel31.github.io/FridayIgnatProject#/newPassword/$token$'>
 link</a></div>`
 
-const PasswordRecoveryReducer = (state = initialState, action: ActionsType) => {
+const passwordRecoveryReducer = (state = initialState, action: ActionsType) => {
     switch (action.type) {
         case "FORGOT/SET-ERROR":
             return { ...state, error: action.error }
@@ -56,4 +56,4 @@ export type setIsInitializedActionType = ReturnType<typeof setIsInitializedAC>;
 type ActionsType = setErrorActionType | setIsInitializedActionType | AppStatusActionType
 
 
-export default PasswordRecoveryReducer;
+export default passwordRecoveryReducer;
