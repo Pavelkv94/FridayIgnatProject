@@ -54,6 +54,7 @@ const LearnPage = React.memo(() => {
         if (first) {
             dispatch(cardsTC(id));
             setFirst(false);
+            setLearnStatus(1)
         }
 
         console.log('cards', cards)
@@ -84,7 +85,7 @@ const LearnPage = React.memo(() => {
     if (isAuth === "") { return <Redirect to={"/login"} />; }
 
 
-
+    console.log(learnStatus)
 
     return (
         <div className={s.container}>
